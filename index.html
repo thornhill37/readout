@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Readout: a five-minute guided tour of how Stephen Thornhill runs customer success for healthcare care-management programs. Fictional data throughout.">
+<title>Readout Tour</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a guided scroll tour. Each stop pairs a short narrative column with a live, clickable panel; a fixed tour bar tracks progress and time left. */
+:root{
+  --bg:#F1F4F7; --surface:#FFFFFF; --sunk:#E7ECF1; --ink:#13233A; --muted:#566880; --line:#D6DDE5;
+  --accent:#0E7A72; --accent-soft:#D7EEEB; --navy:#1F3A5F; --on-navy:#FFFFFF; --band:#E8EEF5; --land:#E2E8EF;
+  --good:#2B8A57; --warn:#B87C0A; --crit:#BF3D2B; --good-soft:#DDF0E5; --warn-soft:#F6EAD0; --crit-soft:#F6DDD8;
+  --display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --shadow:0 1px 2px rgba(19,35,58,.06), 0 8px 24px rgba(19,35,58,.06);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0D1520; --surface:#142030; --sunk:#0F1925; --ink:#E5ECF3; --muted:#93A4B8; --line:#24354A;
+  --accent:#3FC0B2; --accent-soft:#153A3A; --navy:#8FB3DE; --on-navy:#0D1520; --band:#1B2A3D; --land:#1A2838;
+  --good:#4FC48C; --warn:#E2AA3C; --crit:#F0705C; --good-soft:#163527; --warn-soft:#3A2E14; --crit-soft:#3D1D19;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25); color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0D1520; --surface:#142030; --sunk:#0F1925; --ink:#E5ECF3; --muted:#93A4B8; --line:#24354A;
+  --accent:#3FC0B2; --accent-soft:#153A3A; --navy:#8FB3DE; --on-navy:#0D1520; --band:#1B2A3D; --land:#1A2838;
+  --good:#4FC48C; --warn:#E2AA3C; --crit:#F0705C; --good-soft:#163527; --warn-soft:#3A2E14; --crit-soft:#3D1D19;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25); color-scheme:dark }
+
+*{box-sizing:border-box}
+html,body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-bottom:calc(88px + env(safe-area-inset-bottom, 0px))}
+.wrap{max-width:1160px;margin:0 auto}
+h1,h2,h3,h4{text-wrap:balance}
+h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.01em}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.sub{font-size:13px;color:var(--muted)}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:400;margin:0 0 6px}
+
+.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:20px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.brand b{font-family:var(--display);font-size:22px;letter-spacing:-.02em}
+.brand span{color:var(--muted);font-size:14px}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 10px}
+
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-block:56px 64px}
+.hero h1{font-size:clamp(38px,5.4vw,64px);line-height:1.02;font-weight:700;margin-top:14px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{font-size:19px;color:var(--muted);margin-top:20px;max-width:34em}
+.hero-actions{display:flex;gap:14px;align-items:center;margin-top:28px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:10px;padding:12px 18px;font-weight:700;cursor:pointer;text-decoration:none}
+.btn-primary{background:var(--ink);color:var(--bg)}
+.btn-primary:hover{background:var(--accent)}
+.btn-accent{background:var(--accent);color:var(--surface)}
+.btn-accent:hover{filter:brightness(1.08)}
+.btn:disabled{opacity:.5;cursor:default}
+.meta{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.monitor{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);min-width:0}
+.monitor-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.live{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--good)}
+.live i{width:7px;height:7px;border-radius:50%;background:var(--good);animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.25}}
+.big{font-family:var(--display);font-size:72px;line-height:1;font-weight:700;margin-top:8px}
+.big small{font-size:20px;color:var(--muted);font-weight:500}
+#trace{width:100%;height:110px;display:block;margin-top:14px}
+.monitor-foot{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;border-top:1px solid var(--line);padding-top:14px;margin-top:12px}
+.monitor-foot b{display:block;font-family:var(--mono);font-size:18px;font-variant-numeric:tabular-nums}
+.monitor-foot span{font-size:13px;color:var(--muted)}
+
+.stop{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:44px;padding-block:72px;border-top:1px solid var(--line);scroll-margin-top:16px}
+.story{position:sticky;top:calc(24px + env(safe-area-inset-top, 0px));align-self:start;display:flex;flex-direction:column;gap:14px;min-width:0}
+.stepnum{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.stepnum b{color:var(--accent)}
+.story h2{font-size:clamp(28px,3.2vw,38px);line-height:1.08}
+.story p{color:var(--muted);max-width:32em}
+.story .hint{font-size:14px;color:var(--ink);background:var(--accent-soft);border-radius:8px;padding:8px 12px;align-self:flex-start}
+.stack{display:flex;flex-direction:column;gap:18px;min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:22px;min-width:0}
+.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.panel-head h3{font-size:18px}
+
+/* Map */
+.mapwrap{position:relative}
+#usmap{width:100%;height:auto;display:block}
+#usmap .land{fill:var(--land);stroke:var(--line);stroke-width:1.2}
+#usmap .borders{fill:none;stroke:var(--surface);stroke-width:1.4}
+.dot{cursor:pointer;outline:none}
+.dot .core{stroke:var(--surface);stroke-width:2.5}
+.dot .ring{fill:none;stroke-width:2.5;transform-box:fill-box;transform-origin:center;animation:ping 2.8s ease-out infinite}
+.dot.crit .ring{animation-duration:1.1s;stroke-width:3.5}
+.dot.warn .ring{animation-duration:1.8s}
+.dot .selring{fill:none;stroke:var(--ink);stroke-width:2;opacity:0}
+.dot.sel .selring{opacity:1}
+.dot:focus-visible .selring{opacity:1;stroke:var(--accent)}
+@keyframes ping{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.6);opacity:0}}
+.maptip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:13px;border-radius:8px;padding:6px 10px;white-space:nowrap;transform:translate(-50%,-130%)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.kpi{background:var(--sunk);border-radius:10px;padding:10px 12px;min-width:0}
+.kpi span{display:block;font-size:12px;color:var(--muted)}
+.kpi b{font-family:var(--mono);font-size:20px;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:600px}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:400;padding:6px 8px;border-bottom:1px solid var(--line)}
+td{padding:8px;border-bottom:1px solid var(--line);vertical-align:middle}
+td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:var(--sunk)}
+tbody tr.sel{background:var(--accent-soft)}
+tbody tr.sel td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+.acct b{display:block;font-weight:600}
+.acct span{font-size:12px;color:var(--muted)}
+.pill{white-space:nowrap;display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:13px;font-weight:600;padding:3px 9px;border-radius:999px;font-variant-numeric:tabular-nums}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.crit{background:var(--crit-soft);color:var(--crit)}
+.spark{width:96px;height:28px;display:block}
+
+/* Score */
+.score-top{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+.dial{position:relative;width:132px;height:132px;flex:none}
+.dial svg{width:100%;height:100%}
+.dial .arc{transition:stroke-dasharray .5s ease, stroke .3s}
+.dial .v{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.dial .v b{font-family:var(--display);font-size:40px;line-height:1}
+.dial .v span{display:block;font-size:12px;color:var(--muted)}
+select{font:inherit;font-size:15px;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);max-width:100%}
+.sigs{display:flex;flex-direction:column;gap:8px}
+.sig{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr) 92px;gap:12px;align-items:center;border:1px solid transparent;border-radius:10px;padding:8px 10px;background:none;text-align:left;cursor:pointer;width:100%}
+.sig:hover{background:var(--sunk)}
+.sig.on{border-color:var(--line);background:var(--sunk)}
+.sig .nm{font-weight:600;font-size:15px}
+.sig .nm small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:5px;transition:width .5s ease, background .3s}
+.sig .pts{font-family:var(--mono);font-size:13px;text-align:right;font-variant-numeric:tabular-nums}
+.sig .pts small{display:block;color:var(--muted);font-size:11px}
+.explain{margin-top:12px;padding:12px 14px;border-radius:10px;background:var(--sunk);font-size:15px}
+.whatif{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 18px;align-items:center}
+.stepper{display:flex;gap:6px;flex-wrap:wrap}
+.stepper button{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 11px;cursor:pointer;font-family:var(--mono);font-size:13px}
+.stepper button:hover{border-color:var(--accent)}
+.stepper button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.whatif-out{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.whatif-out div{background:var(--sunk);border-radius:10px;padding:10px 12px;min-width:0}
+.whatif-out span{display:block;font-size:12px;color:var(--muted)}
+.whatif-out b{font-family:var(--mono);font-size:17px;font-variant-numeric:tabular-nums}
+.delta-up{color:var(--good)} .delta-down{color:var(--crit)}
+
+/* Alerts */
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:14px;cursor:pointer}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.alerts{display:flex;flex-direction:column;gap:10px}
+.alert{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.alert>button{display:grid;grid-template-columns:6px minmax(0,1fr) auto;gap:14px;width:100%;border:0;background:none;text-align:left;cursor:pointer;padding:0}
+.alert .stripe{align-self:stretch}
+.alert .main{padding:12px 0;min-width:0}
+.alert .main b{display:block;font-size:15px}
+.alert .main span{font-size:13px;color:var(--muted)}
+.alert .lead{padding:12px 14px 12px 0;text-align:right;font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
+.alert .lead b{display:block;font-size:18px;color:var(--ink)}
+.alert .detail{padding:0 16px 14px 20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;font-size:14px}
+.alert .detail ul{margin:0;padding-left:16px}
+
+/* Act on it */
+.runbar{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.runbar>div{min-width:0}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:16px}
+.stp{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;display:flex;gap:8px;align-items:center;min-width:0}
+.stp i{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-style:normal;font-size:11px}
+.stp.busy i{border-color:var(--accent);border-top-color:transparent;animation:spin .7s linear infinite}
+.stp.done{border-color:var(--accent);background:var(--accent-soft)}
+.stp.done i{border-color:var(--accent);background:var(--accent);color:var(--surface)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-top:18px;overflow-x:auto}
+.tab{border:0;background:none;padding:9px 14px;cursor:pointer;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap}
+.tab.on{color:var(--ink);border-bottom-color:var(--accent)}
+.outpane{padding-top:16px}
+.summary-box{display:grid;gap:12px}
+.sevline{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.summary-box ul{margin:0;padding-left:18px}
+.agenda{border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:14px}
+.ag-head{background:var(--navy);color:var(--on-navy);padding:14px 16px}
+.ag-head b{display:block;font-family:var(--display);font-size:18px}
+.ag-head span{display:block;font-size:13px;opacity:.9}
+.ag-att{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 16px;margin-top:8px;font-size:12px;opacity:.9}
+.ag-join{background:var(--band);padding:8px 16px;font-family:var(--mono);font-size:12px;color:var(--ink)}
+.ag-sec{padding:0 16px 10px}
+.ag-sec h5{margin:12px -16px 6px;background:var(--band);color:var(--navy);font-weight:700;font-size:14px;padding:6px 16px}
+.ag-sec ul{list-style:none;margin:0;padding:0}
+.ag-sec li{padding-left:16px;position:relative}
+.ag-sec li::before{content:"▪";position:absolute;left:0;color:var(--navy)}
+.deck{display:grid;gap:10px}
+.slide{aspect-ratio:16/9;max-width:100%;border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:5% 6%;display:flex;flex-direction:column;gap:3%;overflow:hidden;position:relative}
+.slide .kick{font-family:var(--mono);font-size:clamp(9px,1.3vw,12px);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.slide h4{font-family:var(--display);font-size:clamp(16px,2.6vw,28px);margin:0;line-height:1.1}
+.slide ul{margin:0;padding-left:1.2em;font-size:clamp(11px,1.5vw,15px)}
+.slide.title{background:var(--navy);color:var(--on-navy);justify-content:flex-end}
+.slide.title .kick{color:var(--on-navy);opacity:.8}
+.slide .foot{position:absolute;bottom:4%;right:5%;font-family:var(--mono);font-size:10px;color:var(--muted)}
+.slide.title .foot{color:var(--on-navy);opacity:.7}
+.slide .cols{display:grid;grid-template-columns:1fr 1fr;gap:5%;flex:1;min-height:0}
+.mini-bars{display:flex;flex-direction:column;gap:6%;justify-content:center}
+.mini-bars div{display:grid;grid-template-columns:42% 1fr 2.5em;gap:6px;align-items:center;font-size:clamp(9px,1.3vw,13px)}
+.mini-bars .mb{height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.mini-bars .mb i{display:block;height:100%}
+.decknav{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.decknav button{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 12px;cursor:pointer}
+.invite{border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:14px}
+.inv-row{display:grid;grid-template-columns:100px minmax(0,1fr);gap:12px;padding:9px 14px;border-bottom:1px solid var(--line)}
+.inv-row span{color:var(--muted)}
+.inv-body{padding:12px 14px;white-space:pre-wrap;font-size:13px;background:var(--sunk);font-family:var(--body)}
+.inv-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.note{font-size:13px;color:var(--muted)}
+
+/* Outcomes */
+.verdict{display:flex;gap:14px;align-items:flex-start;padding:14px;border-radius:12px;margin-bottom:12px}
+.verdict.good{background:var(--good-soft)} .verdict.warn{background:var(--warn-soft)} .verdict.crit{background:var(--crit-soft)} .verdict.flat{background:var(--sunk)}
+.verdict b{display:block;font-family:var(--display);font-size:19px}
+.verdict .r{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap;margin-left:auto}
+.chart{width:100%;height:auto;display:block}
+.chart text{fill:var(--muted);font-family:var(--mono);font-size:12px}
+.chart .val{fill:var(--ink);font-weight:600;font-size:13px}
+.chart .grid{stroke:var(--line);stroke-width:1}
+.chart .lab{fill:var(--ink)}
+.illus{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--warn);background:var(--warn-soft);border-radius:4px;padding:3px 7px}
+.legend2{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:6px}
+.legend2 span{display:inline-flex;gap:6px;align-items:center}
+.legend2 i{display:inline-block;width:14px;height:8px;border-radius:2px}
+
+/* Agents */
+.flow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.streams{display:flex;flex-wrap:wrap;gap:6px}
+.stream{font-size:13px;border:1px solid var(--line);border-radius:6px;padding:4px 8px;color:var(--muted);transition:all .25s}
+.stream.lit{border-color:var(--accent);color:var(--ink);background:var(--accent-soft)}
+.agents{display:flex;flex-direction:column;gap:8px}
+.agent{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--surface);text-align:left;cursor:pointer;width:100%}
+.agent b{display:block;font-size:15px}
+.agent span{font-size:12px;color:var(--muted)}
+.agent.on{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+.outs{display:flex;flex-direction:column;gap:8px}
+.out{border-radius:10px;background:var(--sunk);padding:10px 12px;font-size:14px}
+.out small{display:block;font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.04em;text-transform:uppercase}
+
+/* Client view */
+.client{border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.client-band{background:var(--navy);color:var(--on-navy);padding:16px 18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.client-band b{font-family:var(--display);font-size:20px}
+.client-band span{font-family:var(--mono);font-size:12px;opacity:.85}
+.client-body{padding:18px;display:grid;gap:16px;background:var(--surface)}
+.client-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.client-kpis div{border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+.client-kpis span{display:block;font-size:12px;color:var(--muted)}
+.client-kpis b{font-family:var(--mono);font-size:20px;font-variant-numeric:tabular-nums}
+.client-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;font-size:14px}
+.client-cols ul{margin:0;padding-left:16px}
+
+.close{padding-block:72px 40px;border-top:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px}
+.close h2{font-size:clamp(30px,3.6vw,44px);line-height:1.05}
+.close p{color:var(--muted);margin-top:14px;max-width:34em}
+.facts{display:flex;flex-direction:column;gap:12px}
+.fact{border-left:2px solid var(--accent);padding:2px 0 2px 14px}
+.fact b{display:block}
+.fact span{color:var(--muted);font-size:15px}
+.contact{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;align-items:center}
+.copyline{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:8px 8px 8px 12px;background:var(--surface)}
+.copyline code{font-family:var(--mono);font-size:14px;user-select:all}
+.copyline button,.copybtn{border:0;background:var(--sunk);border-radius:6px;padding:6px 12px;cursor:pointer;font-size:13px}
+.disclaimer{font-size:13px;color:var(--muted);padding-block:24px 8px;border-top:1px solid var(--line);margin-top:40px}
+
+.tourbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom, 0px);padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.tourbar .in{max-width:1160px;margin:0 auto;display:flex;align-items:center;gap:16px;padding-block:12px}
+.prog{flex:1;min-width:0}
+.prog .row{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.prog .row b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prog .row span{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
+.ticks{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-top:8px}
+.ticks button{height:6px;border:0;border-radius:3px;background:var(--line);cursor:pointer;padding:0}
+.ticks button.done{background:var(--accent)}
+.ticks button.cur{background:var(--ink)}
+.navbtn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;white-space:nowrap}
+.navbtn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.navbtn:disabled{opacity:.4;cursor:default}
+
+/* Entrance motion: everything is visible at rest; .play replays a short build when a stop scrolls into view. */
+@keyframes growW{from{width:0}}
+@keyframes growY{from{transform:scaleY(0)}}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes rise{from{opacity:.0;transform:translateY(8px)}}
+.play .bar i,.play .mini-bars .mb i{animation:growW .9s cubic-bezier(.2,.7,.2,1) both}
+.play .spark .ln{stroke-dasharray:1;animation:draw 1.1s ease-out both}
+.play .gbar{transform-box:fill-box;transform-origin:bottom;animation:growY .9s cubic-bezier(.2,.7,.2,1) both}
+.play .cline{stroke-dasharray:1;animation:draw 1.4s .3s ease-out both}
+.play .dot .core{transform-box:fill-box;transform-origin:center;animation:pop .6s both;animation-delay:var(--d,0s)}
+.play .alert,.play .out,.play .stream{animation:rise .5s both}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *,*::before,*::after{animation:none!important;transition:none!important} }
+
+@media (max-width: 900px){
+  .hero,.stop,.close{grid-template-columns:minmax(0,1fr);gap:28px}
+  .story{position:static}
+  .flow{grid-template-columns:minmax(0,1fr)}
+  .alert .detail,.client-cols,.whatif-out{grid-template-columns:minmax(0,1fr)}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width: 560px){
+  body{font-size:16px}
+  .kpis,.client-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sig{grid-template-columns:minmax(0,1fr) 70px}
+  .sig .bar{grid-column:1 / -1;grid-row:2}
+  .whatif{grid-template-columns:minmax(0,1fr)}
+  .stop{padding-block:52px}
+  #prevBtn{display:none}
+  .big{font-size:60px}
+  .ag-att{grid-template-columns:minmax(0,1fr)}
+  .slide .cols{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header class="topline">
+    <div class="brand"><b>Readout</b><span>an account-health concept by Stephen Thornhill</span></div>
+    <span class="tag">Fictional data throughout</span>
+  </header>
+
+  <section class="hero play" id="s0" data-stop="0" data-title="Welcome">
+    <div>
+      <div class="eyebrow">A 5-minute guided tour</div>
+      <h1>Read the relationship, <em>and act on it.</em></h1>
+      <p class="lede">This is how I run customer success for healthcare care-management programs: a portfolio I can read at a glance, a health score a team can explain, warnings that arrive early, and one click from concern to a client meeting. It runs on a fictional portfolio, so click anything.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#s1" id="startBtn">Start the tour →</a>
+        <span class="meta">7 stops · about 5 minutes</span>
+      </div>
+    </div>
+    <div class="monitor" aria-label="Portfolio health summary">
+      <div class="monitor-head">
+        <div><div class="lbl">Portfolio health</div><div class="big"><span id="avgScore" data-count>80</span><small> / 100</small></div></div>
+        <span class="live"><i></i>refreshed 6:00 AM</span>
+      </div>
+      <canvas id="trace" aria-hidden="true"></canvas>
+      <div class="monitor-foot">
+        <div><b id="mAccts" data-count>10</b><span>accounts</span></div>
+        <div><b id="mLives" data-count>0</b><span>enrolled patients</span></div>
+        <div><b id="mRisk" data-count>2</b><span>need attention</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stop" id="s1" data-stop="1" data-title="The book of business">
+    <div class="story">
+      <div class="stepnum"><b>Stop 1</b> of 7</div>
+      <h2>The book of business</h2>
+      <p>Every week starts here. The map shows where each account is and how it is doing: a slow pulse is healthy, and a fast red pulse needs me today. The table underneath gives each account one line, with enrolled patients, the 12-week trend and the renewal date.</p>
+      <p class="hint">Pick a dot or a row. The rest of the tour follows that account.</p>
+    </div>
+    <div class="stack">
+      <div class="panel">
+        <div class="panel-head">
+          <div><h3>Portfolio map</h3><p class="sub" id="mapSub">10 accounts across 10 states</p></div>
+          <div class="legend"><span><i style="background:var(--good)"></i><b id="lgGood">8</b> healthy</span><span><i style="background:var(--warn)"></i><b id="lgWarn">1</b> at risk</span><span><i style="background:var(--crit)"></i><b id="lgCrit">1</b> critical</span></div>
+        </div>
+        <div class="mapwrap">
+          <svg id="usmap" viewBox="0 0 975 610" role="group" aria-label="Map of account locations colored by health">
+            <path class="land" d="M648,492L648,492L648,492ZM780,466L783,476L787,486L790,491L795,500L801,508L805,511L806,514L805,517L807,522L812,529L815,537L820,544L822,549L823,554L823,565L824,571L824,575L822,574L821,580L822,581L821,583L822,583L824,578L824,580L822,587L818,592L816,593L819,589L820,586L818,586L814,588L812,587L811,589L807,590L805,588L805,585L801,578L798,576L793,574L792,575L789,571L788,566L785,563L782,561L781,563L780,559L781,555L780,552L779,553L780,556L778,557L773,551L769,546L766,543L767,541L771,533L769,532L770,534L768,533L768,531L765,530L764,532L766,532L767,534L767,537L765,537L762,533L762,530L761,526L762,527L764,521L764,517L761,512L762,510L760,508L759,505L755,505L754,506L753,503L751,503L750,500L746,498L745,495L743,494L740,491L732,487L730,488L727,487L726,490L726,492L723,492L716,497L716,496L714,498L712,498L714,500L719,498L714,501L710,499L707,500L706,496L706,495L707,499L708,497L706,494L696,488L689,486L681,486L668,489L664,490L658,492L659,490L656,488L655,482L653,482L652,486L652,490L649,489L646,489L644,491L642,490L640,491L636,490L633,491L627,494L625,495L623,496L621,498L619,499L619,501L621,501L622,503L624,502L624,500L626,498L628,498L627,499L628,501L630,499L631,502L628,503L627,507L625,506L625,507L623,508L624,509L623,510L625,511L626,513L630,513L632,515L632,514L635,518L634,522L632,520L629,524L631,519L629,519L627,517L624,516L620,515L613,521L610,516L608,515L607,517L605,517L605,518L601,523L598,520L595,520L592,519L590,517L592,516L595,518L594,516L592,514L590,515L590,513L588,514L586,512L586,510L584,510L584,508L582,508L579,509L580,506L579,506L574,508L573,508L575,511L571,513L565,512L558,509L554,508L548,508L542,509L541,510L535,511L522,517L527,513L522,514L523,512L524,509L521,509L520,511L518,511L517,514L520,515L520,519L516,523L515,522L515,524L518,522L522,518L523,519L517,523L510,530L509,530L502,534L496,537L492,539L489,542L485,544L480,548L478,551L475,555L472,562L470,566L470,570L470,574L473,587L474,592L472,582L470,576L470,569L470,564L472,560L475,554L476,551L478,550L480,546L483,545L486,542L489,541L489,540L486,542L484,542L484,540L482,540L482,544L479,546L477,545L474,547L475,548L477,547L477,549L474,553L473,552L469,552L470,553L470,555L473,556L471,559L469,564L467,565L467,563L465,566L469,566L469,572L468,576L469,583L470,583L472,588L471,592L474,593L474,595L472,595L470,596L470,598L467,597L464,593L461,593L454,593L452,592L447,589L443,588L440,585L439,585L434,584L435,582L433,581L433,577L431,574L428,570L428,567L427,564L428,559L425,556L423,555L420,552L419,548L418,548L416,544L414,543L412,541L410,534L408,532L408,530L406,526L405,522L403,520L403,519L399,516L398,513L394,511L393,509L390,506L386,506L383,505L378,505L377,503L373,503L372,505L370,504L366,505L364,510L363,514L362,514L361,517L359,517L357,520L357,522L353,521L351,520L348,517L345,516L343,514L340,513L337,511L335,508L334,508L330,504L330,501L328,498L327,495L328,492L325,487L325,483L323,480L316,475L313,472L312,470L309,468L306,463L302,460L299,454L296,452L264,448L263,458L247,456L229,454L208,450L172,429L142,412L143,409L145,407L99,402L100,400L98,398L99,394L99,388L97,382L92,376L90,374L88,371L86,370L85,371L82,369L83,367L82,362L78,361L76,362L70,357L69,354L65,349L59,348L55,345L49,344L49,342L46,340L48,338L49,335L48,333L50,328L48,327L46,325L47,321L45,319L43,315L42,313L41,311L40,308L40,305L39,304L37,300L35,296L35,292L36,289L38,289L40,286L38,281L35,281L34,279L31,274L33,271L32,267L33,261L35,261L35,266L36,267L38,270L39,265L36,262L37,259L36,257L39,256L38,253L36,254L36,257L33,260L31,257L29,255L26,253L28,250L28,248L27,247L27,243L24,240L23,236L21,232L20,229L22,227L21,219L24,216L24,209L22,202L18,197L19,193L21,190L27,184L28,182L28,179L29,177L31,173L32,166L30,164L33,160L31,157L31,153L32,149L34,146L34,145L33,142L33,140L35,137L38,131L43,126L45,121L53,103L54,99L57,92L61,81L61,79L62,75L64,74L64,69L65,71L68,71L71,70L69,69L66,69L64,67L64,65L66,60L66,61L65,66L66,66L66,63L68,63L67,60L70,59L67,59L66,57L67,55L71,54L67,51L67,45L67,43L68,34L66,30L65,28L66,23L68,21L67,19L70,20L72,23L74,24L77,27L81,28L82,29L87,31L89,31L90,33L95,33L94,35L95,38L92,41L90,42L85,46L84,48L88,44L92,43L92,42L97,39L95,46L94,47L92,52L89,55L88,51L88,55L89,56L93,52L94,53L96,52L96,47L98,42L102,38L100,35L101,33L98,34L99,32L101,31L100,27L98,28L98,25L101,27L101,25L102,24L102,23L102,21L99,19L99,15L100,14L115,19L140,25L166,32L184,36L198,39L210,42L233,46L265,52L285,55L303,57L326,60L340,62L364,65L377,66L404,68L421,69L445,70L469,71L479,71L492,71L511,71L511,62L514,62L516,64L518,73L518,76L520,77L524,77L525,78L531,79L532,81L536,80L536,79L540,78L544,79L548,80L549,80L548,82L551,82L553,87L555,87L555,84L558,84L559,86L561,87L563,87L566,91L571,90L575,86L577,86L578,89L588,88L592,91L594,90L596,91L590,94L582,98L579,99L573,106L570,109L565,114L559,119L560,121L563,121L568,120L573,117L573,117L576,115L578,115L580,116L578,119L578,120L577,123L580,122L580,120L583,122L585,123L591,120L594,117L597,116L601,116L603,114L605,112L607,112L608,109L613,106L615,103L619,101L624,100L626,101L622,102L618,108L615,112L615,115L616,117L619,112L620,113L624,112L628,114L633,121L637,121L638,120L640,121L644,121L643,119L645,121L647,118L652,115L656,114L662,114L665,112L670,111L669,113L670,118L673,118L676,117L676,118L678,117L679,116L683,115L684,121L682,123L686,124L687,126L690,126L690,124L693,124L695,126L694,128L689,127L685,127L681,129L676,127L675,129L676,131L674,131L671,128L666,127L663,127L661,130L657,131L657,132L653,131L651,133L650,135L648,137L645,139L646,136L648,134L644,135L643,138L641,138L640,136L639,136L640,138L638,140L634,149L632,152L632,153L632,156L629,157L629,158L627,162L626,166L628,166L631,163L633,159L636,157L638,153L638,151L640,150L640,149L642,148L641,152L639,155L639,157L638,159L635,165L635,170L635,174L633,176L632,181L633,185L632,188L631,195L632,199L632,201L634,206L634,210L634,212L634,217L635,219L637,222L639,227L640,230L642,231L645,231L647,231L652,228L655,224L657,219L659,216L660,210L660,205L659,198L656,191L652,184L654,180L652,175L653,173L655,168L655,163L655,160L657,159L657,155L659,153L661,154L664,148L665,151L664,156L665,157L666,152L666,158L668,153L667,146L670,143L674,142L672,141L670,138L673,134L675,133L681,135L685,135L687,138L690,138L692,139L695,140L697,140L701,147L699,146L699,149L701,150L702,154L702,157L702,162L699,166L699,169L698,171L695,171L694,173L694,177L695,179L699,180L701,177L702,173L703,174L705,171L710,168L713,169L715,172L716,177L718,181L719,186L722,191L721,200L719,202L718,200L719,199L716,199L717,201L715,203L715,207L713,208L712,210L713,213L712,215L710,217L708,222L715,224L718,225L719,224L723,227L726,227L733,223L738,223L742,218L748,213L750,212L756,209L759,207L768,200L772,196L773,194L776,192L778,189L780,186L778,182L777,182L775,176L784,172L792,170L796,170L800,172L802,171L806,169L809,169L813,167L814,165L817,162L819,161L819,158L818,155L817,154L819,152L818,151L815,150L815,146L817,144L820,141L822,138L825,132L829,128L832,124L834,123L837,123L845,121L858,118L865,116L874,114L886,111L887,105L888,103L891,104L891,102L892,101L895,103L894,99L897,99L895,96L897,92L899,90L898,89L900,86L898,83L899,80L898,80L898,76L900,74L899,67L906,48L909,48L910,51L912,52L917,49L920,48L920,46L923,46L930,50L937,74L939,80L942,81L945,80L946,82L945,83L946,84L946,87L949,90L950,88L952,88L957,95L955,99L954,100L953,99L950,106L949,104L947,104L946,107L944,108L944,110L941,110L941,113L939,114L937,112L939,110L937,110L935,111L937,115L936,117L937,118L937,120L936,118L934,116L935,115L932,114L931,110L930,112L929,113L930,114L929,120L930,123L928,125L926,126L924,128L921,129L920,132L918,131L917,133L915,134L915,137L913,138L913,142L911,143L911,146L910,150L909,155L911,159L914,158L913,160L911,162L911,163L909,166L910,169L912,167L914,168L917,171L917,174L919,174L920,177L922,178L925,177L929,175L928,172L927,173L926,170L928,171L931,177L926,180L925,180L923,182L920,183L919,180L918,179L918,182L915,183L915,185L913,186L912,188L910,184L911,187L909,188L910,184L911,183L910,182L907,181L908,188L908,191L902,193L900,193L893,197L887,198L885,199L885,198L882,203L878,205L874,208L873,210L874,211L877,208L882,208L883,207L889,205L891,204L895,200L896,199L896,201L898,201L900,202L903,199L896,206L886,213L878,217L874,218L872,219L870,219L869,216L869,217L868,220L867,221L867,222L871,222L872,225L872,229L873,237L871,245L870,247L867,251L865,257L863,259L863,254L860,253L859,254L852,250L850,250L849,246L849,246L850,244L848,247L849,249L853,252L854,255L855,258L857,261L860,263L861,263L864,270L863,279L863,280L861,284L860,285L858,288L859,292L857,301L855,304L853,301L853,292L856,286L854,285L855,284L853,284L852,285L851,282L850,280L851,279L849,278L848,276L848,279L846,279L841,274L843,274L842,271L846,271L840,268L841,266L842,266L841,264L839,266L839,262L841,263L842,260L839,259L840,255L842,253L843,249L841,250L842,252L839,254L837,254L838,257L836,259L833,258L837,260L838,263L836,269L837,270L838,274L841,277L840,279L843,282L844,284L841,283L838,281L835,282L831,280L830,278L827,280L825,278L827,274L825,275L825,279L826,281L830,279L832,283L834,283L838,283L840,285L846,287L845,289L846,293L845,294L842,294L840,291L838,290L835,288L838,291L840,292L842,295L846,295L848,299L848,300L845,299L845,300L847,302L844,303L846,303L849,305L849,307L847,309L843,306L842,304L840,305L838,304L837,305L841,306L841,304L843,308L846,309L846,310L849,310L849,308L855,308L859,316L861,320L864,325L868,332L866,328L864,328L860,319L859,318L856,317L859,320L862,325L861,325L859,323L858,325L854,323L857,326L855,327L850,326L853,328L851,330L849,331L847,330L845,328L847,333L852,331L853,331L856,330L859,330L859,332L860,337L860,336L860,330L863,329L866,335L865,337L863,338L861,342L860,344L853,345L851,342L850,342L852,345L848,345L843,343L846,345L850,346L853,346L854,347L853,352L850,355L846,353L846,355L850,356L852,354L855,353L855,351L857,353L859,352L859,354L857,356L856,360L862,350L863,350L858,357L856,362L856,361L851,361L847,363L844,365L838,370L836,374L834,377L833,384L829,383L825,384L823,386L820,388L816,392L813,399L814,404L811,406L811,408L808,408L806,410L807,411L803,415L801,419L797,421L795,423L792,424L793,425L793,427L790,429L788,427L787,428L790,430L786,433L786,435L787,436L783,442L782,447L781,451L781,454L780,456L780,459L778,460L780,461ZM104,552L104,552L104,552ZM99,570L103,565L105,569L103,569L101,570ZM95,582L95,582L95,582ZM93,575L96,573L97,573L99,571L103,571L103,574L105,573L99,578L98,579L97,577L95,580ZM93,583L93,583L93,583ZM89,588L89,588L89,588ZM72,594L72,594L72,594ZM71,592L71,592L71,592ZM68,593L69,591L70,592ZM66,590L67,590L67,592ZM68,564L68,564L68,564ZM61,591L61,591L61,591ZM58,592L58,592L58,592ZM66,524L66,524L66,524ZM56,596L56,596L56,596ZM45,597L45,597L45,597ZM43,595L43,595L43,595ZM41,596L41,596L41,596ZM44,547L46,548L50,547L51,549L51,551L48,552L44,549ZM31,601L34,600L36,598L36,597L38,596L40,598L37,601L32,602ZM51,505L59,501L64,500L66,500L65,504L71,505L73,503L74,504L72,501L70,498L71,498L71,500L73,498L70,497L67,496L66,492L63,488L59,484L61,483L62,481L67,481L70,479L72,475L75,471L78,471L82,468L87,468L89,465L93,466L91,468L92,469L94,466L95,469L99,468L101,469L101,470L104,472L109,471L114,473L119,473L123,474L126,472L132,474L133,474L147,547L151,547L152,546L155,545L155,547L162,552L164,555L167,552L167,548L169,546L172,547L176,552L181,554L182,556L190,562L190,564L192,566L193,565L200,567L201,569L203,573L201,578L200,578L198,575L199,574L198,572L198,575L193,574L192,571L191,572L189,570L190,568L188,565L186,564L183,563L182,560L178,557L176,557L171,551L175,558L173,557L170,557L168,559L162,556L160,554L153,552L154,551L153,549L151,551L149,551L146,550L141,550L135,552L135,550L132,550L132,548L131,550L129,549L125,551L126,549L128,548L127,547L126,547L124,545L122,546L119,547L120,550L120,552L121,553L119,554L114,554L113,557L111,559L110,557L109,560L106,561L105,560L109,556L107,557L105,556L107,552L107,549L111,546L112,547L113,546L112,544L109,544L106,546L102,553L102,554L100,557L96,560L96,562L98,562L100,564L96,567L96,569L92,571L91,573L90,572L89,574L88,574L86,576L86,578L83,580L82,579L80,582L77,583L79,584L77,586L71,586L67,589L66,588L63,589L63,588L61,591L60,591L56,592L53,594L50,594L47,595L46,593L49,592L52,591L57,590L60,587L62,585L66,585L67,585L69,583L71,581L75,579L78,576L81,573L82,566L84,564L84,563L80,565L78,563L77,564L77,566L76,566L73,562L72,563L71,561L65,564L64,563L65,561L64,558L66,557L64,551L63,552L58,553L57,553L57,551L53,547L54,545L54,541L53,542L51,538L53,536L54,534L57,530L59,527L61,526L64,528L67,525L71,525L73,523L73,519L72,517L74,516L73,514L68,517L61,515L59,516L55,514L54,509L56,509L52,507ZM25,603L29,599L31,599L31,600L28,602ZM28,573L28,573L28,573ZM20,602L20,602L20,602ZM27,568L27,568L27,568ZM16,603L16,603L16,603ZM34,518L36,517L38,518L39,518L42,521L45,522L42,523L41,524L39,521L37,519L35,520ZM7,603L7,603L7,603ZM23,540L23,540L23,540ZM0,602L5,604L3,604ZM-6,601L-1,601L-2,603ZM-10,599L-10,599L-10,599ZM-11,601L-11,601L-11,601ZM-15,601L-13,599L-11,601ZM-18,600L-18,600L-18,600ZM-20,597L-20,597L-20,597ZM-30,593L-30,593L-30,593ZM-35,593L-35,593L-35,593ZM-41,589L-41,589L-41,589ZM-56,577L-56,577L-56,577ZM-58,571L-55,572L-54,574L-56,573ZM197,577L197,577L197,577ZM196,577L196,577L196,577ZM195,575L195,575L195,575ZM188,570L188,570L188,570ZM187,569L187,569L187,569ZM186,577L188,576L187,578ZM185,573L185,570L187,570L190,572L194,576L196,580L192,579L190,578L192,581L190,580L189,576L186,574ZM183,574L183,574L183,574ZM180,567L182,565L185,564L189,567L186,569L184,569L184,572L183,572ZM175,556L176,557L178,557L180,559L179,560L181,563L180,566L179,563ZM174,565L175,563L177,563L180,568L181,573L176,568L175,565ZM173,566L175,566L174,568ZM169,561L169,560L172,558L175,559L177,563L174,562L174,565L171,564ZM121,555L124,550L124,551ZM120,551L122,549L121,552ZM815,594L815,594L815,594ZM813,596L813,596L813,596ZM807,599L811,597L812,597L808,599ZM794,604L795,602L800,598L804,599L805,600L802,601L796,604ZM790,605L790,605L790,605ZM786,605L786,605L786,605ZM777,558L777,558L777,558ZM770,606L770,606L770,606ZM720,495L720,495L720,495ZM940,115L940,115L940,115ZM938,116L938,114L940,116ZM936,112L936,112L936,112ZM932,116L932,116L932,116ZM934,125L934,125L934,125ZM931,119L933,117L934,119L932,121ZM930,116L930,113L931,116ZM928,187L931,186L932,184L933,186L931,188ZM918,188L919,188L921,184L925,187ZM864,329L866,329L867,331ZM863,350L864,348L871,343L871,336L871,344L867,346ZM77,374L81,377L81,380L79,378L79,376ZM75,384L78,390L76,389ZM65,358L65,358L65,358ZM58,374L58,374L58,374ZM57,355L59,356L63,359L60,359L57,357ZM50,355L54,355L55,358L52,358ZM47,353L49,353L49,354ZM305,584L308,582L310,578L309,575L310,573L315,576L318,576L322,578L326,582L326,584L328,584L328,587L332,589L332,590L329,593L325,595L322,595L317,598L315,602L314,603L309,600L308,599L309,594L308,590ZM292,558L292,556L294,555L296,559L300,557L306,561L307,562L305,564L299,566L297,565L297,561L293,560ZM292,567L294,565L295,567ZM284,558L287,558L289,560L286,562ZM279,554L280,551L288,552L291,553L289,555L288,555L283,554ZM258,543L261,543L265,540L267,544L267,546L270,547L271,549L268,550L266,549L262,549ZM226,533L227,530L231,528L235,529L237,530L236,534L233,536L230,536ZM216,537L220,533L220,536L218,536L217,538ZM849,285L850,285L849,285ZM847,281L848,280L849,282ZM677,131L682,132L680,133ZM663,133L663,133L663,133ZM662,139L663,135L664,135L665,138ZM661,136L661,136L661,136ZM659,142L659,142L659,142ZM657,150L658,150L658,151ZM655,153L655,153L655,153ZM646,140L646,140L646,140ZM601,92L602,91L610,86L614,84L610,89L605,91L607,92L603,93ZM644,493L644,493L644,493ZM639,493L639,493L639,493ZM635,494L635,494L635,494ZM632,494L632,494L632,494ZM899,196L899,196L899,196ZM897,198L897,198L897,198ZM816,154L816,154L816,154ZM814,154L814,154L814,154ZM721,223L721,223L721,223ZM719,222L719,222L719,222ZM93,51L95,48L94,52ZM99,25L99,25L99,25ZM99,20L99,20L99,20ZM98,23L98,23L98,23ZM95,31L99,28L99,31L98,30L96,32L97,33L97,37L98,35L100,37L99,39L98,39L98,37L96,36L97,33ZM96,18L96,18L96,18ZM94,20L94,20L94,20ZM95,13L95,13L95,13ZM91,21L93,21L96,20L98,22L96,27L92,24ZM91,19L91,19L91,19ZM642,146L642,145L644,145L643,147ZM636,150L636,150L636,150ZM584,113L584,113L584,113ZM583,116L583,116L583,116ZM581,115L581,115L581,115ZM580,117L580,117L580,117ZM580,114L580,114L580,114ZM579,113L581,112L583,113L581,115ZM579,118L582,116L581,118ZM576,114L576,114L576,114ZM638,497L638,497L638,497ZM629,498L631,495L631,497L632,498ZM624,510L624,510L624,510ZM610,521L610,521L610,521ZM606,521L606,521L606,521ZM602,522L602,522L602,522ZM577,511L580,511L583,512L580,514ZM908,188L908,188L908,188ZM907,196L907,196L907,196Z"/>
+            <path class="borders" d="M646,489L642,455L642,444L643,413L644,386L642,384L642,384L666,382L689,380L702,427L704,429L705,432L708,436L707,439L710,440L707,443L707,446L706,450L707,453L708,455L709,457L708,463L708,465L711,469L694,471L682,472L661,474L660,477L662,480L665,481L665,485L666,486L664,490M145,407L149,407L151,404L150,401L147,400L147,399L148,395L147,394L148,392L150,391L152,389L154,386L154,380L156,379L157,377L160,376L163,374L160,370L158,363L156,359L157,356L157,354L159,353L159,349L158,345L159,342L159,338L160,336L159,335L160,331L163,331L167,331L168,335L170,335L173,331L176,313L203,318L239,324L265,328L251,424L247,456M711,469L714,475L766,471L766,475L767,476L770,476L770,471L769,469L769,466L770,465L775,466L780,466M689,380L713,377L726,375L735,374L735,375L732,379L732,382L735,383L738,385L741,385L744,389L744,391L747,394L748,396L755,400L756,402L759,403L762,406L762,408L764,409L764,410L766,412L771,414L771,416L773,418L774,423L777,424L781,430L780,431L781,433L786,435M652,228L669,226L686,224L686,225L688,247L693,284L691,286L693,287L692,289L694,289L694,292L691,292L688,295L685,294L683,295L684,298L682,300L681,301L680,304L677,305L676,308L676,312L674,313L670,311L669,309L666,312L666,314L662,315L661,313L657,316L655,319L651,316L648,317L647,315L647,318L645,317L643,318L641,317L642,319L639,320L638,317L639,316L639,314L640,312L639,310L640,308L642,309L645,303L645,300L647,298L647,297L646,295L646,293L643,288L645,284L640,230M394,272L422,273L443,274L465,275L495,275L510,275L512,277L515,278L516,278L517,281L516,281L514,286L517,289L519,293L523,294L522,295L523,326L523,344L507,344L489,344L459,344L433,343L402,341L390,341M910,150L908,149L907,147L905,145L895,114L891,102M910,182L908,181L906,179L905,176L899,178L899,178L882,182L871,184L871,183L871,168L884,165L903,161L904,158L906,156L909,155M913,186L912,183L911,183M560,121L559,120L556,122L556,136L556,137L551,139L548,144L548,147L549,147L551,150L550,154L550,158L549,158L550,162L549,166L554,170L557,170L559,173L564,175L565,178L570,182L572,182L576,187L575,191L576,193L549,194L534,195L516,195L491,195L491,154L490,153L487,152L484,147L489,142L489,140L489,137L489,131L487,128L486,123L486,118L485,117L485,102L483,98L481,89L481,87L481,81L481,78L479,71L479,71M850,244L851,241L855,239L855,237L859,232L861,231L854,226L853,224L851,223L850,221L852,216L850,214L851,212L853,209L853,206L855,204L862,207L870,209L869,216M869,217L867,218L867,221M849,246L849,246M713,377L713,371L716,370L717,369L717,366L721,363L726,362L729,359L730,358L733,356L735,356L737,352L738,350L740,348L741,351L743,349L744,347L747,345L749,346L751,346L752,341L755,338L756,334L780,331L794,329L812,326L840,320L842,319L859,316M823,386L798,368L778,371L777,369L774,365L772,367L772,365L749,367L746,368L742,371L735,374M489,140L477,140L460,139L443,139L412,137L392,136L371,134L375,88L377,66M523,344L523,355L527,381L526,421L522,420L521,418L520,418L517,416L516,416L512,413L511,415L507,415L506,414L501,416L499,415L498,416L493,418L492,420L490,418L486,416L485,415L484,417L482,416L481,414L478,417L477,419L476,419L475,414L472,417L471,416L471,415L468,414L467,413L463,416L461,415L462,413L459,412L458,409L458,410L454,409L452,411L450,409L447,409L443,407L439,407L438,404L435,401L435,403L432,402L429,403L426,399L424,398L426,354L396,352L372,351L372,339M768,200L769,206L783,204L800,201L825,196L841,192L843,195L845,194L847,197L848,200L850,202L854,203L855,204M851,241L848,241L847,242L845,245L816,251L782,257L765,260L761,239L756,209M491,195L488,195L489,198L488,200L491,204L490,206L489,210L488,212L491,218L488,218L486,216L487,215L482,212L479,212L476,210L470,210L467,210L466,212L457,207L457,206L434,205L404,204L391,203L365,201L369,156L369,156L371,134M526,421L529,423L532,422L535,423L535,435L535,458L538,460L540,463L540,467L542,469L544,474L545,476L546,480L546,484L544,487L542,490L543,493L542,496L543,497L543,502L541,504L540,506L539,507L541,510M296,452L294,449L295,447L318,449L339,451L363,453L365,430L367,408L371,351L372,351M365,201L361,247M277,237L301,240L333,244L348,245L361,247L382,248L395,249L394,272L391,327L390,341L372,339L349,338L315,334L279,330L265,328L268,302L268,299L271,280L277,237L253,234L244,232L247,210L250,193L256,154L258,142L263,143L289,147L298,148L339,153L339,153L369,156M899,178L901,186L902,191L902,193M874,208L872,206L876,203L874,201L871,184M510,275L508,274L508,272L507,270L505,268L502,262L521,262L545,261L565,260L571,260L576,265L575,268L576,273L577,275L577,276L578,280L583,284L584,286L590,290L591,297L593,298L595,296L598,297L601,298L599,301L600,303L598,309L598,313L602,316L606,321L607,320L612,324L614,326L613,328L615,330L615,332L614,333L617,338L619,340L619,338L621,340L622,340L621,344L622,345L620,346L621,347L620,349L617,349L617,351L616,351L615,352L615,354L614,356L615,357L612,358L614,360L612,363L600,364L603,359L605,357L605,354L604,352L586,353L565,354L550,355L523,355M782,257L784,269L787,266L790,261L792,262L794,257L797,259L800,258L802,255L803,255L805,253L808,255L811,254L811,256L813,258L814,260L813,265L803,259L803,262L802,264L803,266L799,273L797,274L797,277L794,275L792,283L790,286L787,285L786,283L784,283L784,287L780,294L780,297L777,302L776,305L778,306L776,308L777,309L774,312L773,310L769,314L767,313L767,315L761,318L758,316L755,320L753,320L750,319L747,315L747,313L744,313L741,311L740,309L736,306L734,302L734,298L733,295L734,295L738,293L738,290L740,290L739,285L740,284L740,281L741,280L743,280L744,283L746,281L745,278L746,273L748,273L748,271L750,269L752,271L754,269L758,263L759,263L758,260L760,256L759,252L761,247L760,243L759,241L761,239M576,265L577,259L581,258L581,255L584,252L584,248L581,245L582,241L585,240L588,239L593,236L594,233L596,231L596,226L596,224L592,222L590,218L587,216L587,215L618,214L634,212M639,320L637,323L639,327L636,328L632,330L632,332L634,335L633,337L632,337L624,334L623,334L621,338L621,340M612,363L614,365L611,366L613,367L608,369L610,372L608,373L609,374L607,374L608,376L606,376L605,378L607,378L605,381L607,383L605,384L605,386L603,387L604,389L601,391L600,389L601,392L598,393L600,394L598,396L599,397L599,400L595,402L596,403L594,404L594,407L592,408L593,409L590,411L591,412L590,413L592,415L589,415L590,418L587,418L589,420L588,420L588,422L588,423L589,425L591,430L589,431L590,432L589,433L569,434L535,435M33,160L46,164L62,168L84,175L100,179L89,224L83,246L132,319L157,356M864,270L853,273L846,248L845,245M576,193L577,196L579,199L577,202L578,207L580,211L582,212L586,212L587,215M502,262L500,259L501,255L499,245L499,242L496,240L496,236L497,234L495,232L496,230L494,230L493,224L491,221L492,219L491,218M693,284L694,283L696,285L699,283L701,285L703,288L704,290L710,290L712,292L714,293L716,291L721,292L723,292L725,289L727,288L728,292L731,292L733,295M747,313L741,320L738,322L735,325L735,326L733,328L733,330L730,332L729,334L724,337L722,337L720,339L720,339L704,341L692,341L687,342L681,343L672,343L645,346L645,345L641,345L641,350L619,351L617,351M616,351L615,352M850,285L849,285M863,280L856,283L855,284M827,274L828,272L828,270M826,267L827,265L830,267L828,270L826,267L822,265L818,264L819,262L817,260L814,260M708,222L686,225M632,153L630,151L631,148L627,147L628,144L628,143L628,140L625,138L622,137L623,135L618,134L616,133L614,134L612,134L607,131L590,128L588,124L585,123M603,387L619,386L642,384M625,495L622,493L621,489L619,487L618,485L619,477L606,478L583,479L584,478L583,476L583,475L582,473L585,473L583,470L585,470L584,467L586,466L586,463L589,461L587,461L587,460L589,459L590,457L592,455L593,453L590,453L590,451L593,450L595,448L594,448L593,446L591,445L593,442L591,443L590,441L592,439L590,439L590,437L591,436L591,434L590,435L589,435L589,433M256,154L254,151L253,148L250,148L249,150L250,151L246,150L244,151L243,150L239,150L237,148L235,151L233,150L228,149L227,152L225,149L225,147L224,142L222,140L221,141L219,139L220,134L219,132L217,127L216,123L217,121L215,118L212,121L210,121L208,123L207,120L205,120L206,117L206,115L207,113L209,114L209,111L208,109L208,106L209,106L211,102L213,96L209,96L208,93L205,90L205,88L204,87L203,85L202,82L201,80L198,78L198,77L195,74L197,74L196,72L197,71L197,69L196,67L193,62L198,39M884,165L882,163L882,160L882,158L881,146L881,143L882,141L882,139L883,133L882,129L882,128L885,126L888,122L888,119L886,117L887,113L886,111M858,118L858,122L859,122L859,127L861,129L862,134L861,136L861,140L864,145L864,149L866,148L867,150L870,166L871,168M71,70L72,72L74,74L77,74L80,77L80,80L79,87L80,88L86,91L89,91L94,90L98,91L103,93L103,95L105,94L108,95L112,94L114,95L118,96L123,95L127,95L129,94L131,95L136,96L139,95L171,102L172,107L175,109L176,112L171,118L169,122L167,124L167,126L164,129L162,130L157,137L158,140L161,141L162,143L160,144L160,146L158,150L149,191L122,185L100,179M720,339L727,338L751,335L751,334L756,333L756,334M176,313L176,311L198,201L200,202L228,206L247,210M184,36L178,59L171,92L170,94L171,98L170,100L171,102M198,201L181,198L160,193L149,191"/>
+            <g id="dots"></g>
+          </svg>
+          <div class="maptip" id="maptip" hidden></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="kpis">
+          <div class="kpi"><span>Accounts</span><b id="kAccts">10</b></div>
+          <div class="kpi"><span>Enrolled patients</span><b id="kLives" data-count>0</b></div>
+          <div class="kpi"><span>Avg health</span><b id="kAvg" data-count>80</b></div>
+          <div class="kpi"><span>Renewing in 120 days</span><b id="kRenew">3</b></div>
+        </div>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Account</th><th>Programs</th><th class="num">Patients</th><th>12-week trend</th><th>Health</th><th>Renews</th></tr></thead>
+            <tbody id="bookRows"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stop" id="s2" data-stop="2" data-title="How the score is built">
+    <div class="story">
+      <div class="stepnum"><b>Stop 2</b> of 7</div>
+      <h2>How the score is built</h2>
+      <p>A health score only helps if a customer success manager can explain it in one sentence. This one is built from five signals that care-management programs actually run on, each weighted by how much it tends to matter at renewal.</p>
+      <p class="hint">Move enrollment up or down and watch the score, the map and the portfolio respond.</p>
+    </div>
+    <div class="stack">
+      <div class="panel">
+        <div class="score-top">
+          <div class="dial" id="dial"></div>
+          <div style="min-width:0;flex:1">
+            <label class="sub" for="acctPick">Account</label><br>
+            <select id="acctPick"></select>
+            <p class="sub" id="scoreLine" style="margin-top:8px"></p>
+          </div>
+        </div>
+        <div class="sigs" id="sigs"></div>
+        <div class="explain" id="explain"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><div><h3>What if enrollment moves?</h3><p class="sub">Projected change over the next 90 days for the selected account</p></div></div>
+        <div class="whatif">
+          <div><label class="sub" for="enrollRange">Enrollment change: <b id="enrollVal" class="mono">0%</b></label>
+            <input type="range" id="enrollRange" min="-30" max="30" step="5" value="0"></div>
+          <div class="stepper" role="group" aria-label="Quick enrollment changes">
+            <button type="button" data-v="-20">−20%</button><button type="button" data-v="-10">−10%</button><button type="button" data-v="0" class="on">Reset</button><button type="button" data-v="10">+10%</button><button type="button" data-v="20">+20%</button>
+          </div>
+          <div class="whatif-out">
+            <div><span>Enrolled patients</span><b id="wiLives">–</b></div>
+            <div><span>Health score</span><b id="wiScore">–</b></div>
+            <div><span>Portfolio average</span><b id="wiAvg">–</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stop" id="s3" data-stop="3" data-title="Early warning">
+    <div class="story">
+      <div class="stepnum"><b>Stop 3</b> of 7</div>
+      <h2>Early warning, before the client calls</h2>
+      <p>Each signal is watched against its own baseline. When one bends, the system names the likely cause, the play to run and who owns it, often while the overall score still looks fine. Growth signals surface the same way, because an account that is ready to expand deserves the same speed as one that is slipping.</p>
+      <p class="hint">Open an alert to see what the agent saw.</p>
+    </div>
+    <div class="panel">
+      <div class="panel-head">
+        <h3>This week's signals</h3>
+        <div class="chips" role="group" aria-label="Filter signals">
+          <button class="chip on" data-f="all" type="button">All</button>
+          <button class="chip" data-f="risk" type="button">Risk</button>
+          <button class="chip" data-f="growth" type="button">Growth</button>
+        </div>
+      </div>
+      <div class="alerts" id="alerts"></div>
+    </div>
+  </section>
+
+  <section class="stop" id="s4" data-stop="4" data-title="Act on it">
+    <div class="story">
+      <div class="stepnum"><b>Stop 4</b> of 7</div>
+      <h2>From concern to meeting in one click</h2>
+      <p>Seeing the problem is half the job. Readout turns a concern into the next steps: it summarizes what is happening, builds the agenda in our standard format, drafts the client deck and prepares the calendar invite. The account team reviews and sends; nothing goes out on its own.</p>
+      <p class="hint">Run it on the critical account, then try a healthy one.</p>
+    </div>
+    <div class="panel">
+      <div class="runbar">
+        <div><label class="sub" for="runPick">Account</label><br><select id="runPick"></select></div>
+        <button class="btn btn-accent" id="runBtn" type="button">Run Readout ▸</button>
+      </div>
+      <div class="steps" id="steps">
+        <div class="stp" data-s="0"><i></i>Summarize the concern</div>
+        <div class="stp" data-s="1"><i></i>Build the agenda</div>
+        <div class="stp" data-s="2"><i></i>Draft the deck</div>
+        <div class="stp" data-s="3"><i></i>Prepare the invite</div>
+      </div>
+      <div id="runOut">
+        <div class="tabs" role="tablist">
+          <button class="tab on" data-t="sum" role="tab" type="button">Summary</button>
+          <button class="tab" data-t="ag" role="tab" type="button">Agenda</button>
+          <button class="tab" data-t="deck" role="tab" type="button">Deck</button>
+          <button class="tab" data-t="inv" role="tab" type="button">Invite</button>
+        </div>
+        <div class="outpane" id="pane"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stop" id="s5" data-stop="5" data-title="Are outcomes following the work?">
+    <div class="story">
+      <div class="stepnum"><b>Stop 5</b> of 7</div>
+      <h2>Are outcomes following the work?</h2>
+      <p>Account health is half the picture. The other half is whether patients get better. For each account, Readout lines up the care being delivered against the clinical results and says plainly whether one is following the other. Across the whole portfolio, the same data shows which parts of a program move outcomes. Blood pressure is one example; the same analysis runs on every monitoring device.</p>
+      <p class="hint">Switch accounts to compare a healthy program with one that is slipping.</p>
+    </div>
+    <div class="stack">
+      <div class="panel">
+        <div class="panel-head">
+          <div><h3 id="outTitle">Account insight</h3><p class="sub">Care-coordination minutes per patient vs. share of patients at blood-pressure goal, last 6 months</p></div>
+          <select id="outPick" aria-label="Account for outcome insight"></select>
+        </div>
+        <div id="verdict"></div>
+        <svg class="chart" id="outChart" viewBox="0 0 600 260" role="img" aria-label="Monthly care minutes and blood-pressure control for the selected account"></svg>
+        <div class="legend2"><span><i style="background:var(--navy);opacity:.55"></i>Minutes per patient (left axis)</span><span><i style="background:var(--accent);height:3px"></i>Patients at BP goal (right axis)</span></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head">
+          <div><h3>Across the population</h3><p class="sub">Average systolic change from baseline after 90 days, by monthly care-coordination time</p></div>
+          <span class="illus">Illustrative data</span>
+        </div>
+        <svg class="chart" id="chart" viewBox="0 0 600 280" role="img" aria-label="Bar chart: patients with more care-coordination minutes show larger systolic reductions"></svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="stop" id="s6" data-stop="6" data-title="The agents underneath">
+    <div class="story">
+      <div class="stepnum"><b>Stop 6</b> of 7</div>
+      <h2>The agents underneath</h2>
+      <p>Behind the dashboard, a set of AI agents covers the full client lifecycle: sales, implementation, account management and in-account growth. They read more than ten live data streams, so the team spends its time on conversations instead of assembling numbers.</p>
+      <p class="hint">Select a stage to see what it reads and what it produces.</p>
+    </div>
+    <div class="panel">
+      <div class="flow">
+        <div><h4 class="lbl">Live data streams</h4><div class="streams" id="streams"></div></div>
+        <div><h4 class="lbl">Lifecycle agents</h4><div class="agents" id="agents"></div></div>
+        <div><h4 class="lbl">What it produces</h4><div class="outs" id="outs"></div></div>
+      </div>
+      <p class="sub" id="streamCount" style="margin-top:14px"></p>
+    </div>
+  </section>
+
+  <section class="stop" id="s7" data-stop="7" data-title="What the client sees">
+    <div class="story">
+      <div class="stepnum"><b>Stop 7</b> of 7</div>
+      <h2>What the client sees</h2>
+      <p>Clients get their own view, refreshed every morning, instead of waiting for a quarterly review. The numbers are the same ones the team works from, written for the client: what is working, what needs a decision and what we are doing about it.</p>
+      <p class="hint">This view follows whichever account you picked.</p>
+    </div>
+    <div class="panel"><div class="client" id="client"></div></div>
+  </section>
+
+  <section class="close" id="s8" data-stop="8" data-title="Why I built it">
+    <div>
+      <div class="eyebrow">End of tour</div>
+      <h2>Customer success has been the core of my work under every title I've held.</h2>
+      <p>Readout is how I think about that work: one score a team can explain, signals that arrive before the client has to raise them, AI that does the assembling, and a client view built on the same numbers. I'd be glad to walk through how I would adapt it for your customers.</p>
+      <div class="contact">
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/thornhillstephen/" target="_blank" rel="noopener">Connect on LinkedIn ↗</a>
+        <span class="copyline"><code id="email">sr.thornhill@outlook.com</code><button type="button" id="copyBtn">Copy</button></span>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="fact"><b>15+ years in healthcare technology</b><span>Most recently leading customer success for national accounts across ACOs, FQHCs, medical groups and value-based care organizations on APCM, CCM, PCM, RPM, RTM and TOC/TCM programs.</span></div>
+      <div class="fact"><b>Scale, from the inside</b><span>At ONEai Health, I led the operation that grew active patients from fewer than 100 to more than 15,000, and directed an AI clinical surveillance system built on wearable data.</span></div>
+      <div class="fact"><b>Process discipline</b><span>Lean Six Sigma Black Belt (Healthcare) and an Executive Leadership certificate from Harvard Business School.</span></div>
+    </div>
+  </section>
+
+  <p class="disclaimer">Readout is an illustrative concept built by Stephen Thornhill. Every company, account, person, meeting detail and figure on this page is fictional, including the vendor name "Harbor Care Partners." Nothing here shows data from any current or former employer or client, and any resemblance to a real organization is coincidental.</p>
+</div>
+
+<nav class="tourbar" aria-label="Tour progress">
+  <div class="in">
+    <button class="navbtn" id="prevBtn" type="button">← Back</button>
+    <div class="prog">
+      <div class="row"><b id="curTitle">Welcome</b><span id="timeLeft">about 5 min</span></div>
+      <div class="ticks" id="ticks"></div>
+    </div>
+    <button class="navbtn primary" id="nextBtn" type="button">Next →</button>
+  </div>
+</nav>
+
+<script>
+(function(){
+const XY={"riv": [538, 238], "blu": [474, 328], "sum": [170, 158], "lak": [631, 200], "cop": [197, 400], "har": [743, 359], "wes": [391, 381], "gra": [56, 248], "tid": [850, 311], "nor": [171, 64]};
+const VENDOR='Harbor Care Partners';
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const SIGS=[
+ {k:'enroll',label:'Enrollment velocity',w:.25,what:'New enrollments per week against the account\'s own 8-week baseline.',moves:'Eligibility-feed breaks, provider buy-in, outreach staffing.'},
+ {k:'minutes',label:'Care-minute completion',w:.25,what:'Share of enrolled patients reaching their monthly billable time.',moves:'Coordinator capacity, patient reachability, scheduling.'},
+ {k:'docs',label:'Documentation quality',w:.20,what:'Notes and device-day records that pass audit rules the first time.',moves:'Template drift, new staff, device sync gaps.'},
+ {k:'billing',label:'Clean-claim rate',w:.15,what:'Claims paid on first submission.',moves:'Consent capture, coding updates, payer rule changes.'},
+ {k:'engage',label:'Executive engagement',w:.15,what:'Sponsor attendance, response time and decision follow-through.',moves:'Sponsor turnover, competing priorities, value clarity.'}
+];
+const up=(a,b)=>Array.from({length:12},(_,i)=>Math.round(a+(b-a)*i/11+Math.sin(i*1.7)*(Math.abs(b-a)*.03)));
+const A=[
+ {id:'riv',name:'Riverbend ACO',type:'ACO',city:'Des Moines, IA',prog:'CCM · RPM · APCM',lives:4820,renew:'Mar 2027',days:150,s:{enroll:88,minutes:90,docs:84,billing:86,engage:82},t:up(4120,4820),om:[15,16,16,17,18,19],oc:[58,60,61,63,65,67]},
+ {id:'blu',name:'Bluestem Community Health',type:'FQHC',city:'Wichita, KS',prog:'CCM · TOC/TCM',lives:2140,renew:'Jan 2027',days:80,s:{enroll:52,minutes:80,docs:78,billing:76,engage:70},t:[2310,2320,2330,2325,2300,2270,2240,2210,2190,2170,2150,2140],om:[16,17,16,17,17,17],oc:[57,58,58,59,60,60]},
+ {id:'sum',name:'Summit Valley Medical Group',type:'Medical group',city:'Boise, ID',prog:'CCM · PCM · RPM',lives:3310,renew:'Jun 2027',days:240,s:{enroll:82,minutes:84,docs:80,billing:78,engage:76},t:up(3200,3310),om:[15,15,16,17,17,18],oc:[59,60,60,62,63,64]},
+ {id:'lak',name:'Lakeshore Primary Partners',type:'Medical group',city:'Milwaukee, WI',prog:'CCM · RPM · RTM',lives:1260,renew:'Aug 2027',days:300,s:{enroll:94,minutes:92,docs:90,billing:88,engage:90},t:up(880,1260),om:[16,17,18,19,20,21],oc:[60,62,64,66,68,70]},
+ {id:'cop',name:'Copperline Health Network',type:'Value-based care org',city:'Phoenix, AZ',prog:'RPM · CCM · APCM',lives:5940,renew:'Feb 2027',days:110,s:{enroll:84,minutes:82,docs:72,billing:84,engage:80},t:up(5600,5940),om:[15,16,17,18,19,20],oc:[59,59,60,59,59,60]},
+ {id:'har',name:'Harrow Creek Family Medicine',type:'Medical group',city:'Asheville, NC',prog:'CCM · PCM',lives:640,renew:'Oct 2027',days:360,s:{enroll:82,minutes:86,docs:80,billing:84,engage:78},t:up(560,640),om:[16,16,17,17,18,18],oc:[61,62,62,63,64,65]},
+ {id:'wes',name:'Westfield Rural Health',type:'FQHC',city:'Amarillo, TX',prog:'CCM · RPM',lives:1780,renew:'Dec 2026',days:55,s:{enroll:52,minutes:41,docs:48,billing:55,engage:40},t:[1960,1955,1950,1940,1925,1905,1880,1860,1835,1815,1795,1780],om:[18,17,16,14,12,11],oc:[61,60,59,56,54,52]},
+ {id:'gra',name:'Granite Bay ACO',type:'ACO',city:'Sacramento, CA',prog:'CCM · APCM · TOC/TCM',lives:3050,renew:'Apr 2027',days:180,s:{enroll:90,minutes:88,docs:86,billing:90,engage:84},t:up(2700,3050),om:[16,17,17,18,19,19],oc:[60,61,63,64,65,66]},
+ {id:'tid',name:'Tidewater Medical Associates',type:'Medical group',city:'Norfolk, VA',prog:'CCM · RPM · PCM',lives:2460,renew:'May 2027',days:210,s:{enroll:86,minutes:84,docs:88,billing:82,engage:86},t:up(2210,2460),om:[15,16,17,17,18,19],oc:[58,59,61,62,63,65]},
+ {id:'nor',name:'Northfork Health Partners',type:'Value-based care org',city:'Spokane, WA',prog:'CCM · RTM · APCM',lives:1990,renew:'Sep 2027',days:330,s:{enroll:84,minutes:88,docs:82,billing:86,engage:80},t:up(1720,1990),om:[16,16,17,18,18,19],oc:[59,60,61,62,64,65]}
+];
+const adj={}; A.forEach(a=>adj[a.id]=0);
+const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+const sigVal=(a,k)=>k==='enroll'?clamp(Math.round(a.s.enroll+adj[a.id]*1.5),0,100):a.s[k];
+const score=a=>Math.round(SIGS.reduce((n,g)=>n+sigVal(a,g.k)*g.w,0));
+const livesOf=a=>Math.round(a.lives*(1+adj[a.id]/100));
+const band=v=>v>=80?'good':v>=65?'warn':'crit';
+const bandName=v=>v>=80?'Healthy':v>=65?'At risk':'Critical';
+const fmt=n=>n.toLocaleString('en-US');
+const $=id=>document.getElementById(id);
+const setT=(id,v)=>{const e=$(id); if(e) e.textContent=v};
+const byId=id=>A.find(x=>x.id===id);
+let sel='wes', sigSel='minutes';
+
+function totals(){const tot=A.reduce((n,a)=>n+livesOf(a),0),avg=Math.round(A.reduce((n,a)=>n+score(a),0)/A.length);
+  const g=A.filter(a=>band(score(a))==='good').length,w=A.filter(a=>band(score(a))==='warn').length,c=A.filter(a=>band(score(a))==='crit').length;
+  return {tot,avg,g,w,c,renew:A.filter(a=>a.days<=120).length};}
+function renderTotals(){const t=totals();
+  setT('avgScore',t.avg);setT('kAvg',t.avg);setT('mLives',fmt(t.tot));setT('kLives',fmt(t.tot));setT('mRisk',t.w+t.c);setT('kRenew',t.renew);
+  setT('lgGood',t.g);setT('lgWarn',t.w);setT('lgCrit',t.c);
+  $('avgScore').dataset.to=t.avg;$('kAvg').dataset.to=t.avg;$('mLives').dataset.to=t.tot;$('kLives').dataset.to=t.tot;$('mRisk').dataset.to=t.w+t.c;}
+
+function spark(t,cls){
+  const w=96,h=28,mn=Math.min(...t),mx=Math.max(...t),r=(mx-mn)||1;
+  const pts=t.map((v,i)=>[i/(t.length-1)*(w-6)+3,h-4-(v-mn)/r*(h-8)]);
+  const d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const last=pts[pts.length-1];
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" aria-hidden="true"><path d="${d} L${last[0]} ${h} L3 ${h} Z" fill="var(--${cls}-soft)" stroke="none"/><path class="ln" pathLength="1" d="${d}" fill="none" stroke="var(--${cls})" stroke-width="1.6"/><circle cx="${last[0]}" cy="${last[1]}" r="2.6" fill="var(--${cls})"/></svg>`;
+}
+function renderBook(){
+  $('bookRows').innerHTML=A.map(a=>{
+    const sc=score(a), t=adj[a.id]?a.t.map((v,i)=>Math.round(v*(1+adj[a.id]/100*i/11))):a.t;
+    const c=t[11]-t[0]>=0?'good':'crit';
+    return `<tr data-id="${a.id}" class="${a.id===sel?'sel':''}" tabindex="0" aria-selected="${a.id===sel}">
+      <td class="acct"><b>${a.name}</b><span>${a.type} · ${a.city}</span></td>
+      <td><span class="sub">${a.prog}</span></td>
+      <td class="num">${fmt(livesOf(a))}</td>
+      <td>${spark(t,c)}</td>
+      <td><span class="pill ${band(sc)}">${sc} · ${bandName(sc)}</span></td>
+      <td class="mono" style="font-size:13px;white-space:nowrap">${a.renew}${a.days<=120?' <span style="color:var(--warn)" title="Renews within 120 days">●</span>':''}</td></tr>`}).join('');
+  document.querySelectorAll('#bookRows tr').forEach(tr=>{
+    const go=()=>select(tr.dataset.id);
+    tr.addEventListener('click',go);
+    tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}});
+  });
+}
+function renderMap(){
+  const order=A.slice().sort((x,y)=>score(y)-score(x));
+  $('dots').innerHTML=order.map((a,i)=>{const [x,y]=XY[a.id], b=band(score(a));
+    return `<g class="dot ${b} ${a.id===sel?'sel':''}" data-id="${a.id}" tabindex="0" role="button" aria-label="${a.name}, ${a.city}, health ${score(a)} ${bandName(score(a))}" style="--d:${(i*.08).toFixed(2)}s">
+      <circle class="ring" cx="${x}" cy="${y}" r="10" stroke="var(--${b})"/>
+      <circle class="selring" cx="${x}" cy="${y}" r="17"/>
+      <circle class="core" cx="${x}" cy="${y}" r="${b==='crit'?12:b==='warn'?11:9}" fill="var(--${b})"/></g>`}).join('');
+  const tip=$('maptip'), svg=$('usmap');
+  document.querySelectorAll('.dot').forEach(g=>{
+    const a=byId(g.dataset.id);
+    const show=()=>{const [x,y]=XY[a.id], r=svg.getBoundingClientRect(), k=r.width/975;
+      tip.innerHTML=`<b>${a.name}</b> · ${score(a)} ${bandName(score(a))}`; tip.style.left=(x*k)+'px'; tip.style.top=(y*k)+'px'; tip.hidden=false;};
+    g.addEventListener('mouseenter',show);g.addEventListener('focus',show);
+    g.addEventListener('mouseleave',()=>tip.hidden=true);g.addEventListener('blur',()=>tip.hidden=true);
+    g.addEventListener('click',()=>select(a.id));
+    g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(a.id)}});
+  });
+}
+const pick=$('acctPick'), runPick=$('runPick'), outPick=$('outPick');
+[pick,runPick,outPick].forEach(p=>{p.innerHTML=A.map(a=>`<option value="${a.id}">${a.name}</option>`).join('')});
+pick.addEventListener('change',()=>select(pick.value));
+outPick.addEventListener('change',()=>select(outPick.value));
+runPick.addEventListener('change',()=>{select(runPick.value)});
+
+function renderScore(){
+  const a=byId(sel), sc=score(a); pick.value=sel;
+  const c=band(sc), R=56, C=2*Math.PI*R, f=sc/100;
+  $('dial').innerHTML=`<svg viewBox="0 0 132 132" aria-hidden="true"><circle cx="66" cy="66" r="${R}" fill="none" stroke="var(--line)" stroke-width="10"/><circle class="arc" cx="66" cy="66" r="${R}" fill="none" stroke="var(--${c})" stroke-width="10" stroke-linecap="round" stroke-dasharray="${(C*f).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 66 66)"/></svg><div class="v"><div><b>${sc}</b><span>${bandName(sc)}</span></div></div>`;
+  const weakest=SIGS.slice().sort((x,y)=>sigVal(a,x.k)-sigVal(a,y.k))[0];
+  $('scoreLine').textContent=`${a.city} · ${fmt(livesOf(a))} enrolled patients · renews ${a.renew}. Weakest signal: ${weakest.label.toLowerCase()} (${sigVal(a,weakest.k)}).`;
+  $('sigs').innerHTML=SIGS.map(g=>{
+    const v=sigVal(a,g.k), pts=(v*g.w).toFixed(1);
+    return `<button class="sig ${g.k===sigSel?'on':''}" data-k="${g.k}" type="button" aria-pressed="${g.k===sigSel}"><span class="nm">${g.label}<small>weight ${Math.round(g.w*100)}%</small></span><span class="bar"><i style="width:${v}%;background:var(--${band(v)})"></i></span><span class="pts">${v}<small>+${pts} pts</small></span></button>`}).join('');
+  document.querySelectorAll('.sig').forEach(b=>b.addEventListener('click',()=>{sigSel=b.dataset.k;renderScore()}));
+  const g=SIGS.find(x=>x.k===sigSel);
+  $('explain').innerHTML=`<b>${g.label}.</b> ${g.what}<br><span class="sub">What usually moves it: ${g.moves}</span>`;
+}
+function renderWhatIf(){
+  const a=byId(sel), d=adj[a.id];
+  $('enrollRange').value=d; setT('enrollVal',(d>0?'+':'')+d+'%');
+  document.querySelectorAll('.stepper button').forEach(b=>b.classList.toggle('on',+b.dataset.v===d));
+  const base={...adj}; adj[a.id]=0; const s0=score(a), l0=livesOf(a), avg0=totals().avg; adj[a.id]=base[a.id];
+  const s1=score(a), l1=livesOf(a), avg1=totals().avg;
+  const arrow=(x,y)=>y===x?'':`<span class="${y>x?'delta-up':'delta-down'}"> ${y>x?'▲':'▼'}</span>`;
+  $('wiLives').innerHTML=`${fmt(l0)} → ${fmt(l1)}${arrow(l0,l1)}`;
+  $('wiScore').innerHTML=`${s0} → ${s1}${arrow(s0,s1)} <span class="pill ${band(s1)}" style="font-size:11px">${bandName(s1)}</span>`;
+  $('wiAvg').innerHTML=`${avg0} → ${avg1}${arrow(avg0,avg1)}`;
+}
+function setAdj(v){adj[sel]=clamp(+v,-30,30);renderTotals();renderBook();renderMap();renderScore();renderWhatIf();renderClient();}
+$('enrollRange').addEventListener('input',e=>setAdj(e.target.value));
+document.querySelectorAll('.stepper button').forEach(b=>b.addEventListener('click',()=>setAdj(b.dataset.v)));
+
+const ALERTS=[
+ {id:'wes',f:'risk',sev:'crit',sig:'Care-minute completion fell from 82% to 61% in three weeks',lead:19,saw:['Two coordinator logins went inactive','Outbound call attempts down 38%','Patients near month-end without minutes up 2.4x'],play:['Staffing review with the clinic manager','Temporary coverage from the shared pool','Re-sequence outreach by minutes remaining'],owner:'Account director · this week',ask:'Confirm temporary coordinator coverage for the next 30 days',cause:'Coordinator capacity dropped after two departures, and outreach did not re-route.'},
+ {id:'blu',f:'risk',sev:'warn',sig:'Enrollment velocity down 34% against baseline',lead:12,saw:['Eligibility feed returned zero new patients for 9 days','Change began the day after an EHR upgrade','No matching drop at the clinic\'s other sites'],play:['Working session with the client\'s IT lead','Manual eligibility pull to bridge the gap','Confirm the fix with a 7-day velocity check'],owner:'Implementation lead · 48 hours',ask:'Approve a working session between your IT lead and our implementation lead',cause:'An EHR upgrade broke the eligibility feed, so new patients stopped flowing in.'},
+ {id:'cop',f:'risk',sev:'warn',sig:'Device-day documentation slipping on RPM; score still 81',lead:9,saw:['Patients under the 16-day reading rule up from 6% to 13%','Concentrated in two provider panels','Sync errors on one device model'],play:['Provider huddle on reading cadence','Device swap for the affected model','Patient reminder sequence for low-reading weeks'],owner:'Clinical success manager · 2 weeks',ask:'Approve a device swap for one reading model',cause:'One device model is failing to sync, and two panels lost their reading cadence.'},
+ {id:'sum',f:'risk',sev:'warn',sig:'Clean-claim rate dipped from 88% to 78%; caught early',lead:21,saw:['Denials for missing consent tripled','Denials cluster on new enrollments','Collections lag widening month over month'],play:['AR reconciliation with the billing team','Consent step added to the enrollment workflow','Resubmission queue for eligible claims'],owner:'Revenue cycle partner · this month',ask:'Add a consent step to the enrollment workflow',cause:'Consent is not being captured at enrollment, so new claims are being denied.'},
+ {id:'lak',f:'growth',sev:'good',sig:'Eligible but not enrolled CCM patients rose to 740',lead:0,saw:['Two new providers joined the practice','Panel growth concentrated in chronic conditions','Current enrollment at 94% of target'],play:['Expansion proposal sized from payer mix','Add RTM for the orthopedic panel','Review at the next sponsor meeting'],owner:'Account director · next sponsor meeting',ask:'Review the expansion proposal for RTM',cause:'Practice growth has created a new pool of eligible patients.'}
+];
+let filt='all', openIdx=0;
+function renderAlerts(){
+  const list=ALERTS.map((x,i)=>({...x,i})).filter(x=>filt==='all'||x.f===filt);
+  $('alerts').innerHTML=list.map((x,k)=>`<div class="alert" style="animation-delay:${k*.08}s">
+    <button type="button" data-i="${x.i}" aria-expanded="${x.i===openIdx}">
+      <span class="stripe" style="background:var(--${x.sev})"></span>
+      <span class="main"><b>${byId(x.id).name}</b><span>${x.sig}</span></span>
+      <span class="lead">${x.f==='growth'?'<b>Growth</b>opportunity':`<b>${x.lead} days</b>before client raised it`}</span>
+    </button>
+    <div class="detail" ${x.i===openIdx?'':'hidden'}>
+      <div><h4 class="lbl">What the agent saw</h4><ul>${x.saw.map(s=>`<li>${s}</li>`).join('')}</ul></div>
+      <div><h4 class="lbl">Recommended play</h4><ul>${x.play.map(s=>`<li>${s}</li>`).join('')}</ul></div>
+      <div><h4 class="lbl">Owner</h4>${x.owner}<br><button class="copybtn" type="button" data-run="${x.id}" style="margin-top:10px">Act on it ▸</button></div>
+    </div></div>`).join('');
+  document.querySelectorAll('.alert>button').forEach(b=>b.addEventListener('click',()=>{const i=+b.dataset.i;openIdx=openIdx===i?-1:i;renderAlerts()}));
+  document.querySelectorAll('[data-run]').forEach(b=>b.addEventListener('click',()=>{select(b.dataset.run);$('s4').scrollIntoView({behavior:reduce?'auto':'smooth'});setTimeout(runReadout,reduce?0:600)}));
+}
+document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
+  filt=c.dataset.f; document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===c));
+  openIdx=ALERTS.findIndex(x=>filt==='all'||x.f===filt); renderAlerts();
+}));
+
+/* Readout action */
+function nextBizDay(){const d=new Date(); d.setDate(d.getDate()+1); while(d.getDay()===0||d.getDay()===6)d.setDate(d.getDate()+1); return d;}
+const dateStr=d=>d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+function brief(a){
+  const al=ALERTS.find(x=>x.id===a.id), sc=score(a), weak=SIGS.slice().sort((x,y)=>sigVal(a,x.k)-sigVal(a,y.k)).slice(0,2);
+  if(al&&al.f==='risk') return {kind:'risk',sev:al.sev,title:'Program recovery working session',head:al.sig,cause:al.cause,saw:al.saw,play:al.play,ask:al.ask,owner:al.owner};
+  if(al&&al.f==='growth') return {kind:'growth',sev:'good',title:'Program expansion review',head:al.sig,cause:al.cause,saw:al.saw,play:al.play,ask:al.ask,owner:al.owner};
+  return {kind:'steady',sev:band(sc),title:'Quarterly value review',head:`No urgent concern. Health ${sc}, with every signal at or above baseline.`,cause:`The program is performing; the lowest signals are ${weak[0].label.toLowerCase()} (${sigVal(a,weak[0].k)}) and ${weak[1].label.toLowerCase()} (${sigVal(a,weak[1].k)}).`,saw:[`${fmt(livesOf(a))} enrolled patients, trending up`,`Patients at blood-pressure goal up ${a.oc[5]-a.oc[0]} points in 6 months`,`Renewal in ${a.renew}`],play:['Share outcome gains with the sponsor','Confirm renewal timeline and decision makers','Size the next program from payer mix'],ask:'Confirm renewal timeline and next program to evaluate',owner:'Account director · before renewal'};
+}
+let out=null, deckIdx=0, tab='sum', running=false;
+function buildOutputs(){
+  const a=byId(sel), b=brief(a), when=nextBizDay(), sc=score(a);
+  out={a,b,when,sc}; deckIdx=0;
+}
+function renderPane(){
+  if(!out){buildOutputs()}
+  const {a,b,when,sc}=out, p=$('pane');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.t===tab));
+  if(tab==='sum'){
+    p.innerHTML=`<div class="summary-box"><div class="sevline"><span class="pill ${b.sev}">${sc} · ${bandName(sc)}</span><b>${a.name}</b><span class="sub">${a.type} · ${a.city} · renews ${a.renew}</span></div>
+     <div><h4 class="lbl">The concern</h4>${b.head}. ${b.cause}</div>
+     <div><h4 class="lbl">Evidence</h4><ul>${b.saw.map(s=>`<li>${s}</li>`).join('')}</ul></div>
+     <div><h4 class="lbl">Immediate steps</h4><ul>${b.play.map(s=>`<li>${s}</li>`).join('')}</ul></div>
+     <div><h4 class="lbl">Ask of the client</h4>${b.ask}. <span class="sub">Owner: ${b.owner}</span></div></div>`;
+  } else if(tab==='ag'){
+    p.innerHTML=`<div class="agenda"><div class="ag-head"><b>${a.name}  ×  ${VENDOR}</b><span>${b.title}</span><span>${dateStr(when)} · 10:00 AM ET · Microsoft Teams</span>
+      <div class="ag-att"><div><b>${a.name}</b><br>Executive sponsor<br>Clinic manager<br>${b.kind==='risk'&&a.id==='blu'?'IT lead':'Care team lead'}</div><div><b>${VENDOR}</b><br>Account director<br>Clinical success manager<br>${b.kind==='risk'?'Implementation lead':'Analytics lead'}</div></div></div>
+      <div class="ag-join">Join: Teams link added on send · Meeting ID 284 551 907 316 · Passcode 7Qx2pa</div>
+      <div class="ag-sec"><h5>1  Where the program stands</h5><ul><li>${fmt(livesOf(a))} enrolled patients · health ${sc}</li><li>${b.head}</li></ul>
+      <h5>2  What we're seeing</h5><ul>${b.saw.map(s=>`<li>${s}</li>`).join('')}</ul>
+      <h5>3  Plan</h5><ul>${b.play.map(s=>`<li>${s}</li>`).join('')}</ul>
+      <h5>4  Decisions needed</h5><ul><li>${b.ask}</li></ul>
+      <h5>5  Next check-in</h5><ul><li>Review progress in two weeks</li></ul></div></div>`;
+  } else if(tab==='deck'){
+    const slides=[
+     `<div class="slide title"><div class="kick">${VENDOR} · ${b.title}</div><h4>${a.name}</h4><div style="font-size:clamp(11px,1.5vw,15px);opacity:.9">${dateStr(when)}</div><span class="foot">1 / 4</span></div>`,
+     `<div class="slide"><div class="kick">Where the program stands</div><h4>${b.head}</h4><div class="cols"><div class="mini-bars">${SIGS.map(g=>{const v=sigVal(a,g.k);return `<div><span>${g.label}</span><span class="mb"><i style="width:${v}%;background:var(--${band(v)})"></i></span><span class="mono">${v}</span></div>`}).join('')}</div><ul>${b.saw.map(s=>`<li>${s}</li>`).join('')}</ul></div><span class="foot">2 / 4</span></div>`,
+     `<div class="slide"><div class="kick">Why it's happening and what we'll do</div><h4>${b.cause}</h4><ul>${b.play.map(s=>`<li>${s}</li>`).join('')}</ul><span class="foot">3 / 4</span></div>`,
+     `<div class="slide"><div class="kick">Decisions we need from you</div><h4>${b.ask}</h4><ul><li>Owner on our side: ${b.owner.split(' · ')[0].toLowerCase()}</li><li>We'll report progress in two weeks</li><li>Your live view refreshes every morning</li></ul><span class="foot">4 / 4</span></div>`];
+    p.innerHTML=`<div class="deck play">${slides[deckIdx]}<div class="decknav"><button type="button" id="dPrev">← Prev</button><span class="sub">Slide ${deckIdx+1} of 4 · drafted for review</span><button type="button" id="dNext">Next →</button></div></div>`;
+    $('dPrev').onclick=()=>{deckIdx=(deckIdx+3)%4;renderPane()}; $('dNext').onclick=()=>{deckIdx=(deckIdx+1)%4;renderPane()};
+  } else {
+    const subj=`${a.name} × ${VENDOR}: ${b.title}`;
+    const body=`Hello,\n\nWe'd like to meet to review ${a.name}'s program.\n\n${b.head}. ${b.cause}\n\nAgenda\n1. Where the program stands\n2. What we're seeing\n3. Plan\n4. Decisions needed: ${b.ask}\n5. Next check-in\n\nThe agenda and a short deck will be shared before the meeting.`;
+    p.innerHTML=`<div class="invite">
+      <div class="inv-row"><span>Subject</span><b>${subj}</b></div>
+      <div class="inv-row"><span>When</span><div>${dateStr(when)}, 10:00–10:45 AM ET</div></div>
+      <div class="inv-row"><span>Where</span><div>Microsoft Teams (link added on send)</div></div>
+      <div class="inv-row"><span>Required</span><div>Executive sponsor, clinic manager (${a.name}); account director, clinical success manager (${VENDOR})</div></div>
+      <div class="inv-row"><span>Attached</span><div>Agenda · 4-slide deck</div></div>
+      <div class="inv-body" id="invBody"></div></div>
+      <div class="inv-actions"><button class="btn btn-primary" type="button" id="copyInv">Copy invite text</button><span class="note">In production, Readout drafts this in Outlook for the account director to review and send. Here it stays on the page.</span></div>`;
+    $('invBody').textContent=body;
+    $('copyInv').onclick=function(){const b2=this,t=`${subj}\n${dateStr(when)}, 10:00–10:45 AM ET\n\n${body}`;
+      try{navigator.clipboard.writeText(t).then(()=>{b2.textContent='Copied'},()=>{b2.textContent='Select the text to copy'})}catch(e){b2.textContent='Select the text to copy'}};
+  }
+}
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{tab=t.dataset.t;renderPane()}));
+function runReadout(){
+  if(running)return; running=true; $('runBtn').disabled=true;
+  out=null; buildOutputs(); tab='sum';
+  const st=[...document.querySelectorAll('.stp')]; st.forEach(s=>{s.className='stp';s.querySelector('i').textContent=''});
+  const order=['sum','ag','deck','inv']; let i=0;
+  const step=()=>{ if(i>0){st[i-1].className='stp done';st[i-1].querySelector('i').textContent='✓';tab=order[i-1];renderPane();}
+    if(i<st.length){st[i].className='stp busy';i++;setTimeout(step,reduce?0:650)} else {running=false;$('runBtn').disabled=false;tab='sum';renderPane();}};
+  step();
+}
+$('runBtn').addEventListener('click',runReadout);
+function markDone(){document.querySelectorAll('.stp').forEach(s=>{s.className='stp done';s.querySelector('i').textContent='✓'})}
+
+/* Outcomes */
+const MONTHS=['May','Jun','Jul','Aug','Sep','Oct'];
+function corr(x,y){const n=x.length,mx=x.reduce((a,b)=>a+b)/n,my=y.reduce((a,b)=>a+b)/n;let s=0,sx=0,sy=0;for(let i=0;i<n;i++){s+=(x[i]-mx)*(y[i]-my);sx+=(x[i]-mx)**2;sy+=(y[i]-my)**2}return sx&&sy?s/Math.sqrt(sx*sy):0}
+function renderOutcomes(){
+  const a=byId(sel); outPick.value=sel; setT('outTitle',a.name);
+  const dm=a.om[5]-a.om[0], dc=a.oc[5]-a.oc[0], r=corr(a.om,a.oc);
+  let v;
+  if(dm>1.5&&dc>2) v=['good','Yes. Outcomes are following the work.',`Coordination time rose ${dm} minutes per patient and patients at goal rose ${dc} points.`];
+  else if(dm<-1.5&&dc<-2) v=['crit','Yes, and that is the concern.',`Coordination time fell ${-dm} minutes per patient and blood-pressure control followed it down ${-dc} points. Restoring coordinator capacity comes first.`];
+  else if(dm>1.5&&dc<=1) v=['warn','Not yet. The work is up, but outcomes are flat.',`Minutes rose ${dm} per patient while control held at ${a.oc[5]}%. Review which patients are getting the time and whether the protocol escalates high readings.`];
+  else v=['flat','Holding steady.',`Coordination time and control are both stable (${a.om[5]} minutes, ${a.oc[5]}% at goal). Watch enrollment, which is where this account is moving.`];
+  $('verdict').innerHTML=`<div class="verdict ${v[0]}"><div><b>${v[1]}</b><span class="sub" style="color:var(--ink)">${v[2]}</span></div><span class="r">r = ${r.toFixed(2)}</span></div>`;
+  const W=600,H=260,L=44,R=48,T=14,B=34,pw=W-L-R,ph=H-T-B, mMax=25, cMin=40,cMax=80, n=6, bw=pw/n*.46;
+  let s='';
+  for(let k=0;k<=5;k++){const y=T+ph*k/5; s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${y}" y2="${y}"/><text x="${L-8}" y="${y+4}" text-anchor="end">${mMax-k*5}</text><text x="${W-R+8}" y="${y+4}">${cMax-k*8}%</text>`;}
+  const px=i=>L+pw*(i+.5)/n, cy=v2=>T+ph*(1-(v2-cMin)/(cMax-cMin));
+  a.om.forEach((m,i)=>{const h=ph*m/mMax; s+=`<rect class="gbar" style="animation-delay:${i*.06}s" x="${px(i)-bw/2}" y="${T+ph-h}" width="${bw}" height="${h}" rx="3" fill="var(--navy)" opacity=".55"/><text class="lab" x="${px(i)}" y="${H-12}" text-anchor="middle">${MONTHS[i]}</text>`});
+  const d=a.oc.map((c,i)=>(i?'L':'M')+px(i).toFixed(1)+' '+cy(c).toFixed(1)).join(' ');
+  s+=`<path class="cline" pathLength="1" d="${d}" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linejoin="round"/>`;
+  a.oc.forEach((c,i)=>{s+=`<circle cx="${px(i)}" cy="${cy(c)}" r="${i===5?5:3.5}" fill="var(--accent)" stroke="var(--surface)" stroke-width="2"/>`});
+  s+=`<text class="val" x="${px(5)}" y="${cy(a.oc[5])-12}" text-anchor="middle">${a.oc[5]}%</text>`;
+  $('outChart').innerHTML=s;
+  const sec=$('s5'); if(sec.classList.contains('play')&&!reduce){sec.classList.remove('play');void sec.offsetWidth;sec.classList.add('play')}
+}
+function renderChart(){
+  const data=[['Under 10 min',-3.2,'n = 4,110'],['10–19 min',-5.1,'n = 6,940'],['20+ min',-8.6,'n = 5,380']];
+  const W=600,H=280,L=56,R=20,T=20,B=52, max=10, ph=H-T-B, pw=W-L-R, bw=pw/data.length*0.5;
+  let s='';
+  for(let v=0;v<=max;v+=2){const y=T+ph*(v/max); s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${y}" y2="${y}"/><text x="${L-10}" y="${y+4}" text-anchor="end">${v===0?'0':'−'+v}</text>`;}
+  s+=`<text x="14" y="${T+ph/2}" transform="rotate(-90 14 ${T+ph/2})" text-anchor="middle">mmHg</text>`;
+  data.forEach((d,i)=>{
+    const cx=L+pw*(i+.5)/data.length, h=ph*(-d[1]/max), x=cx-bw/2;
+    s+=`<rect class="gbar" style="transform-origin:top;animation-delay:${i*.1}s" x="${x}" y="${T}" width="${bw}" height="${h}" rx="4" fill="${i===2?'var(--accent)':'var(--navy)'}" opacity="${i===2?1:.55}"/>`;
+    s+=`<text class="val" x="${cx}" y="${T+h+18}" text-anchor="middle">${String(d[1]).replace('-','−')}</text>`;
+    s+=`<text class="lab" x="${cx}" y="${H-26}" text-anchor="middle">${d[0]}</text><text x="${cx}" y="${H-8}" text-anchor="middle">${d[2]}</text>`;
+  });
+  $('chart').innerHTML=s;
+}
+
+const STREAMS=['EHR enrollment feed','Device readings (RPM)','Therapy readings (RTM)','Care-minute logs','Claims & remits','CRM activity','Email & meeting notes','Support tickets','Staffing roster','Contract terms','Payer mix','CMS fee schedule','Patient surveys'];
+const AGENTS=[
+ {k:'sales',name:'Sales',desc:'Sizes the opportunity before the first call',reads:[0,4,9,10,11],outs:[['Program sizing','Eligible patients by program from payer mix and diagnoses'],['Revenue model','Expected reimbursement under the current fee schedule'],['Fit summary','Where the prospect looks like accounts that renew']]},
+ {k:'impl',name:'Implementation',desc:'Watches go-live readiness and early adoption',reads:[0,1,3,5,7,8],outs:[['Readiness checks','Feeds, staffing and consent steps confirmed before launch'],['First-90-day curve','Enrollment and minutes against the expected ramp'],['Blocker list','Open items with owners, sent to both teams']]},
+ {k:'am',name:'Account management',desc:'Scores health and turns warnings into action',reads:[0,1,2,3,4,5,6,7,8,12],outs:[['Daily health score','Five signals per account, refreshed each morning'],['Early-warning alerts','Cause, play and owner when a signal bends'],['Readout action','Summary, agenda, deck and invite, ready for review']]},
+ {k:'grow',name:'In-account growth',desc:'Finds expansion the client is ready for',reads:[0,1,2,4,9,10,11],outs:[['Whitespace','Eligible patients not yet enrolled, by program'],['Expansion case','Outcomes and economics for the next program'],['Timing','Raised ahead of the sponsor meeting or renewal']]}
+];
+let agentSel='am';
+function renderAgents(){
+  const ag=AGENTS.find(x=>x.k===agentSel);
+  $('streams').innerHTML=STREAMS.map((s,i)=>`<span class="stream ${ag.reads.includes(i)?'lit':''}" style="animation-delay:${i*.03}s">${s}</span>`).join('');
+  $('agents').innerHTML=AGENTS.map(x=>`<button class="agent ${x.k===agentSel?'on':''}" data-k="${x.k}" type="button" aria-pressed="${x.k===agentSel}"><b>${x.name}</b><span>${x.desc}</span></button>`).join('');
+  $('outs').innerHTML=ag.outs.map((o,i)=>`<div class="out" style="animation-delay:${.1+i*.08}s"><small>${o[0]}</small>${o[1]}</div>`).join('');
+  setT('streamCount',`${ag.name} reads ${ag.reads.length} of ${STREAMS.length} live streams.`);
+  document.querySelectorAll('.agent').forEach(b=>b.addEventListener('click',()=>{agentSel=b.dataset.k;renderAgents()}));
+}
+function renderClient(){
+  const a=byId(sel), al=ALERTS.find(x=>x.id===a.id), sc=score(a);
+  const minutesPct=Math.round(sigVal(a,'minutes')*.92), clean=a.s.billing, newE=Math.max(0,Math.round(livesOf(a)*sigVal(a,'enroll')/2400));
+  const working=sc>=80?['Enrollment on or ahead of plan','Care minutes on target for most patients',`Patients at blood-pressure goal up ${a.oc[5]-a.oc[0]} points since May`]:['Patients enrolled in RPM are reading consistently','Sponsor meetings are on schedule','First-time documentation review is steady'];
+  const decide=al?[al.ask]:['Confirm the renewal timeline and next program to evaluate'];
+  const doing=al?al.play.slice(0,2):['Monitoring all five signals daily','Preparing the next sponsor update'];
+  $('client').innerHTML=`<div class="client-band"><b>${a.name}</b><span>Program performance · refreshed today 6:00 AM</span></div>
+   <div class="client-body">
+    <div class="client-kpis">
+      <div><span>Enrolled patients</span><b>${fmt(livesOf(a))}</b></div>
+      <div><span>New this month</span><b>${fmt(newE)}</b></div>
+      <div><span>Monthly minutes met</span><b>${minutesPct}%</b></div>
+      <div><span>At BP goal</span><b>${a.oc[5]}%</b></div>
+    </div>
+    <div class="client-cols">
+      <div><h4 class="lbl">What's working</h4><ul>${working.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      <div><h4 class="lbl">Needs your decision</h4><ul>${decide.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      <div><h4 class="lbl">What we're doing</h4><ul>${doing.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+    </div>
+   </div>`;
+}
+function select(id){sel=id; runPick.value=id; renderBook();renderMap();renderScore();renderWhatIf();renderOutcomes();renderClient();
+  if(!running){out=null;buildOutputs();renderPane();}}
+
+renderTotals();renderChart();renderAlerts();renderAgents();select(sel);markDone();
+
+/* Count-up on load */
+function countUp(el){const to=+el.dataset.to||+String(el.textContent).replace(/,/g,'');if(!to||reduce){return}
+  const t0=performance.now(),dur=1100; const f=now=>{const p=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=fmt(Math.round(to*e));if(p<1)requestAnimationFrame(f)}; requestAnimationFrame(f);}
+document.querySelectorAll('[data-count]').forEach(countUp);
+
+/* Replay entrance builds as stops scroll into view */
+const playIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('play');playIO.unobserve(e.target)}}),{threshold:.2});
+document.querySelectorAll('.stop').forEach(s=>playIO.observe(s));
+
+/* Hero trace */
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const cv=$('trace'), ctx=cv.getContext('2d');
+let W=0,H=0,pts=[],head=0;
+function size(){const dpr=window.devicePixelRatio||1;W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);pts=[];for(let x=0;x<=W;x+=2)pts.push(val(x))}
+function val(x){const p=(x%140)/140;let y=Math.sin(x/38)*4+Math.sin(x/11)*1.5;if(p>.42&&p<.46)y-=10;else if(p>.46&&p<.5)y+=32;else if(p>.5&&p<.54)y-=17;return y}
+function draw(){ctx.clearRect(0,0,W,H);const mid=H*.55,line=css('--line'),acc=css('--accent');ctx.strokeStyle=line;ctx.lineWidth=1;
+  for(let y=12;y<H;y+=24){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+  ctx.lineWidth=2;ctx.strokeStyle=acc;ctx.beginPath();const n=pts.length;let pen=false;
+  for(let i=0;i<n;i++){if(!reduce&&i>head-3&&i<head+8){pen=false;continue}const x=i*2,y=mid-pts[i];if(!pen){ctx.moveTo(x,y);pen=true}else ctx.lineTo(x,y)}
+  ctx.stroke(); if(!reduce){const x=head*2,y=mid-pts[Math.min(head,n-1)];ctx.fillStyle=acc;ctx.beginPath();ctx.arc(x,y,3.5,0,7);ctx.fill()}}
+function tick(){head=(head+1)%Math.max(1,pts.length);draw();requestAnimationFrame(tick)}
+size();draw();if(!reduce)requestAnimationFrame(tick);
+addEventListener('resize',()=>{size();draw()});
+
+/* Tour bar */
+const stops=[...document.querySelectorAll('[data-stop]')], secs=[15,40,40,35,45,40,30,25,20];
+const ticks=$('ticks');
+ticks.innerHTML=stops.slice(1).map((s,i)=>`<button type="button" aria-label="Go to ${s.dataset.title}" data-i="${i+1}"></button>`).join('');
+let cur=0; const last=stops.length-1;
+function setCur(i){cur=i;
+  setT('curTitle',i===0?'Welcome':i===last?'Why I built it':`Stop ${i} of 7 · ${stops[i].dataset.title}`);
+  const left=secs.slice(i+1).reduce((a,b)=>a+b,0);
+  setT('timeLeft',left<=0?'tour complete':left<60?'under a minute left':`about ${Math.round(left/60)} min left`);
+  ticks.querySelectorAll('button').forEach(b=>{const k=+b.dataset.i;b.className=k<i?'done':k===i?'cur':''});
+  $('prevBtn').disabled=i===0;
+  $('nextBtn').textContent=i===0?'Start →':i>=last?'Back to top ↑':'Next →';
+}
+const go=i=>stops[clamp(i,0,last)].scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+$('nextBtn').addEventListener('click',()=>go(cur>=last?0:cur+1));
+$('prevBtn').addEventListener('click',()=>go(cur-1));
+ticks.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>go(+b.dataset.i)));
+$('startBtn').addEventListener('click',e=>{e.preventDefault();go(1)});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)setCur(+e.target.dataset.stop)}),{rootMargin:'-45% 0px -50% 0px'});
+stops.forEach(s=>io.observe(s)); setCur(0);
+
+$('copyBtn').addEventListener('click',function(){const b=this,t=$('email').textContent;
+  const sel2=()=>{const r=document.createRange();r.selectNodeContents($('email'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Press Ctrl+C'};
+  try{navigator.clipboard.writeText(t).then(()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1600)},sel2)}catch(e){sel2()}});
+})();
+</script>
+
+</body>
+</html>
