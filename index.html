@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Readout: a five-minute guided tour of how Stephen Thornhill runs customer success for healthcare care-management programs. Fictional data throughout.">
+<meta name="description" content="Readout: guided tours of how Stephen Thornhill runs implementation and customer success for healthcare programs. Fictional data throughout.">
 <title>Readout Tour</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,7 +38,7 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;
   padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
   padding-bottom:calc(88px + env(safe-area-inset-bottom, 0px))}
-.wrap{max-width:1160px;margin:0 auto}
+.wrap{max-width:1760px;margin:0 auto}
 h1,h2,h3,h4{text-wrap:balance}
 h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.01em}
 p{margin:0}
@@ -55,7 +55,7 @@ button{font:inherit;color:inherit}
 .brand span{color:var(--muted);font-size:14px}
 .tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 10px}
 
-.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-block:56px 64px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding-block:56px 64px}
 .hero h1{font-size:clamp(38px,5.4vw,64px);line-height:1.02;font-weight:700;margin-top:14px}
 .hero h1 em{font-style:normal;color:var(--accent)}
 .lede{font-size:19px;color:var(--muted);margin-top:20px;max-width:34em}
@@ -79,7 +79,7 @@ button{font:inherit;color:inherit}
 .monitor-foot b{display:block;font-family:var(--mono);font-size:18px;font-variant-numeric:tabular-nums}
 .monitor-foot span{font-size:13px;color:var(--muted)}
 
-.stop{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:44px;padding-block:72px;border-top:1px solid var(--line);scroll-margin-top:16px}
+.stop{display:grid;grid-template-columns:minmax(300px,.55fr) minmax(0,1.45fr);gap:56px;padding-block:72px;border-top:1px solid var(--line);scroll-margin-top:16px}
 .story{position:sticky;top:calc(24px + env(safe-area-inset-top, 0px));align-self:start;display:flex;flex-direction:column;gap:14px;min-width:0}
 .stepnum{font-family:var(--mono);font-size:13px;color:var(--muted)}
 .stepnum b{color:var(--accent)}
@@ -287,18 +287,290 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 
 .tourbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);
   padding-bottom:env(safe-area-inset-bottom, 0px);padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
-.tourbar .in{max-width:1160px;margin:0 auto;display:flex;align-items:center;gap:16px;padding-block:12px}
+.tourbar .in{max-width:1760px;margin:0 auto;display:flex;align-items:center;gap:16px;padding-block:12px}
 .prog{flex:1;min-width:0}
 .prog .row{display:flex;justify-content:space-between;gap:10px;font-size:14px}
 .prog .row b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .prog .row span{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
-.ticks{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-top:8px}
+.ticks{display:grid;grid-template-columns:repeat(var(--n,8),1fr);gap:4px;margin-top:8px}
 .ticks button{height:6px;border:0;border-radius:3px;background:var(--line);cursor:pointer;padding:0}
 .ticks button.done{background:var(--accent)}
 .ticks button.cur{background:var(--ink)}
 .navbtn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;white-space:nowrap}
 .navbtn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .navbtn:disabled{opacity:.4;cursor:default}
+
+/* Implementation journey */
+.deal{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:16px;align-items:center;background:var(--sunk);border-radius:12px;padding:14px 16px}
+.deal b{display:block;font-family:var(--display);font-size:18px}
+.deal .lbl{display:block}
+.deal-arrow{font-size:22px;color:var(--accent)}
+.kpis3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.gantt{margin-top:6px;display:grid;gap:8px;overflow-x:auto}
+.grow{display:grid;grid-template-columns:150px minmax(520px,1fr);gap:12px;align-items:center}
+.grow .gname{font-weight:600;font-size:14px}
+.grow .gname small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.gtrack{position:relative;height:30px;background:var(--sunk);border-radius:6px}
+.gseg{position:absolute;top:3px;bottom:3px;border-radius:4px;font-size:11px;line-height:24px;padding:0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:left .45s ease,width .45s ease;cursor:default}
+.gseg.shared{background:var(--navy);color:var(--on-navy)}
+.gseg.prog{background:var(--accent-soft);color:var(--ink);box-shadow:inset 0 0 0 1px var(--accent)}
+.gseg.trans{background:var(--warn-soft);color:var(--ink);box-shadow:inset 0 0 0 1px var(--warn)}
+.gseg.live{background:var(--good);color:var(--surface)}
+.gaxis{display:grid;grid-template-columns:150px minmax(520px,1fr);gap:12px}
+.gticks{position:relative;height:18px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.gticks span{position:absolute;transform:translateX(-50%)}
+.gfloor{position:absolute;top:-4px;bottom:-4px;width:0;border-left:2px dashed var(--crit)}
+.glegend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:12px}
+.glegend span{display:inline-flex;gap:6px;align-items:center}
+.gs{display:inline-block;width:14px;height:10px;border-radius:2px}
+.gs.shared{background:var(--navy)} .gs.prog{background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)} .gs.trans{background:var(--warn-soft);box-shadow:inset 0 0 0 1px var(--warn)} .gs.live{background:var(--good)}
+.gantt.compact .gtrack{height:22px} .gantt.compact .gseg{line-height:16px;font-size:10px}
+.datebar{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) minmax(0,1.1fr);gap:14px;align-items:center;margin-bottom:16px}
+.datebar b{display:block;font-family:var(--display);font-size:24px;line-height:1.1}
+.datebar .lbl{display:block}
+.datebar .arrow{font-size:22px;color:var(--accent)}
+.floorbox{border-left:3px solid var(--crit);padding-left:12px}
+.levers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:16px}
+.lever{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:start;border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;background:var(--surface);text-align:left;width:100%}
+.lever:hover{border-color:var(--accent)}
+.lever.on{border-color:var(--accent);background:var(--accent-soft)}
+.lever .box{width:18px;height:18px;border-radius:5px;border:2px solid var(--line);display:grid;place-items:center;font-size:12px;margin-top:2px}
+.lever.on .box{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.lever b{display:block;font-size:14px;font-weight:600}
+.lever .trade{display:block;font-size:12.5px;color:var(--muted);margin-top:3px}
+.lever .own{display:inline-block;font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:5px}
+.lever .save{font-family:var(--mono);font-size:12px;color:var(--accent);white-space:nowrap}
+.lever .ph{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.gate-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:18px}
+.checks{display:flex;flex-direction:column;gap:12px}
+.cgroup h4{margin:0 0 6px}
+.citem{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:center;padding:7px 8px;border-radius:8px;cursor:pointer;width:100%;border:0;background:none;text-align:left}
+.citem:hover{background:var(--sunk)}
+.citem .box{width:18px;height:18px;border-radius:5px;border:2px solid var(--line);display:grid;place-items:center;font-size:12px}
+.citem.done .box{background:var(--good);border-color:var(--good);color:var(--surface)}
+.citem.done .tx{color:var(--muted);text-decoration:line-through}
+.citem .tx{font-size:14.5px}
+.citem .gtag{font-family:var(--mono);font-size:10.5px;color:var(--crit);text-transform:uppercase;letter-spacing:.05em;margin-left:6px}
+.citem .own{font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap}
+.gatepanel{align-self:start}
+.blk{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.blk i{width:10px;height:10px;border-radius:50%;background:var(--crit);flex:none;margin-top:6px}
+.blk.ok i{background:var(--good)}
+.gate-ok{display:flex;gap:10px;align-items:center;padding:12px;border-radius:10px;background:var(--good-soft);font-weight:600}
+.gate-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+table.risk{min-width:820px}
+table.risk tbody tr{cursor:default}
+table.risk td{vertical-align:top;font-size:14px}
+table.risk td:last-child{color:var(--muted);max-width:40ch}
+.lvl{display:inline-block;font-family:var(--mono);font-size:11.5px;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.lvl.High,.lvl.Occurred{background:var(--crit-soft);color:var(--crit)}
+.lvl.Likely,.lvl.Medium{background:var(--warn-soft);color:var(--warn)}
+.lvl.Possible,.lvl.Low{background:var(--sunk);color:var(--muted)}
+.seg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;background:var(--sunk);padding:5px;border-radius:12px;margin-bottom:18px}
+.seg button{border:0;background:none;border-radius:8px;padding:9px 10px;cursor:pointer;font-weight:600;font-size:14px;color:var(--muted)}
+.seg button.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.trgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:24px}
+.rules{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.rules li{border-left:3px solid var(--warn);padding:4px 0 4px 12px;font-size:15px}
+.ttask{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.ttask span{font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap}
+.handoff{display:flex;justify-content:space-between;gap:24px;align-items:center;flex-wrap:wrap}
+.donelist{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:6px;font-size:14.5px}
+.donelist li{padding-left:24px;position:relative}
+.donelist li::before{content:"✓";position:absolute;left:0;color:var(--good);font-weight:700}
+.jtoggle{display:inline-flex;background:var(--sunk);padding:4px;border-radius:10px;gap:4px;flex:none}
+.jtoggle button{border:0;background:none;border-radius:7px;padding:7px 12px;font-weight:600;font-size:13px;cursor:pointer;color:var(--muted);white-space:nowrap}
+.jtoggle button.on{background:var(--ink);color:var(--bg)}
+.hero-actions .btn-ghost{background:var(--surface);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.hero-actions .btn-ghost:hover{box-shadow:inset 0 0 0 1px var(--accent)}
+@media (max-width: 1100px){ .levers{grid-template-columns:minmax(0,1fr)} .gate-grid,.trgrid{grid-template-columns:minmax(0,1fr)} }
+@media (max-width: 900px){ .datebar{grid-template-columns:minmax(0,1fr) minmax(0,1fr)} .datebar .arrow{display:none} .seg{grid-template-columns:repeat(2,minmax(0,1fr))} .deal{grid-template-columns:minmax(0,1fr)} .deal-arrow{display:none} }
+@media (max-width: 560px){ .kpis3{grid-template-columns:minmax(0,1fr)} .grow,.gaxis{grid-template-columns:96px minmax(520px,1fr)} .jtoggle button{padding:7px 8px;font-size:12px} .tourbar .in{flex-wrap:wrap} .prog{order:3;flex-basis:100%} }
+/* ---- WOW layer ---- */
+.seg-sm{margin:4px 0 16px}
+.seg-sm button{font-size:13px;padding:8px}
+.trgrid{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+/* Negotiation */
+.ask{font-family:var(--display);font-size:clamp(20px,2.2vw,28px);line-height:1.2;margin-bottom:22px}
+.ask em{font-style:normal;color:var(--accent)}
+.negot{position:relative;height:96px;background:var(--sunk);border-radius:12px;margin:8px 0 10px;touch-action:none;user-select:none;cursor:ew-resize}
+.nfloor{position:absolute;left:0;top:0;bottom:0;background:repeating-linear-gradient(135deg,var(--crit-soft) 0 10px,transparent 10px 20px);border-right:2px dashed var(--crit);border-radius:12px 0 0 12px}
+.nfloor span{position:absolute;top:8px;left:12px;font-family:var(--mono);font-size:11px;color:var(--crit);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.nbase{position:absolute;top:0;bottom:0;border-left:2px dotted var(--muted)}
+.nbase span{position:absolute;bottom:8px;right:6px;font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+.nticks{position:absolute;left:0;right:0;bottom:-22px;height:18px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.nticks span{position:absolute;transform:translateX(-50%)}
+.npin{position:absolute;top:-10px;bottom:-10px;width:4px;margin-left:-2px;background:var(--accent);border:0;padding:0;cursor:grab;border-radius:2px;transition:background .2s}
+.npin:active{cursor:grabbing}
+.npin::after{content:"";position:absolute;bottom:-6px;left:50%;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px var(--accent-soft)}
+.npin-flag{position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--surface);font-family:var(--mono);font-size:12px;font-weight:600;padding:4px 9px;border-radius:7px;white-space:nowrap}
+.npin.bad,.npin.bad::after,.npin.bad .npin-flag{background:var(--crit)}
+.npin.bad::after{box-shadow:0 0 0 5px var(--crit-soft)}
+.negot.shake{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+.verdictline{margin-top:34px;padding:12px 14px;border-radius:10px;font-size:15px;background:var(--sunk)}
+.verdictline.good{background:var(--good-soft)} .verdictline.crit{background:var(--crit-soft)} .verdictline.warn{background:var(--warn-soft)}
+.needgrid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:22px;margin-top:16px}
+.need{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14.5px;animation:rise .35s both}
+.need span{font-family:var(--mono);font-size:12px;color:var(--accent);white-space:nowrap}
+.need small{display:block;color:var(--muted);font-size:12px}
+.who{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.who b{font-family:var(--mono)}
+/* Dependency map */
+.countdown{text-align:right}
+.countdown b{display:block;font-family:var(--display);font-size:34px;line-height:1;font-variant-numeric:tabular-nums;transition:color .3s}
+.countdown.late b{color:var(--crit)}
+.dagwrap{overflow-x:auto}
+#dag{width:100%;min-width:760px;height:auto;display:block}
+#dag .edge{fill:none;stroke:var(--line);stroke-width:2;transition:stroke .3s,opacity .3s}
+#dag .edge.flow{stroke-dasharray:4 10;animation:flow 1.1s linear infinite}
+#dag .edge.crit{stroke:var(--accent);stroke-width:3}
+#dag .edge.late{stroke:var(--crit)}
+#dag .edge.deferred{stroke:var(--muted);stroke-dasharray:2 6;animation:none;opacity:.6}
+@keyframes flow{to{stroke-dashoffset:-28}}
+#dag .node rect{fill:var(--surface);stroke:var(--line);stroke-width:1.5;transition:fill .35s,stroke .35s}
+#dag .node.done rect{fill:var(--sunk)}
+#dag .node.crit rect{stroke:var(--accent);stroke-width:2.5}
+#dag .node.late rect{fill:var(--crit-soft);stroke:var(--crit)}
+#dag .node.slipsrc rect{stroke-width:3.5}
+#dag .node text{fill:var(--ink);font-family:var(--body);font-size:14px;font-weight:600}
+#dag .node .meta{fill:var(--muted);font-family:var(--mono);font-size:11px;font-weight:400}
+#dag .node .badge{fill:var(--crit);font-family:var(--mono);font-size:12px;font-weight:600}
+#dag .node{cursor:pointer;transition:opacity .25s}
+#dag.focus .node:not(.hl),#dag.focus .edge:not(.hl){opacity:.18}
+.slipbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.chip.slip.on{background:var(--crit);border-color:var(--crit);color:var(--surface)}
+.recov-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.recov-grid h3{font-size:18px}
+.rmove{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.rmove span{font-family:var(--mono);font-size:12px;color:var(--good);white-space:nowrap}
+.rmove small{display:block;color:var(--muted);font-size:12px}
+.rmove.applied{color:var(--muted)}
+#recovBtn{margin-top:14px}
+/* Kickoff pack */
+.raci{min-width:720px}
+.raci td,.raci th{text-align:center}
+.raci td:first-child,.raci th:first-child{text-align:left}
+.rc{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:7px;font-family:var(--mono);font-size:12px;font-weight:700}
+.rc.R{background:var(--accent);color:var(--surface)} .rc.A{background:var(--navy);color:var(--on-navy)} .rc.C{background:var(--accent-soft);color:var(--ink)} .rc.I{background:var(--sunk);color:var(--muted)}
+.raci-key{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:10px}
+/* Play */
+.playhead-row{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+.clock b{display:block;font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums}
+.pstat b{display:block;font-family:var(--mono);font-size:20px;font-variant-numeric:tabular-nums}
+.play-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:20px}
+.ptl{position:relative;display:grid;gap:10px;align-content:start}
+.ptrack{display:grid;grid-template-columns:70px minmax(0,1fr);gap:10px;align-items:center}
+.ptrack b{font-size:14px}
+.pbar{position:relative;height:28px;background:var(--sunk);border-radius:6px;overflow:hidden}
+.pseg{position:absolute;top:3px;bottom:3px;border-radius:4px;background:var(--line);font-size:10.5px;line-height:22px;padding:0 6px;white-space:nowrap;overflow:hidden;color:var(--muted)}
+.pseg .fill{position:absolute;inset:0;width:0;background:var(--accent);opacity:.9}
+.pseg.shared .fill{background:var(--navy)}
+.pseg.live .fill{background:var(--good)}
+.pseg span{position:relative;z-index:1}
+.pseg.filled span{color:var(--surface)}
+.pcursor{position:absolute;top:0;bottom:0;width:2px;background:var(--crit);left:70px;pointer-events:none}
+.pcursor::before{content:"";position:absolute;top:-6px;left:-5px;width:12px;height:12px;border-radius:50%;background:var(--crit)}
+.feed{max-height:330px;overflow:hidden;display:flex;flex-direction:column;gap:8px;border-left:1px solid var(--line);padding-left:16px}
+.fe{font-size:13.5px;padding:8px 10px;border-radius:9px;background:var(--sunk);animation:rise .35s both}
+.fe small{display:block;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.fe.risk{background:var(--crit-soft)}
+.fe.risk.resolved{background:var(--good-soft)}
+.fe.risk.resolved b{text-decoration:line-through;color:var(--muted)}
+.fe .fix{display:block;color:var(--good);font-weight:600;margin-top:3px}
+.fe.sys{background:var(--accent-soft)}
+.livestamp{display:flex;gap:16px;align-items:center;margin-top:18px;padding:14px 18px;border-radius:12px;background:var(--good-soft);animation:pop .6s both}
+.livestamp span{font-family:var(--display);font-size:30px;font-weight:700;color:var(--surface);background:var(--good);padding:2px 14px;border-radius:8px;letter-spacing:.06em}
+@media (max-width: 1100px){ .play-grid,.recov-grid,.needgrid{grid-template-columns:minmax(0,1fr)} .feed{border-left:0;padding-left:0;max-height:none} }
+.nticks span:last-child{transform:translateX(-100%)}
+.nticks span:first-child{transform:none}
+
+.ptl{align-self:start}
+#dag .node text{font-size:14.5px}
+/* ---- v5: hero, launch readiness, folds, customers ---- */
+.hero2{display:grid;gap:34px;padding-block:48px 60px}
+.hero-text{max-width:980px}
+.hero2 h1{font-size:clamp(36px,5vw,62px);line-height:1.03;font-weight:700;margin-top:14px}
+.hero2 h1 em{font-style:normal;color:var(--accent)}
+.discipline{margin-top:16px;max-width:60em;font-size:16px}
+.creds{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.creds span{font-family:var(--mono);font-size:12px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px}
+.hero-cards{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:20px;align-items:stretch}
+.lr-sub{font-size:15px;color:var(--muted);margin-top:4px}
+.lr-sub b{font-family:var(--display);font-size:26px;color:var(--ink);margin-right:4px}
+.rings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:10px}
+.lring{border:0;background:none;padding:6px;border-radius:12px;cursor:pointer;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;color:inherit}
+.lring:hover{background:var(--sunk)}
+.lring svg{width:100%;max-width:150px;height:auto;overflow:visible}
+.lring .trk{fill:none;stroke:var(--sunk);stroke-width:11}
+.lring .arc{fill:none;stroke-width:11;stroke-linecap:round;animation:ringIn 1.4s cubic-bezier(.2,.7,.2,1) both}
+.lring .slip{fill:none;stroke:var(--warn);stroke-width:11;stroke-dasharray:3 4;opacity:.75;animation:slipPulse 1.6s ease-in-out infinite}
+.lring .tick{fill:none;stroke-width:1;stroke:var(--line)}
+.lring .orbit{transform-box:view-box;transform-origin:70px 70px;animation:orbit 6s linear infinite}
+.lring.off .orbit{animation:orbitHesitate 9s ease-in-out infinite}
+.lring .orbit circle{fill:var(--accent)}
+.lring.off .orbit circle{fill:var(--warn)}
+.lring .ctr{font-family:var(--display);font-size:26px;font-weight:700;fill:var(--ink)}
+.lring .ctr2{font-family:var(--mono);font-size:10px;fill:var(--muted)}
+.lring b{font-size:14px;line-height:1.2}
+.lring .rmeta{font-size:12px;color:var(--muted)}
+@keyframes ringIn{from{stroke-dasharray:0 100}}
+@keyframes slipPulse{50%{opacity:.25}}
+@keyframes orbit{to{transform:rotate(360deg)}}
+@keyframes orbitHesitate{0%{transform:rotate(0)}40%{transform:rotate(150deg)}55%{transform:rotate(160deg)}100%{transform:rotate(360deg)}}
+.pill.wait{background:var(--warn-soft);color:var(--warn)}
+details.fold{border-top:1px solid var(--line);margin-top:14px}
+details.fold>summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 0;cursor:pointer}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary>span:first-child{display:flex;flex-direction:column;gap:2px;min-width:0}
+details.fold>summary b{font-size:16px}
+.viewbtn{flex:none;font-size:13px;font-weight:700;border:1px solid var(--line);border-radius:8px;padding:6px 12px;background:var(--surface)}
+.viewbtn::before{content:"View ▾"}
+details[open]>summary .viewbtn::before{content:"Hide ▴"}
+details.fold>summary:hover .viewbtn{border-color:var(--accent);color:var(--accent)}
+details.fold.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:4px 22px 6px;margin-top:0}
+details.fold.card[open]{padding-bottom:20px}
+details.fold.card>summary b{font-size:18px;font-family:var(--display)}
+.pickrow{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.custpick{display:inline-flex;background:var(--sunk);padding:4px;border-radius:10px;gap:4px;flex-wrap:wrap}
+.custpick button{border:0;background:none;border-radius:7px;padding:7px 12px;font-weight:600;font-size:13px;cursor:pointer;color:var(--muted);display:inline-flex;align-items:center;gap:7px}
+.custpick button i{width:8px;height:8px;border-radius:50%;background:var(--good)}
+.custpick button i.off{background:var(--warn)}
+.custpick button.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.sync{font-family:var(--mono);font-size:11.5px;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:4px 10px}
+.cta-pulse{position:relative;animation:ctaPulse 2.2s ease-in-out infinite}
+.cta-pulse.done{animation:none}
+@keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 45%,transparent)}50%{box-shadow:0 0 0 10px color-mix(in srgb,var(--accent) 0%,transparent)}}
+.npin.hinting::after{animation:pinPulse 1.8s ease-in-out infinite}
+@keyframes pinPulse{50%{box-shadow:0 0 0 12px var(--accent-soft)}}
+.npin-hint{position:absolute;bottom:-34px;left:14px;font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap;animation:nudge 1.8s ease-in-out infinite}
+.npin:not(.hinting) .npin-hint{display:none}
+@keyframes nudge{50%{transform:translateX(-6px)}}
+.negot.flash{animation:negFlash 2.4s ease-in-out 3}
+@keyframes negFlash{50%{box-shadow:0 0 0 3px var(--accent-soft)}}
+.custcards{display:flex;flex-direction:column;gap:12px}
+.ccard{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:2px 22px}
+.ccard[open]{padding-bottom:22px;border-color:var(--accent)}
+.ccard>summary{list-style:none;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) auto auto;gap:16px;align-items:center;padding:16px 0;cursor:pointer}
+.ccard>summary::-webkit-details-marker{display:none}
+.ccard>summary b{font-family:var(--display);font-size:18px;display:block}
+.ccard .cmeta{font-size:13px;color:var(--muted)}
+.ccard .cgl{font-family:var(--mono);font-size:13px}
+.ccard .cgl small{display:block;font-family:var(--body);font-size:12px;color:var(--muted)}
+.handoffbox{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1.2fr);gap:16px;align-items:start;background:var(--sunk);border-radius:12px;padding:14px 16px;margin-bottom:16px}
+.handoffbox .deal-arrow{align-self:center}
+.hsrow{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:3px 0}
+.hsrow span:first-child{color:var(--muted)}
+.prom{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
+.prom small{display:block;color:var(--muted);font-size:12px}
+.kp .runbar{justify-content:space-between}
+.kpfold{border:1px solid var(--line);border-radius:12px;padding:0 16px;margin-top:10px;background:var(--surface);animation:rise .4s both}
+.kpfold>summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:12px 0;cursor:pointer;font-weight:700}
+.kpfold>summary::-webkit-details-marker{display:none}
+.kpfold[open]{padding-bottom:16px}
+.kplog{font-family:var(--mono);font-size:12px;color:var(--accent);margin-top:12px}
+@media (max-width: 1100px){ .hero-cards{grid-template-columns:minmax(0,1fr)} .ccard>summary{grid-template-columns:minmax(0,1fr) auto} .handoffbox{grid-template-columns:minmax(0,1fr)} .handoffbox .deal-arrow{display:none} }
+@media (max-width: 560px){ .rings{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px} .lring .ctr{font-size:22px} .ccard{padding:2px 14px} details.fold.card{padding:4px 14px 6px} }
 
 /* Entrance motion: everything is visible at rest; .play replays a short build when a stop scrolls into view. */
 @keyframes growW{from{width:0}}
@@ -344,33 +616,212 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     <span class="tag">Fictional data throughout</span>
   </header>
 
-  <section class="hero play" id="s0" data-stop="0" data-title="Welcome">
-    <div>
-      <div class="eyebrow">A 5-minute guided tour</div>
-      <h1>Read the relationship, <em>and act on it.</em></h1>
-      <p class="lede">This is how I run customer success for healthcare care-management programs: a portfolio I can read at a glance, a health score a team can explain, warnings that arrive early, and one click from concern to a client meeting. It runs on a fictional portfolio, so click anything.</p>
+  <section class="hero2 play" id="s0" data-stop data-journey="both" data-secs="15" data-title="Welcome">
+    <div class="hero-text">
+      <div class="eyebrow" id="heroEyebrow">Implementation &amp; customer success leadership</div>
+      <h1 id="heroH1">Disciplined, white-glove delivery. <em>See it run in four minutes.</em></h1>
+      <p class="lede" id="heroLede">A client's first 90 days decide how the next three years go. This is how I run a white-glove implementation: receive the handoff from sales with nothing dropped, curate every step of the launch, and deliver on everything the client was told to expect. Then account management keeps it healthy and growing. Everything runs on fictional data, so click anything.</p>
+      <p class="discipline"><b>How I work:</b> process design and leadership that bring sales, implementation, clinical and account teams together into one plan, with one owner for every step.</p>
+      <p class="creds"><span>B.S. Administration</span><span>Lean Six Sigma Black Belt (Healthcare)</span><span>Harvard Business School, Executive Leadership</span></p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#s1" id="startBtn">Start the tour →</a>
-        <span class="meta">7 stops · about 5 minutes</span>
+        <a class="btn btn-primary" href="#i1" id="startImpl">Start with implementation →</a>
+        <a class="btn btn-ghost" href="#s1" id="startAm">Go to account management</a>
       </div>
     </div>
-    <div class="monitor" aria-label="Portfolio health summary">
-      <div class="monitor-head">
-        <div><div class="lbl">Portfolio health</div><div class="big"><span id="avgScore" data-count>80</span><small> / 100</small></div></div>
-        <span class="live"><i></i>refreshed 6:00 AM</span>
+    <div class="hero-cards">
+      <div class="monitor launch" aria-label="Launch readiness for implementations in progress">
+        <div class="monitor-head">
+          <div><div class="lbl">Launch readiness</div><div class="lr-sub"><b>3</b> launches in flight</div></div>
+          <span class="live"><i></i>live</span>
+        </div>
+        <div class="rings" id="rings"></div>
       </div>
-      <canvas id="trace" aria-hidden="true"></canvas>
-      <div class="monitor-foot">
-        <div><b id="mAccts" data-count>10</b><span>accounts</span></div>
-        <div><b id="mLives" data-count>0</b><span>enrolled patients</span></div>
-        <div><b id="mRisk" data-count>2</b><span>need attention</span></div>
+      <div class="monitor" aria-label="Portfolio health summary">
+        <div class="monitor-head">
+          <div><div class="lbl">Portfolio health</div><div class="big"><span id="avgScore" data-count>80</span><small> / 100</small></div></div>
+          <span class="live"><i></i>refreshed 6:00 AM</span>
+        </div>
+        <canvas id="trace" aria-hidden="true"></canvas>
+        <div class="monitor-foot">
+          <div><b id="mAccts" data-count>10</b><span>accounts</span></div>
+          <div><b id="mLives" data-count>0</b><span>enrolled patients</span></div>
+          <div><b id="mRisk" data-count>2</b><span>need attention</span></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="stop" id="s1" data-stop="1" data-title="The book of business">
+
+  <section class="stop" id="i1" data-stop data-journey="impl" data-secs="45" data-title="Receiving the baton">
     <div class="story">
-      <div class="stepnum"><b>Stop 1</b> of 7</div>
+      <div class="stepnum"><b>Stop 1</b> of 5 · Implementation</div>
+      <h2>Receiving the baton</h2>
+      <p>Implementation starts the moment a deal closes in HubSpot. The deal carries everything sales learned and everything sales promised, and nothing is re-asked. The signed scope seeds a dated plan with an owner for every step, and every promise from the sales cycle is tracked through to delivery.</p>
+      <p class="hint">Three launches are in flight. Open each one, then build a kickoff pack.</p>
+    </div>
+    <div class="stack">
+      <div class="custcards" id="custCards"></div>
+      <div class="panel kp">
+        <div class="runbar">
+          <div><h3>Kickoff pack · <span class="cname"></span></h3><p class="sub">Built from the HubSpot deal and the plan, ready for review before anything is sent</p></div>
+          <button class="btn btn-accent cta-pulse" id="kpBtn" type="button">Build kickoff pack ▸</button>
+        </div>
+        <div class="steps" id="kpSteps" hidden>
+          <div class="stp"><i></i>Kickoff agenda</div>
+          <div class="stp"><i></i>Who owns what</div>
+          <div class="stp"><i></i>Project plan</div>
+          <div class="stp"><i></i>Welcome email</div>
+        </div>
+        <div id="kpOut" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stop" id="i2" data-stop data-journey="impl" data-secs="45" data-title="Can we go live by…?">
+    <div class="story">
+      <div class="stepnum"><b>Stop 2</b> of 5 · Implementation</div>
+      <h2>"Can we go live by…?"</h2>
+      <p>Every client asks for an earlier date. Each phase has a floor that cannot be bought back, and a short list of named accelerators. An accelerator only counts if someone can commit to it, so each one carries an owner and a trade-off. Readout finds the fewest, easiest commitments that reach the date the client asked for, and says so plainly when a date is not defensible.</p>
+      <p class="hint">Drag the go-live pin earlier. Go past the red line and see what happens.</p>
+    </div>
+    <div class="stack">
+      <div class="panel">
+        <div class="pickrow"><div class="custpick" data-pick></div><span class="sync">↻ Commitments sync to HubSpot as tasks</span></div>
+        <div class="ask" id="askLine">–</div>
+        <div class="negot" id="negot">
+          <div class="nfloor" id="nFloor"><span>Not defensible</span></div>
+          <div class="nbase" id="nBase"><span>Standard plan</span></div>
+          <div class="nticks" id="nTicks"></div>
+          <button class="npin hinting" id="nPin" type="button" aria-label="Go-live target. Use the arrow keys to move it."><span class="npin-flag" id="nPinLbl">–</span><span class="npin-hint" aria-hidden="true">◂ drag</span></button>
+        </div>
+        <div class="verdictline" id="nVerdict"></div>
+        <details class="fold" id="needFold">
+          <summary><span><b id="needHead">Commitments needed</b><span class="sub" id="needSum"></span></span><span class="viewbtn"></span></summary>
+          <div class="needgrid">
+            <div><h4 class="lbl">Commitments</h4><div id="needList"></div></div>
+            <div><h4 class="lbl">Who has to say yes</h4><div id="whoList"></div></div>
+          </div>
+        </details>
+        <details class="fold">
+          <summary><span><b>Every accelerator in the plan</b><span class="sub">Toggle any of them by hand; the pin follows</span></span><span class="viewbtn"></span></summary>
+          <div class="levers" id="levers"></div>
+          <div class="gantt compact" id="gantt2"></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="stop" id="i3" data-stop data-journey="impl" data-secs="50" data-title="When something slips">
+    <div class="story">
+      <div class="stepnum"><b>Stop 3</b> of 5 · Implementation</div>
+      <h2>When something slips</h2>
+      <p>Plans slip. What matters is seeing the ripple the day it happens, and having the recovery and the client conversation ready before anyone asks. Every task knows what it is waiting on and what is waiting on it, so a delay anywhere moves every date that depends on it.</p>
+      <p class="hint">Hover a task to see its dependencies. Then trigger a slip and apply the recovery.</p>
+    </div>
+    <div class="stack">
+      <div class="panel">
+        <div class="pickrow"><div class="custpick" data-pick></div></div>
+        <div class="panel-head">
+          <div><h3><span class="cname"></span> · <span id="dagWeek">week 4</span></h3><p class="sub">Accent path is the critical path; work flows left to right</p></div>
+          <div class="countdown"><span class="lbl">Go-live</span><b id="cdDays">–</b><span class="sub" id="cdDate">–</span></div>
+        </div>
+        <div class="dagwrap"><svg id="dag" viewBox="0 0 1210 470" role="img" aria-label="Dependency map of implementation tasks"></svg></div>
+        <div class="slipbar">
+          <span class="lbl">Trigger a slip</span>
+          <div class="chips" id="slipChips"></div>
+          <button class="copybtn" id="slipReset" type="button">Reset</button>
+        </div>
+      </div>
+      <div class="panel" id="recovPanel">
+        <div class="recov-grid">
+          <div>
+            <h3>Recovery plan</h3>
+            <p class="sub" id="recovSub">No slips. The plan is on its committed date.</p>
+            <div id="recovList"></div>
+            <button class="btn btn-accent" id="recovBtn" type="button" disabled>Apply recovery plan</button>
+          </div>
+          <div>
+            <h3>Note to the client</h3>
+            <p class="sub">Sent the day the date moves, not at go-live, and logged to the HubSpot timeline</p>
+            <button class="btn btn-primary" id="noteBtn" type="button" disabled>Generate client note</button>
+            <div id="noteWrap" hidden>
+              <div class="inv-body" id="clientNote"></div>
+              <div class="inv-actions"><button class="copybtn" id="copyNote" type="button">Copy note</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stop" id="i4" data-stop data-journey="impl" data-secs="35" data-title="Readiness, risks and the go-live gate">
+    <div class="story">
+      <div class="stepnum"><b>Stop 4</b> of 5 · Implementation</div>
+      <h2>Readiness, risks and the go-live gate</h2>
+      <p>A go-live date is a promise, so the gate is explicit: nothing goes live until training is delivered, care plans are accepted and the first cohort is confirmed. Open items feed a risk register with an owner, a likelihood, an impact and a mitigation, written as the next action rather than a warning.</p>
+      <p class="hint">Open the checklist, check items off, and watch the gate and risks clear.</p>
+    </div>
+    <div class="stack">
+      <div class="pickrow"><div class="custpick" data-pick></div><span class="sync">↻ Open items sync to HubSpot as tasks with owners and due dates</span></div>
+      <details class="fold card">
+        <summary><span><b>Readiness checklist</b><span class="sub" id="readySub"></span></span><span class="viewbtn"></span></summary>
+        <div class="checks" id="checks"></div>
+      </details>
+      <details class="fold card">
+        <summary><span><b>Go-live gate</b><span class="sub" id="gateSub"></span></span><span class="viewbtn"></span></summary>
+        <div id="gate"></div>
+        <div class="gate-actions">
+          <button class="btn btn-accent" id="liveBtn" type="button">Record go-live</button>
+          <button class="copybtn" id="clearBtn" type="button">Complete open items</button>
+        </div>
+        <p class="sub" id="liveNote" style="margin-top:10px"></p>
+      </details>
+      <details class="fold card">
+        <summary><span><b>Risk register</b><span class="sub" id="riskCount"></span></span><span class="viewbtn"></span></summary>
+        <div class="tablewrap"><table class="risk"><thead><tr><th>Risk</th><th>Category</th><th>Owner</th><th>Likelihood</th><th>Impact</th><th>Mitigation</th></tr></thead><tbody id="risks"></tbody></table></div>
+      </details>
+    </div>
+  </section>
+
+  <section class="stop" id="i5" data-stop data-journey="impl" data-secs="45" data-title="Play the implementation">
+    <div class="story">
+      <div class="stepnum"><b>Stop 5</b> of 5 · Implementation</div>
+      <h2>Play the implementation</h2>
+      <p>Seven weeks in twenty seconds. Watch the phases fill, the tasks close, two risks appear and get resolved, and the activity feed show who did what, logged to HubSpot as it happens. Then the account is handed to account management with nothing dropped.</p>
+      <p class="hint">Press play.</p>
+    </div>
+    <div class="stack">
+      <div class="panel playpanel" id="playPanel">
+        <div class="pickrow"><div class="custpick" data-pick></div></div>
+        <div class="playhead-row">
+          <button class="btn btn-accent cta-pulse" id="playBtn" type="button">▶ Play the implementation</button>
+          <div class="clock"><b id="pWeek">Week 0</b><span class="sub" id="pDate">–</span></div>
+          <div class="pstat"><span class="lbl">Tasks closed</span><b id="pTasks">0 of 14</b></div>
+          <div class="pstat"><span class="lbl">Open risks</span><b id="pRisks">0</b></div>
+          <div class="pstat"><span class="lbl">Promises delivered</span><b id="pProm">0 of 4</b></div>
+        </div>
+        <div class="play-grid">
+          <div class="ptl" id="ptl"></div>
+          <div class="feed" id="feed" aria-live="polite"><p class="sub">The activity feed fills as the implementation plays.</p></div>
+        </div>
+        <div class="livestamp" id="liveStamp" hidden><span>LIVE</span><b id="liveStampTxt">Go-live on the committed date</b></div>
+      </div>
+      <div class="panel handoff">
+        <div><h3>Handoff to account management</h3>
+          <ul class="donelist">
+            <li>HubSpot deal moved to Live, and the account owner assigned</li>
+            <li>Every sales promise marked delivered, with the date it was met</li>
+            <li>Go-live recorded with the accelerators that were in play, so planned vs. actual can be read back later</li>
+            <li>Open risks transferred with owners and next actions</li>
+          </ul></div>
+        <button class="btn btn-primary" id="handoffBtn" type="button">Hand off to account management →</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="stop" id="s1" data-stop data-journey="am" data-secs="40" data-title="The book of business">
+    <div class="story">
+      <div class="stepnum"><b>Stop 1</b> of 7 · Account management</div>
       <h2>The book of business</h2>
       <p>Every week starts here. The map shows where each account is and how it is doing: a slow pulse is healthy, and a fast red pulse needs me today. The table underneath gives each account one line, with enrolled patients, the 12-week trend and the renewal date.</p>
       <p class="hint">Pick a dot or a row. The rest of the tour follows that account.</p>
@@ -407,9 +858,9 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     </div>
   </section>
 
-  <section class="stop" id="s2" data-stop="2" data-title="How the score is built">
+  <section class="stop" id="s2" data-stop data-journey="am" data-secs="40" data-title="How the score is built">
     <div class="story">
-      <div class="stepnum"><b>Stop 2</b> of 7</div>
+      <div class="stepnum"><b>Stop 2</b> of 7 · Account management</div>
       <h2>How the score is built</h2>
       <p>A health score only helps if a customer success manager can explain it in one sentence. This one is built from five signals that care-management programs actually run on, each weighted by how much it tends to matter at renewal.</p>
       <p class="hint">Move enrollment up or down and watch the score, the map and the portfolio respond.</p>
@@ -445,9 +896,9 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     </div>
   </section>
 
-  <section class="stop" id="s3" data-stop="3" data-title="Early warning">
+  <section class="stop" id="s3" data-stop data-journey="am" data-secs="35" data-title="Early warning">
     <div class="story">
-      <div class="stepnum"><b>Stop 3</b> of 7</div>
+      <div class="stepnum"><b>Stop 3</b> of 7 · Account management</div>
       <h2>Early warning, before the client calls</h2>
       <p>Each signal is watched against its own baseline. When one bends, the system names the likely cause, the play to run and who owns it, often while the overall score still looks fine. Growth signals surface the same way, because an account that is ready to expand deserves the same speed as one that is slipping.</p>
       <p class="hint">Open an alert to see what the agent saw.</p>
@@ -465,9 +916,9 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     </div>
   </section>
 
-  <section class="stop" id="s4" data-stop="4" data-title="Act on it">
+  <section class="stop" id="s4" data-stop data-journey="am" data-secs="45" data-title="Act on it">
     <div class="story">
-      <div class="stepnum"><b>Stop 4</b> of 7</div>
+      <div class="stepnum"><b>Stop 4</b> of 7 · Account management</div>
       <h2>From concern to meeting in one click</h2>
       <p>Seeing the problem is half the job. Readout turns a concern into the next steps: it summarizes what is happening, builds the agenda in our standard format, drafts the client deck and prepares the calendar invite. The account team reviews and sends; nothing goes out on its own.</p>
       <p class="hint">Run it on the critical account, then try a healthy one.</p>
@@ -495,9 +946,9 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     </div>
   </section>
 
-  <section class="stop" id="s5" data-stop="5" data-title="Are outcomes following the work?">
+  <section class="stop" id="s5" data-stop data-journey="am" data-secs="40" data-title="Are outcomes following the work?">
     <div class="story">
-      <div class="stepnum"><b>Stop 5</b> of 7</div>
+      <div class="stepnum"><b>Stop 5</b> of 7 · Account management</div>
       <h2>Are outcomes following the work?</h2>
       <p>Account health is half the picture. The other half is whether patients get better. For each account, Readout lines up the care being delivered against the clinical results and says plainly whether one is following the other. Across the whole portfolio, the same data shows which parts of a program move outcomes. Blood pressure is one example; the same analysis runs on every monitoring device.</p>
       <p class="hint">Switch accounts to compare a healthy program with one that is slipping.</p>
@@ -522,9 +973,9 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     </div>
   </section>
 
-  <section class="stop" id="s6" data-stop="6" data-title="The agents underneath">
+  <section class="stop" id="s6" data-stop data-journey="am" data-secs="30" data-title="The agents underneath">
     <div class="story">
-      <div class="stepnum"><b>Stop 6</b> of 7</div>
+      <div class="stepnum"><b>Stop 6</b> of 7 · Account management</div>
       <h2>The agents underneath</h2>
       <p>Behind the dashboard, a set of AI agents covers the full client lifecycle: sales, implementation, account management and in-account growth. They read more than ten live data streams, so the team spends its time on conversations instead of assembling numbers.</p>
       <p class="hint">Select a stage to see what it reads and what it produces.</p>
@@ -539,9 +990,9 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     </div>
   </section>
 
-  <section class="stop" id="s7" data-stop="7" data-title="What the client sees">
+  <section class="stop" id="s7" data-stop data-journey="am" data-secs="25" data-title="What the client sees">
     <div class="story">
-      <div class="stepnum"><b>Stop 7</b> of 7</div>
+      <div class="stepnum"><b>Stop 7</b> of 7 · Account management</div>
       <h2>What the client sees</h2>
       <p>Clients get their own view, refreshed every morning, instead of waiting for a quarterly review. The numbers are the same ones the team works from, written for the client: what is working, what needs a decision and what we are doing about it.</p>
       <p class="hint">This view follows whichever account you picked.</p>
@@ -549,11 +1000,11 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     <div class="panel"><div class="client" id="client"></div></div>
   </section>
 
-  <section class="close" id="s8" data-stop="8" data-title="Why I built it">
+  <section class="close" id="s8" data-stop data-journey="both" data-secs="20" data-title="Why I built it">
     <div>
       <div class="eyebrow">End of tour</div>
       <h2>Customer success has been the core of my work under every title I've held.</h2>
-      <p>Readout is how I think about that work: one score a team can explain, signals that arrive before the client has to raise them, AI that does the assembling, and a client view built on the same numbers. I'd be glad to walk through how I would adapt it for your customers.</p>
+      <p>Readout is how I think about that work: a plan a client can trust from the day the deal closes, recovery ready before anyone asks, one score a team can explain, signals that arrive before the client has to raise them, AI that does the assembling, and a client view built on the same numbers. I'd be glad to walk through how I would adapt it for your customers.</p>
       <div class="contact">
         <a class="btn btn-primary" href="https://www.linkedin.com/in/thornhillstephen/" target="_blank" rel="noopener">Connect on LinkedIn ↗</a>
         <span class="copyline"><code id="email">sr.thornhill@outlook.com</code><button type="button" id="copyBtn">Copy</button></span>
@@ -562,18 +1013,19 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     <div class="facts">
       <div class="fact"><b>15+ years in healthcare technology</b><span>Most recently leading customer success for national accounts across ACOs, FQHCs, medical groups and value-based care organizations on APCM, CCM, PCM, RPM, RTM and TOC/TCM programs.</span></div>
       <div class="fact"><b>Scale, from the inside</b><span>At ONEai Health, I led the operation that grew active patients from fewer than 100 to more than 15,000, and directed an AI clinical surveillance system built on wearable data.</span></div>
-      <div class="fact"><b>Process discipline</b><span>Lean Six Sigma Black Belt (Healthcare) and an Executive Leadership certificate from Harvard Business School.</span></div>
+      <div class="fact"><b>Process discipline</b><span>Bachelor of Science in Administration, a Lean Six Sigma Black Belt (Healthcare) and an Executive Leadership certificate from Harvard Business School.</span></div>
     </div>
   </section>
 
-  <p class="disclaimer">Readout is an illustrative concept built by Stephen Thornhill. Every company, account, person, meeting detail and figure on this page is fictional, including the vendor name "Harbor Care Partners." Nothing here shows data from any current or former employer or client, and any resemblance to a real organization is coincidental.</p>
+  <p class="disclaimer">Readout is an illustrative concept built by Stephen Thornhill. Every company, account, person, meeting detail and figure on this page is fictional, including the vendor name "Harbor Care Partners" and the client "Pinecrest Family Health." The implementation playbook shown here is generalized from my own work. Nothing here shows data from any current or former employer or client, and any resemblance to a real organization is coincidental.</p>
 </div>
 
 <nav class="tourbar" aria-label="Tour progress">
   <div class="in">
+    <div class="jtoggle" role="group" aria-label="Journey"><button type="button" data-j="impl" class="on">Implementation</button><button type="button" data-j="am">Account management</button></div>
     <button class="navbtn" id="prevBtn" type="button">← Back</button>
     <div class="prog">
-      <div class="row"><b id="curTitle">Welcome</b><span id="timeLeft">about 5 min</span></div>
+      <div class="row"><b id="curTitle">Welcome</b><span id="timeLeft">about 4 min</span></div>
       <div class="ticks" id="ticks"></div>
     </div>
     <button class="navbtn primary" id="nextBtn" type="button">Next →</button>
@@ -882,6 +1334,418 @@ function select(id){sel=id; runPick.value=id; renderBook();renderMap();renderSco
 
 renderTotals();renderChart();renderAlerts();renderAgents();select(sel);markDone();
 
+/* ===== Implementation journey (three customers in flight) ===== */
+const IPROG={
+ ccm:{abbr:'CCM',name:'Chronic Care Mgmt',ph:[['agreements','Contracts & compliance',1],['kickoff','Kickoff & governance',2],['data','Patient data & eligibility',2],['careplan','Care plans',1],['training','Provider & staff training',.5],['enroll','Enrollment & consent',.5],['golive','Go-live & first cohort',1.5]]},
+ rpm:{abbr:'RPM',name:'Remote Monitoring',ph:[['agreements','Contracts & compliance',1],['kickoff','Kickoff & governance',2],['data','Patient data & eligibility',2],['careplan','Care plans',1],['training','Provider & staff training',.5],['enroll','Devices & enrollment',.5],['golive','Go-live & monitoring',1]]},
+ pcm:{abbr:'PCM',name:'Principal Care Mgmt',ph:[['agreements','Contracts & compliance',1],['kickoff','Kickoff & governance',2],['data','Patient data & eligibility',2],['careplan','Care plans',1],['training','Provider & staff training',.5],['enroll','Enrollment & consent',.5],['golive','Go-live & first cohort',1.5]]},
+ tcm:{abbr:'TCM',name:'Transitional Care',ph:[['agreements','Contracts & compliance',1],['kickoff','Kickoff & governance',2],['data','Discharge feed',1.5],['careplan','Transitional workflow',1],['training','Provider & staff training',.5],['enroll','Consent & episode setup',.5],['golive','Go-live & episodes',1]]},
+ line:{abbr:'Line',name:'Patient engagement line',ph:[['agreements','Contracts & compliance',1],['kickoff','Kickoff & targets',1],['phones','Phones & call routing',1],['scripts','Scripts & protocols',1],['training','Agent & staff training',1],['golive','Go-live & pilot',1]]}
+};
+const SHARED=['agreements','kickoff','training'];
+const FLOOR={agreements:.5,kickoff:.5,data:1,careplan:.5,training:.25,enroll:.25,golive:.5,phones:.5,scripts:.5,transition:1};
+const LEV=[
+ {id:'presign',ease:4,ph:'agreements',label:'MSA and BAA already on file from another service',owner:'Client',saves:.25,trade:'Only applies if a prior agreement is in place; otherwise legal review is the gate.'},
+ {id:'esign',ease:1,ph:'agreements',label:'SOW sent same day by e-signature to one named signer',owner:'Implementation manager + client',saves:.25,trade:'The client names the signer at first contact, and legal review runs alongside routing, not before it.'},
+ {id:'fastko',ease:2,ph:'kickoff',label:'Kickoff booked within 5 business days of signature',owner:'Client',saves:.5,trade:'The clinical lead and a billing contact clear calendars on short notice.'},
+ {id:'intake',ease:2,ph:'kickoff',label:'Escalation contacts and after-hours path supplied in writing before kickoff',owner:'Client',saves:.5,trade:'Kickoff becomes a confirmation meeting, not a discovery one. The decisions are made on paper first.'},
+ {id:'sample',ease:4,ph:'data',label:'A live data sample delivered at or before kickoff',owner:'Client IT + EHR vendor',saves:.6,trade:'Needs the EHR vendor engaged early; some vendors charge for the interface ticket.'},
+ {id:'bridge',ease:3,ph:'data',label:'Launch on a secure patient list while the automated feed is built',owner:'Joint',saves:.5,trade:'The first cohort is loaded by hand. The feed still has to land before month two, so this defers work rather than removing it.'},
+ {id:'elig',ease:2,ph:'data',label:'Eligibility criteria agreed in advance',owner:'Client',saves:.3,trade:'Criteria are locked for the first batch; any change waits for the next pull.'},
+ {id:'draftcp',ease:2,ph:'careplan',label:'Our care team drafts the care plans instead of waiting on the practice',owner:'Care team',saves:.3,trade:'The provider still reviews and accepts every plan before it is used.'},
+ {id:'cp48',ease:3,ph:'careplan',label:'Provider commits to a 48-hour care plan acceptance turnaround',owner:'Client provider',saves:.3,trade:'Someone has to own the provider follow-up, every day it is open.'},
+ {id:'onetrain',ease:2,ph:'training',label:'One provider education session covering every program in scope',owner:'Joint',saves:.2,trade:'A longer single session, so attendance has to be protected.'},
+ {id:'consent',ease:1,ph:'enroll',label:"Consent language pre-approved by the practice's compliance lead",owner:'Client',saves:.1,trade:'Compliance reviews the language before kickoff instead of after.'},
+ {id:'phased',ease:3,ph:'golive',label:'Phased go-live: a first cohort of about 50 patients on day one',owner:'Joint',saves:.3,trade:'The panel scales weekly after launch, so the full panel arrives later than a big-bang go-live.'}
+];
+const TRW={new:0,inhouse:1,client:.5,vendor:1.5};
+const TR={
+ new:{label:'New program',sub:'No transition phase. The plan starts at contracts.',rules:['Every program in scope gets its own phases and its own go-live date','Shared phases run once: contracts, kickoff and training'],tasks:[]},
+ inhouse:{label:'Practice runs it in-house',sub:'Adds a 1-week transition and cutover phase before training.',rules:['No overlap and no gap for any patient','Agree the billing cutover month before go-live','Patients hear about their new care team in the practice\'s voice','Inherited answers are assumptions until somebody confirms them'],tasks:[['Collect the active roster, care plans, consent records and time logs from the practice team','Practice'],['Agree what practice staff do after the handover','Joint'],['Agree the cutover date: no overlap and no gap for any patient','Joint'],['Agree the billing cutover month with the practice billing team','Joint'],['Tell patients about their new care team, in the practice\'s voice','Practice']]},
+ client:{label:'Existing client changing',sub:'Adds a half-week transition to carry settings across, then re-confirm them.',rules:['Carry over only what still applies, and re-confirm each item','No overlap and no gap for any patient','Agree the billing cutover month before go-live'],tasks:[['Confirm which program changes and which stays as it is','Account manager'],['Carry over the settings that still apply, and re-confirm each with the practice','Implementation manager'],['Agree the cutover date for the changing program','Joint'],['Agree the billing cutover month','Joint']]},
+ vendor:{label:'Taking over from a vendor',sub:'Adds a 1.5-week transition and cutover phase before training.',rules:['No overlap and no gap for any patient','Agree the billing cutover month before go-live','Patients hear about their new care team in the practice\'s voice','Never assume the prior vendor\'s data is complete; reconcile it against the practice record'],tasks:[['Get the prior vendor\'s end date and notice terms','Practice'],['Request the active roster, care plans and time logs from the prior vendor','Practice'],['Reconcile the prior vendor\'s roster against the practice record','Implementation manager'],['Agree the cutover date: no overlap and no gap for any patient','Joint'],['Agree the billing cutover month','Joint'],['Tell patients about their new care team, in the practice\'s voice','Practice']]}
+};
+const CHECKS=[
+ {id:'c1',ph:'agreements',label:'MSA and BAA signed',owner:'Client',gate:true},
+ {id:'c2',ph:'agreements',label:'SOW signed by the named signer',owner:'Client',gate:true},
+ {id:'c3',ph:'kickoff',label:'Kickoff held with the clinical lead and a billing contact',owner:'Joint',gate:false},
+ {id:'c4',ph:'kickoff',label:'Escalation contacts and after-hours path confirmed in writing',owner:'Client',gate:true},
+ {id:'c5',ph:'data',label:'Eligibility criteria agreed',owner:'Client',gate:true},
+ {id:'c6',ph:'data',label:'First patient list loaded and matched to the practice record',owner:'Impl. manager',gate:true},
+ {id:'c7',ph:'data',label:'Automated data feed live',owner:'Client IT + EHR',gate:false},
+ {id:'c8',ph:'careplan',label:'Care plan templates accepted by the provider',owner:'Client provider',gate:true},
+ {id:'c9',ph:'training',label:'Provider training delivered',owner:'Impl. manager',gate:true},
+ {id:'c10',ph:'training',label:'Practice staff training delivered',owner:'Impl. manager',gate:true},
+ {id:'c11',ph:'enroll',label:'Consent language approved by compliance',owner:'Client',gate:true},
+ {id:'c12',ph:'enroll',label:'Devices staged for the first cohort',owner:'Logistics',gate:true,only:'rpm'},
+ {id:'c13',ph:'golive',label:'Day-one cohort of about 50 patients confirmed',owner:'Joint',gate:true}
+];
+const PHNAME={agreements:'Contracts',kickoff:'Kickoff',data:'Patient data',careplan:'Care plans',training:'Training',enroll:'Enrollment',golive:'Go-live'};
+const CUST={
+ pin:{id:'pin',name:'Pinecrest Family Health',short:'Pinecrest',type:'FQHC · 3 clinic sites',progs:['ccm','rpm'],start:'new',signAgo:3,lev:new Set(),done:new Set(['c1','c2','c3','c5','c6','c11']),slips:new Set(),rec:false,live:null,
+   deal:[['Deal stage','Closed won'],['Sold by','Account executive'],['Programs','CCM + RPM'],['Signer and contacts','Synced from the deal'],['Payer mix','Medicaid-heavy']],
+   promises:[['Go-live before the January visit season','Impl. manager','plan'],['Outreach in English and Spanish from day one','Care team','plan'],['Weekly status update to the CMO','Account manager','plan'],['No new work for front-desk staff','Impl. manager','plan']]},
+ lark:{id:'lark',name:'Larkspur Medical Group',short:'Larkspur',type:'Medical group · 6 providers',progs:['ccm','pcm'],start:'inhouse',signAgo:5,lev:new Set(['fastko','elig','draftcp']),done:new Set(['c1','c2','c3','c4','c5','c6','c7','c8','c9','c11']),slips:new Set(),rec:false,live:null,
+   deal:[['Deal stage','Closed won'],['Sold by','Account executive'],['Programs','CCM + PCM'],['Today','Run in-house by the practice'],['Champion','Practice administrator']],
+   promises:[['Take over in-house CCM with no gap for any patient','Joint','plan'],['Keep the two in-house coordinators involved after handover','Account manager','plan'],['Monthly outcomes report for the board','Account manager','plan']]},
+ bay:{id:'bay',name:'Bayview ACO',short:'Bayview',type:'ACO · 14 practices',progs:['rpm','tcm'],start:'vendor',signAgo:4,lev:new Set(),done:new Set(['c1','c2','c3','c5']),slips:new Set(['vendor']),rec:false,live:null,
+   deal:[['Deal stage','Closed won'],['Sold by','Account executive'],['Programs','RPM + TCM'],['Today','Another vendor, contract ends Dec 31'],['Sponsor','VP, Population Health']],
+   promises:[['Replace the prior vendor before its contract ends Dec 31','Impl. manager','risk'],['Discharge follow-up within 2 business days','Care team','plan'],['Device logistics handled end to end','Logistics','plan']]}
+};
+let curC='pin', negTarget=null, dragging=false, touched=false;
+const S=()=>CUST[curC];
+const signOf=st=>{const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7)-7*st.signAgo);return d};
+const addW=(w,st=S())=>{const d=signOf(st);d.setDate(d.getDate()+Math.round(w*7));while(d.getDay()===0||d.getDay()===6)d.setDate(d.getDate()+1);return d};
+const todayW=st=>Math.round((Date.now()-signOf(st))/864e5)/7;
+const fmtD=d=>d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+const r2=x=>Math.round(x*100)/100;
+function sched(pk,st=S(),levers=st.lev){
+  const rows=IPROG[pk].ph.slice(), out=[]; let t=0; const tw=TRW[st.start];
+  if(tw>0){const ix=rows.findIndex(r=>r[0]==='training');rows.splice(ix,0,['transition','Transition & cutover',tw])}
+  rows.forEach(([k,name,w])=>{const save=LEV.filter(l=>l.ph===k&&levers.has(l.id)).reduce((a,l)=>a+l.saves,0);
+    const len=Math.max(FLOOR[k]||.25,r2(w-save)); out.push({k,name,start:t,len,floor:FLOOR[k]||.25}); t=r2(t+len)});
+  return {rows:out,end:t};
+}
+const planEnd=(st=S(),levers=st.lev)=>Math.max(...st.progs.map(pk=>sched(pk,st,levers).end));
+const allLev=()=>new Set(LEV.map(l=>l.id));
+const activeChecks=(st=S())=>CHECKS.filter(c=>!c.only||st.progs.includes(c.only));
+const readiness=st=>{const cs=activeChecks(st);const d=cs.filter(c=>st.done.has(c.id)).length;return {d,n:cs.length,p:Math.round(d/cs.length*100)}};
+
+/* ---- dependency map model ---- */
+const NODES=[
+ {id:'A',name:'Contracts & BAA',d:1,deps:[],own:'Client',c:0,r:2},
+ {id:'B',name:'Kickoff',d:2,deps:['A'],own:'Joint',c:1,r:2},
+ {id:'C',name:'Eligibility criteria',d:.5,deps:['B'],own:'Client',c:2,r:0},
+ {id:'D',name:'EHR data feed',d:2,deps:['B'],own:'Client IT',c:2,r:1},
+ {id:'F',name:'Care plan drafts',d:1,deps:['B'],own:'Care team',c:2,r:2},
+ {id:'I',name:'Consent language',d:.5,deps:['B'],own:'Client',c:2,r:3},
+ {id:'J',name:'Devices staged',d:1.5,deps:['B'],own:'Logistics',c:2,r:4,only:'rpm'},
+ {id:'E',name:'Patient list',d:.5,deps:['C','D'],own:'Impl. mgr',c:3,r:0.5},
+ {id:'G',name:'Care plan sign-off',d:.5,deps:['F'],own:'Provider',c:3,r:2},
+ {id:'H',name:'Training',d:.5,deps:['G'],own:'Impl. mgr',c:4,r:2},
+ {id:'K',name:'First cohort',d:.5,deps:['E','H','I','J'],own:'Joint',c:5,r:2},
+ {id:'L',name:'Go-live',d:1,deps:['K'],own:'Joint',c:6,r:2}
+];
+const SLIPS={
+ vendor:{label:'EHR vendor delays the data feed',node:'D',delay:1.5,cause:'Our EHR vendor quoted three more weeks for the interface ticket',moves:[{t:'Launch on a secure patient list while the feed is built',o:'Joint',edge:['D','E'],why:'Go-live no longer waits on the feed; it still lands before month two'},{t:'Lock eligibility criteria for the first batch',o:'Client',node:'C',save:.25,why:'No second pass on the first patient pull'}]},
+ sponsor:{label:'Executive sponsor leaves',node:'G',delay:1,cause:'Care plan sign-off stalled after the executive sponsor left',moves:[{t:'Name an interim sponsor within 48 hours',o:'Account manager',node:'G',save:.5,why:'Decisions keep moving while the role is filled'},{t:'Provider commits to a 48-hour acceptance turnaround',o:'Client provider',node:'G',save:.25,why:'Daily follow-up until every plan is accepted'}]},
+ training:{label:'Two providers miss training',node:'H',delay:.5,cause:'Two providers missed the training session',moves:[{t:'Recorded session plus a 30-minute make-up for absentees',o:'Impl. manager',node:'H',save:.4,why:'Nobody waits for the next full session'}]},
+ devices:{label:'Device shipment is two weeks late',node:'J',delay:2,cause:'The device shipment for the first remote-monitoring cohort is two weeks late',moves:[{t:'Phased go-live: other programs start on day one, RPM joins when devices land',o:'Joint',edge:['J','K'],why:'The first cohort is not held back by hardware'}]}
+};
+const nodesFor=st=>NODES.filter(n=>!n.only||st.progs.includes(n.only));
+function dagCalc(st,withSlips,withRecovery,floorEf){
+  const ns=nodesFor(st), have=new Set(ns.map(n=>n.id)), ef={}, slip={}, save={}, cut=new Set();
+  if(withSlips)st.slips.forEach(k=>{const s=SLIPS[k]; if(!have.has(s.node))return; slip[s.node]=(slip[s.node]||0)+s.delay; if(withRecovery)s.moves.forEach(m=>{if(m.node)save[m.node]=(save[m.node]||0)+m.save; if(m.edge)cut.add(m.edge.join('>'))})});
+  const depsOf=n=>n.deps.filter(d=>have.has(d)&&!cut.has(d+'>'+n.id));
+  ns.forEach(n=>{const ds=depsOf(n),es=ds.length?Math.max(...ds.map(d=>ef[d])):0; ef[n.id]=es+Math.max(.25,n.d+(slip[n.id]||0)-(save[n.id]||0)); if(floorEf)ef[n.id]=Math.max(ef[n.id],floorEf[n.id])});
+  const crit=new Set(['L']); let c='L'; while(true){const n=ns.find(x=>x.id===c),ds=depsOf(n); if(!ds.length)break; c=ds.reduce((a,b)=>ef[a]>=ef[b]?a:b); crit.add(c)}
+  return {ef,cut,crit,end:ef.L,ns};
+}
+function slipDays(st){const b=dagCalc(st,false,false), c=dagCalc(st,true,st.rec,st.rec?b.ef:null); return Math.round((c.end-b.end)*7)}
+const goLiveW=st=>planEnd(st)+slipDays(st)/7;
+const statusOf=st=>slipDays(st)>0?'off':'on';
+
+/* ---- hero: launch readiness rings ---- */
+function renderRings(){
+  $('rings').innerHTML=Object.values(CUST).map(st=>{
+    const rd=readiness(st), off=statusOf(st)==='off', days=Math.max(0,Math.round(goLiveW(st)*7-todayW(st)*7)), sd=slipDays(st);
+    const R=52, slipPct=Math.min(30,sd*1.6);
+    return `<button type="button" class="lring ${off?'off':''}" data-c="${st.id}" aria-label="${st.name}: ${rd.p}% ready, ${off?sd+' days behind':'on track'}">
+      <svg viewBox="0 0 140 140" aria-hidden="true">
+        <circle class="trk" cx="70" cy="70" r="${R}"/>
+        ${off?`<circle class="slip" cx="70" cy="70" r="${R}" pathLength="100" stroke-dasharray="${slipPct} 100" stroke-dashoffset="${-rd.p}" transform="rotate(-90 70 70)"/>`:''}
+        <circle class="arc" cx="70" cy="70" r="${R}" pathLength="100" stroke="var(--${off?'warn':'accent'})" stroke-dasharray="${rd.p} 100" transform="rotate(-90 70 70)"/>
+        <g class="orbit" style="animation-delay:-${(st.signAgo*1.3).toFixed(1)}s"><circle cx="70" cy="${70-R-13}" r="4"/></g>
+        <text class="ctr" x="70" y="72" text-anchor="middle">${rd.p}%</text>
+        <text class="ctr2" x="70" y="89" text-anchor="middle">${days} days</text>
+        <text class="ctr2" x="70" y="100" text-anchor="middle">to go-live</text>
+      </svg>
+      <b>${st.short}</b><span class="rmeta">${st.progs.map(p=>IPROG[p].abbr).join(' + ')}</span>
+      <span class="pill ${off?'wait':'good'}">${off?sd+' days behind':'On track'}</span></button>`}).join('');
+  document.querySelectorAll('.lring').forEach(b=>b.addEventListener('click',()=>{openSet.add(b.dataset.c);selectCust(b.dataset.c);setJourney('impl',false);$('i1').scrollIntoView({behavior:reduce?'auto':'smooth'})}));
+}
+
+/* ---- gantt ---- */
+function ganttHTML(st,compact){
+  const maxW=Math.max(planEnd(st,new Set()),1)+.5, floorW=planEnd(st,allLev()), pct=w=>(w/maxW*100).toFixed(2)+'%';
+  let h='';
+  st.progs.forEach(pk=>{const s=sched(pk,st);
+    h+=`<div class="grow"><div class="gname">${IPROG[pk].abbr}<small>${IPROG[pk].name}</small></div><div class="gtrack">`;
+    s.rows.forEach(r=>{const cls=r.k==='golive'?'live':r.k==='transition'?'trans':SHARED.includes(r.k)?'shared':'prog';
+      h+=`<span class="gseg ${cls}" style="left:${pct(r.start)};width:calc(${pct(r.len)} - 2px)" title="${r.name}: ${fmtD(addW(r.start,st))} to ${fmtD(addW(r.start+r.len,st))} (${r.len} wk; floor ${r.floor} wk)">${compact?'':r.name}</span>`});
+    if(compact)h+=`<span class="gfloor" style="left:${pct(floorW)}" title="Earliest defensible go-live"></span>`;
+    h+='</div></div>'});
+  let tk='';for(let w=0;w<=Math.floor(maxW);w++){if(w%(maxW>9?2:1))continue;tk+=`<span style="left:${pct(w)}">${w===0?'Sign':'W'+w}</span>`}
+  return h+`<div class="gaxis"><div></div><div class="gticks">${tk}</div></div>`;
+}
+
+/* ---- stop 1: customer cards (fully controlled open state) ---- */
+const openSet=new Set(['pin']);
+function renderCards(){
+  $('custCards').innerHTML=Object.values(CUST).map(st=>{
+    const rd=readiness(st), off=statusOf(st)==='off', sd=slipDays(st), gl=addW(goLiveW(st),st), t=TR[st.start];
+    const tasks=activeChecks(st).length+t.tasks.length, phases=st.progs.reduce((n,pk)=>n+sched(pk,st).rows.length,0);
+    return `<details class="ccard" data-c="${st.id}" ${openSet.has(st.id)?'open':''}>
+      <summary><span><b>${st.name}</b><span class="cmeta">${st.type} · ${t.label}</span></span>
+        <span class="cgl">${fmtD(gl)}<small>${off?`go-live, ${sd} days behind`:'go-live, on the committed date'}</small></span>
+        <span class="pill ${off?'wait':'good'}">${rd.p}% ready</span><span class="viewbtn"></span></summary>
+      <div class="handoffbox">
+        <div><span class="lbl">HubSpot deal · signed ${fmtD(signOf(st))}</span>${st.deal.map(d=>`<div class="hsrow"><span>${d[0]}</span><span>${d[1]}</span></div>`).join('')}</div>
+        <div class="deal-arrow" aria-hidden="true">→</div>
+        <div><span class="lbl">Promises made in the sales cycle · tracked to delivery</span>${st.promises.map(p=>`<div class="prom"><div>${p[0]}<small>Owner: ${p[1]}</small></div><span class="pill ${p[2]==='risk'&&off?'wait':'good'}">${p[2]==='risk'&&off?'At risk':'On plan'}</span></div>`).join('')}</div>
+      </div>
+      <div class="panel-head"><div><h3>Programs in scope</h3><p class="sub">Seeded from the deal: ${st.progs.length} programs · ${phases} phases · ${tasks} tasks with owners</p></div>
+        <div class="chips">${Object.keys(IPROG).map(pk=>`<button type="button" class="chip ${st.progs.includes(pk)?'on':''}" data-prog="${pk}" aria-pressed="${st.progs.includes(pk)}">${IPROG[pk].abbr}</button>`).join('')}</div></div>
+      <div class="seg seg-sm" role="group" aria-label="Where is the program running today?">${Object.keys(TR).map(k=>`<button type="button" data-start="${k}" class="${st.start===k?'on':''}">${TR[k].label}</button>`).join('')}</div>
+      <div class="gantt">${ganttHTML(st,false)}</div>
+      <div class="glegend"><span><i class="gs shared"></i>Runs once for all programs</span><span><i class="gs prog"></i>Program-specific</span><span><i class="gs trans"></i>Transition</span><span><i class="gs live"></i>Go-live</span></div>
+      <details class="fold"><summary><span><b>Transition rules and tasks</b><span class="sub">${t.sub}</span></span><span class="viewbtn"></span></summary>
+        <div class="trgrid" style="border:0;margin-top:0;padding-top:0"><div><h4 class="lbl">Rules that do not bend</h4><ul class="rules">${t.rules.map(r=>`<li>${r}</li>`).join('')}</ul></div>
+        <div><h4 class="lbl">Transition tasks added to the plan</h4>${t.tasks.length?t.tasks.map(x=>`<div class="ttask">${x[0]}<span>${x[1]}</span></div>`).join(''):'<p class="sub">Nothing to hand over. The plan starts clean.</p>'}</div></div></details>
+    </details>`}).join('');
+  document.querySelectorAll('.ccard').forEach(d=>{
+    d.querySelector(':scope>summary').addEventListener('click',e=>{e.preventDefault();const id=d.dataset.c;
+      if(openSet.has(id))openSet.delete(id); else {openSet.add(id); if(curC!==id){selectCust(id);return}} renderCards()});
+    d.querySelectorAll('[data-prog]').forEach(b=>b.addEventListener('click',()=>{const st=CUST[d.dataset.c],pk=b.dataset.prog;
+      if(st.progs.includes(pk)){if(st.progs.length>1)st.progs=st.progs.filter(x=>x!==pk)}else st.progs.push(pk); curC=st.id; renderAll()}));
+    d.querySelectorAll('[data-start]').forEach(b=>b.addEventListener('click',()=>{const st=CUST[d.dataset.c];st.start=b.dataset.start;curC=st.id;renderAll()}));
+  });
+}
+
+/* ---- customer picker on stops 2-5 ---- */
+function renderPickers(){
+  document.querySelectorAll('[data-pick]').forEach(el=>{
+    el.innerHTML=Object.values(CUST).map(st=>`<button type="button" class="${st.id===curC?'on':''}" data-c="${st.id}" aria-pressed="${st.id===curC}"><i class="${statusOf(st)==='off'?'off':''}"></i>${st.short}</button>`).join('');
+    el.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>selectCust(b.dataset.c)));
+  });
+  document.querySelectorAll('.cname').forEach(e=>e.textContent=S().name);
+}
+function selectCust(id){curC=id;negTarget=null;kpReset();noteHide();resetPlay();renderAll()}
+
+/* ---- kickoff pack ---- */
+let kpBusy=false;
+const kickoffDate=st=>{const d=signOf(st);let n=0;while(n<5){d.setDate(d.getDate()+1);if(d.getDay()%6)n++}return d};
+const dLong=d=>d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+function kpReset(){ if(kpBusy)return; $('kpOut').hidden=true;$('kpOut').innerHTML='';$('kpSteps').hidden=true;$('kpBtn').classList.remove('done');$('kpBtn').textContent='Build kickoff pack ▸'}
+function kpSections(){
+  const st=S(), progs=st.progs.map(pk=>IPROG[pk].abbr).join(' + '), gl=fmtD(addW(planEnd(st),st)), kd=dLong(kickoffDate(st));
+  const agenda=`<div class="agenda"><div class="ag-head"><b>${st.name}  ×  ${VENDOR}</b><span>Implementation kickoff · ${progs}</span><span>${kd} · 10:00 AM ET · Microsoft Teams</span>
+      <div class="ag-att"><div><b>${st.name}</b><br>Executive sponsor<br>Clinical lead<br>Billing contact<br>IT lead</div><div><b>${VENDOR}</b><br>Implementation manager<br>Account manager<br>Clinical specialist<br>Account executive (sales handoff)</div></div></div>
+      <div class="ag-join">Join: Teams link added on send · Meeting ID 371 902 448 155 · Passcode 4Rk8va</div>
+      <div class="ag-sec"><h5>1  What you were promised, and how we will deliver it</h5><ul>${st.promises.map(p=>`<li>${p[0]}</li>`).join('')}</ul>
+      <h5>2  The plan and who owns each phase</h5><ul>${sched(st.progs[0],st).rows.map(r=>`<li>${r.name}: ${r.len} wk</li>`).join('')}<li>Target go-live: ${gl}</li></ul>
+      <h5>3  Decisions to confirm today</h5><ul><li>Escalation contacts and after-hours path</li><li>Eligibility criteria for the first patient pull</li><li>Care plan path: practice-authored or drafted by our care team</li>${st.start!=='new'?'<li>Cutover date and billing cutover month</li>':''}</ul>
+      <h5>4  Data and access</h5><ul><li>EHR data sample and interface ticket</li><li>Secure patient list as a bridge, if needed</li></ul>
+      <h5>5  Next check-in</h5><ul><li>Weekly, same time, until go-live</li></ul></div></div>`;
+  const roles=['Exec sponsor','Clinical lead','Client IT','Impl. manager','Care team','Account manager'];
+  const rows=[['Contracts & compliance','A I I R I C'],['Kickoff & governance','A C C R I C'],['Patient data & eligibility','I C R A I I'],['Care plans','I A I C R I'],['Training','I C I R C I'],['Enrollment & consent','I A I R C I'],['Go-live','A C C R C I']];
+  if(st.start!=='new')rows.splice(4,0,['Transition & cutover','A C I R C R']);
+  const raci=`<div class="tablewrap"><table class="raci"><thead><tr><th>Phase</th>${roles.map(r=>`<th>${r}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr><td><b>${r[0]}</b></td>${r[1].split(' ').map(c=>`<td><span class="rc ${c}">${c}</span></td>`).join('')}</tr>`).join('')}</tbody></table></div>
+      <div class="raci-key"><span><span class="rc R">R</span> Does the work</span><span><span class="rc A">A</span> Signs off</span><span><span class="rc C">C</span> Consulted</span><span><span class="rc I">I</span> Kept informed</span></div>`;
+  const s0=sched(st.progs[0],st).rows;
+  const tasks=activeChecks(st).map(c=>{const r=s0.find(x=>x.k===c.ph)||s0[s0.length-1];return [c.label,c.owner,fmtD(addW(r.start+r.len,st)),r.name]});
+  TR[st.start].tasks.forEach(t=>{const r=s0.find(x=>x.k==='transition');tasks.push([t[0],t[1],r?fmtD(addW(r.start+r.len,st)):'–','Transition & cutover'])});
+  const plan=`<div class="tablewrap"><table><thead><tr><th>Task</th><th>Phase</th><th>Owner</th><th>Due</th></tr></thead><tbody>${tasks.map(t=>`<tr><td>${t[0]}</td><td class="sub">${t[3]}</td><td>${t[1]}</td><td class="mono" style="white-space:nowrap">${t[2]}</td></tr>`).join('')}</tbody></table></div>`;
+  const body=`Subject: Welcome to ${VENDOR}: your ${progs} launch plan\n\nHello ${st.short} team,\n\nThank you for choosing ${VENDOR}. Your implementation starts today, and everything you discussed with our sales team has come across with it, so you will not be asked twice.\n\nTarget go-live: ${gl}\nKickoff: ${kd}, 10:00 AM ET\n\nWhat we committed to:\n${st.promises.map(p=>'• '+p[0]).join('\n')}\n\nBefore kickoff, it helps if you can send:\n• Your escalation contacts and after-hours path\n• A sample data extract from your EHR, or your EHR vendor contact\n• The eligibility criteria you want for the first patient list\n\nYou will see the same plan we work from, every day, until go-live.\n\nThe ${VENDOR} implementation team`;
+  return [['Kickoff agenda',agenda],['Who owns what',raci],[`Project plan (${tasks.length} tasks)`,plan],['Welcome email',`<div class="inv-body" id="kpMail"></div><div class="inv-actions"><button class="copybtn" id="kpCopy" type="button">Copy email</button><span class="note">Drafted in Outlook for the implementation manager to review and send.</span></div>`,body]];
+}
+$('kpBtn').addEventListener('click',()=>{ if(kpBusy)return; kpBusy=true; const btn=$('kpBtn'); btn.disabled=true; btn.classList.add('done');
+  const secs=kpSections(), st=[...document.querySelectorAll('#kpSteps .stp')], out=$('kpOut');
+  $('kpSteps').hidden=false; out.hidden=false; out.innerHTML=''; st.forEach(s=>{s.className='stp';s.querySelector('i').textContent=''});
+  let i=0; const step=()=>{ if(i>0){st[i-1].className='stp done';st[i-1].querySelector('i').textContent='✓';
+      const [t,html,mail]=secs[i-1], d=document.createElement('details'); d.className='kpfold'; d.open=(i===1);
+      d.innerHTML=`<summary><span>${t}</span><span class="viewbtn"></span></summary>${html}`; out.appendChild(d);
+      if(mail){d.querySelector('#kpMail').textContent=mail; d.querySelector('#kpCopy').onclick=function(){const b=this;try{navigator.clipboard.writeText(mail).then(()=>b.textContent='Copied',()=>b.textContent='Select the text to copy')}catch(e){b.textContent='Select the text to copy'}}}}
+    if(i<st.length){st[i].className='stp busy';i++;setTimeout(step,reduce?0:550)}
+    else {const p=document.createElement('p');p.className='kplog';p.textContent='↻ Logged to HubSpot: kickoff meeting, '+(activeChecks().length+TR[S().start].tasks.length)+' tasks with owners, and the welcome email draft';out.appendChild(p);
+      kpBusy=false;btn.disabled=false;btn.textContent='Rebuild kickoff pack'}};
+  step();});
+
+/* ---- stop 2: negotiate the date ---- */
+function solveFor(target){
+  const st=S(), usable=new Set(st.progs.flatMap(pk=>IPROG[pk].ph.map(p=>p[0])));
+  const cand=LEV.filter(l=>usable.has(l.ph)).sort((a,b)=>a.ease-b.ease||b.saves-a.saves), set=new Set();
+  for(const l of cand){ if(planEnd(st,set)<=target+1e-9)break; const before=planEnd(st,set); set.add(l.id); if(planEnd(st,set)>=before-1e-9)set.delete(l.id) }
+  return set;
+}
+const negScale=()=>planEnd(S(),new Set())+1;
+function renderNeg(){
+  const st=S(), W=negScale(), base=planEnd(st,new Set()), fl=planEnd(st,allLev()), now=planEnd(st);
+  const t=negTarget==null?now:negTarget, pct=w=>Math.max(0,Math.min(100,w/W*100))+'%';
+  $('nFloor').style.width=pct(fl); $('nBase').style.left=pct(base);
+  let tk='';for(let w=0;w<=Math.floor(W);w++)tk+=`<span style="left:${pct(w)}">${w===0?'Sign':'W'+w}</span>`; $('nTicks').innerHTML=tk;
+  const pin=$('nPin'); pin.style.left=pct(t); const bad=t<fl-1e-9; pin.classList.toggle('bad',bad); pin.classList.toggle('hinting',!touched);
+  $('nPinLbl').textContent=fmtD(addW(t,st));
+  $('askLine').innerHTML=`${st.short} asks: <em>can we go live by ${fmtD(addW(t,st))}?</em>`;
+  const v=$('nVerdict');
+  if(bad){v.className='verdictline crit';v.innerHTML=`<b>Not defensible.</b> Even with every accelerator committed, the earliest honest date is <b>${fmtD(addW(fl,st))}</b>. Say so now, while it is a conversation rather than an apology.`}
+  else if(!st.lev.size){v.className='verdictline good';v.innerHTML=`<b>Yes, on the standard plan.</b> No commitments needed. Go-live ${fmtD(addW(now,st))}.`}
+  else {v.className='verdictline warn';v.innerHTML=`<b>Yes, with ${st.lev.size} commitment${st.lev.size>1?'s':''}.</b> Go-live ${fmtD(addW(now,st))}, ${Math.round((base-now)*10)/10} weeks earlier than standard. Each commitment becomes a tracked dependency.`}
+  const on=LEV.filter(l=>st.lev.has(l.id)), who={};
+  on.forEach(l=>l.owner.split(' + ').forEach(o=>{o=o[0].toUpperCase()+o.slice(1);who[o]=(who[o]||0)+1}));
+  setT('needHead',`Commitments needed (${on.length})`);
+  setT('needSum',on.length?Object.entries(who).sort((a,b)=>b[1]-a[1]).map(([o,n])=>`${o} ${n}`).join(' · '):'None. Drag the pin earlier to ask for a sooner date.');
+  $('needList').innerHTML=on.length?on.map(l=>`<div class="need"><div>${l.label}<small>${l.owner} · ${l.trade}</small></div><span>−${l.saves} wk</span></div>`).join(''):'<p class="sub">None yet.</p>';
+  $('whoList').innerHTML=Object.keys(who).length?Object.entries(who).sort((a,b)=>b[1]-a[1]).map(([o,n])=>`<div class="who">${o}<b>${n}</b></div>`).join(''):'<p class="sub">Nobody yet.</p>';
+}
+function renderLevers(){
+  const st=S(), usable=new Set(st.progs.flatMap(pk=>IPROG[pk].ph.map(p=>p[0])));
+  $('levers').innerHTML=LEV.filter(l=>usable.has(l.ph)).map(l=>`<button type="button" class="lever ${st.lev.has(l.id)?'on':''}" data-id="${l.id}" aria-pressed="${st.lev.has(l.id)}"><span class="box">${st.lev.has(l.id)?'✓':''}</span><span><span class="ph">${PHNAME[l.ph]||l.ph}</span><b>${l.label}</b><span class="trade">${l.trade}</span><span class="own">Owner: ${l.owner}</span></span><span class="save">−${l.saves} wk</span></button>`).join('');
+  document.querySelectorAll('.lever').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.id;st.lev.has(id)?st.lev.delete(id):st.lev.add(id);negTarget=null;renderAll()}));
+  $('gantt2').innerHTML=ganttHTML(st,true);
+}
+function setTargetFromX(x){const box=$('negot').getBoundingClientRect(),W=negScale(); let w=(x-box.left)/box.width*W; w=Math.round(w*4)/4; applyTarget(Math.max(.5,Math.min(W-.25,w)))}
+function applyTarget(w){
+  const st=S(), fl=planEnd(st,allLev()); negTarget=w; touched=true; $('negot').classList.remove('flash');
+  st.lev=w<fl?allLev():solveFor(w);
+  if(w<fl&&!$('negot').classList.contains('shake')){$('negot').classList.add('shake');setTimeout(()=>$('negot').classList.remove('shake'),400)}
+  renderAll();
+}
+$('negot').addEventListener('pointerdown',e=>{dragging=true;$('negot').setPointerCapture(e.pointerId);setTargetFromX(e.clientX)});
+$('negot').addEventListener('pointermove',e=>{if(dragging)setTargetFromX(e.clientX)});
+$('negot').addEventListener('pointerup',()=>{dragging=false});
+$('nPin').addEventListener('keydown',e=>{const c=negTarget==null?planEnd(S()):negTarget;
+  if(e.key==='ArrowLeft'){e.preventDefault();applyTarget(Math.max(.5,c-.25))} if(e.key==='ArrowRight'){e.preventDefault();applyTarget(Math.min(negScale()-.25,c+.25))}});
+
+/* ---- stop 3: dependency map, slips, recovery ---- */
+let cdShown=null;
+const nx=n=>16+n.c*172, ny=n=>16+n.r*92, NW=156, NH=62;
+function tweenNum(el,from,to,f){ if(reduce||from===to){el.textContent=f(to);return} const t0=performance.now(),dur=700;
+  const go=now=>{const p=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=f(Math.round(from+(to-from)*e));if(p<1)requestAnimationFrame(go)};requestAnimationFrame(go)}
+function renderDag(){
+  const st=S(), base=dagCalc(st,false,false), cu=dagCalc(st,true,st.rec,st.rec?base.ef:null), svg=$('dag'), TW=todayW(st);
+  setT('dagWeek',`week ${Math.floor(TW)+1}`);
+  let h='';
+  cu.ns.forEach(n=>n.deps.forEach(d=>{const a=cu.ns.find(x=>x.id===d); if(!a)return; const x1=nx(a)+NW,y1=ny(a)+NH/2,x2=nx(n),y2=ny(n)+NH/2,mx=(x1+x2)/2;
+    const def=cu.cut.has(d+'>'+n.id), ce=cu.crit.has(d)&&cu.crit.has(n.id)&&!def, late=cu.ef[n.id]>base.ef[n.id]+1e-9&&cu.ef[d]>base.ef[d]+1e-9;
+    h+=`<path class="edge ${def?'deferred':'flow'} ${ce?'crit':''} ${late&&!def?'late':''}" data-a="${d}" data-b="${n.id}" d="M${x1} ${y1} C${mx} ${y1} ${mx} ${y2} ${x2} ${y2}"/>`}));
+  cu.ns.forEach(n=>{const late=cu.ef[n.id]-base.ef[n.id], isL=late>1e-9, done=base.ef[n.id]<=TW, src=[...st.slips].some(k=>SLIPS[k].node===n.id);
+    h+=`<g class="node ${done?'done':''} ${cu.crit.has(n.id)?'crit':''} ${isL?'late':''} ${src?'slipsrc':''}" data-id="${n.id}" tabindex="0" role="button" aria-label="${n.name}, ${n.own}"><rect x="${nx(n)}" y="${ny(n)}" width="${NW}" height="${NH}" rx="10" style="transition-delay:${n.c*90}ms"/>
+      <text x="${nx(n)+12}" y="${ny(n)+24}">${n.name}</text><text class="meta" x="${nx(n)+12}" y="${ny(n)+44}">${done?'Done':fmtD(addW(cu.ef[n.id],st))} · ${n.own}</text>
+      ${isL?`<text class="badge" x="${nx(n)+NW-10}" y="${ny(n)+24}" text-anchor="end">+${Math.round(late*7)}d</text>`:''}</g>`});
+  svg.innerHTML=h;
+  svg.querySelectorAll('.node').forEach(g=>{
+    const on=()=>{const id=g.dataset.id, up=new Set([id]), dn=new Set([id]); let ch=true;
+      while(ch){ch=false;cu.ns.forEach(n=>{if(up.has(n.id))n.deps.forEach(d=>{if(!up.has(d)){up.add(d);ch=true}})})}
+      ch=true;while(ch){ch=false;cu.ns.forEach(n=>{if(!dn.has(n.id)&&n.deps.some(d=>dn.has(d))){dn.add(n.id);ch=true}})}
+      const all=new Set([...up,...dn]); svg.classList.add('focus');
+      svg.querySelectorAll('.node').forEach(x=>x.classList.toggle('hl',all.has(x.dataset.id)));
+      svg.querySelectorAll('.edge').forEach(e=>e.classList.toggle('hl',(up.has(e.dataset.a)&&up.has(e.dataset.b))||(dn.has(e.dataset.a)&&dn.has(e.dataset.b))))};
+    const off=()=>svg.classList.remove('focus');
+    g.addEventListener('mouseenter',on);g.addEventListener('focus',on);g.addEventListener('mouseleave',off);g.addEventListener('blur',off)});
+  const days=Math.round((cu.end-TW)*7), cd=$('cdDays').parentElement; cd.classList.toggle('late',cu.end>base.end+1e-9);
+  tweenNum($('cdDays'),cdShown==null?days:cdShown,days,v=>`${v} days`); cdShown=days;
+  setT('cdDate',fmtD(addW(cu.end,st))+(cu.end>base.end+1e-9?` · was ${fmtD(addW(base.end,st))}`:' · committed date'));
+  renderRecovery(st,base);
+  $('slipChips').innerHTML=Object.entries(SLIPS).filter(([k,s])=>cu.ns.some(n=>n.id===s.node)).map(([k,s])=>`<button type="button" class="chip slip ${st.slips.has(k)?'on':''}" data-k="${k}" aria-pressed="${st.slips.has(k)}">${s.label}</button>`).join('');
+  document.querySelectorAll('#slipChips .chip').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.k;st.slips.has(k)?st.slips.delete(k):st.slips.add(k);st.rec=false;noteHide();renderAll()}));
+}
+function noteText(st,base){
+  const unrec=dagCalc(st,true,false), rec=dagCalc(st,true,true,base.ef), moves=[...st.slips].flatMap(k=>SLIPS[k].moves), recD=Math.round((rec.end-base.end)*7);
+  return `Subject: ${st.short} go-live update\n\nHello ${st.short} team,\n\nI want to let you know right away that our go-live date is at risk of moving from ${fmtD(addW(base.end,st))} to ${fmtD(addW(unrec.end,st))}. ${[...st.slips].map(k=>SLIPS[k].cause).join('; ')}.\n\n${st.rec?'Here is what we are doing':'Here is what we propose'}:\n${moves.map(m=>'• '+m.t+' ('+m.o+')').join('\n')}\n\nWith these steps in place, we expect to go live on ${fmtD(addW(rec.end,st))}${recD<=0?', our original date':''}. I will confirm progress at our weekly check-in, and sooner if anything changes.\n\nThank you,\nYour implementation manager`;
+}
+function renderRecovery(st,base){
+  const unrec=dagCalc(st,true,false), rec=dagCalc(st,true,true,base.ef), moves=[...st.slips].flatMap(k=>SLIPS[k].moves);
+  const slipD=Math.round((unrec.end-base.end)*7), recD=Math.round((rec.end-base.end)*7);
+  $('noteBtn').disabled=!st.slips.size;
+  if(!st.slips.size){setT('recovSub','No slips. The plan is on its committed date.');$('recovList').innerHTML='';$('recovBtn').disabled=true;$('recovBtn').textContent='Apply recovery plan';noteHide();return}
+  setT('recovSub',st.rec?`Applied. Net slip ${recD>0?'+'+recD+' days':'none'} (from +${slipD} days).`:`Slip of +${slipD} days. This plan wins back ${slipD-recD} of them.`);
+  $('recovList').innerHTML=moves.map(m=>`<div class="rmove ${st.rec?'applied':''}"><div>${m.t}<small>${m.o} · ${m.why}</small></div><span>${st.rec?'✓ applied':'recovers time'}</span></div>`).join('');
+  $('recovBtn').disabled=st.rec; $('recovBtn').textContent=st.rec?'Recovery plan applied':'Apply recovery plan';
+  if(!$('noteWrap').hidden)$('clientNote').textContent=noteText(st,base);
+}
+function noteHide(){$('noteWrap').hidden=true;$('noteBtn').textContent='Generate client note'}
+$('noteBtn').addEventListener('click',()=>{const st=S(),base=dagCalc(st,false,false);$('clientNote').textContent=noteText(st,base);$('noteWrap').hidden=false;$('noteBtn').textContent='Regenerate client note'});
+$('slipReset').addEventListener('click',()=>{S().slips.clear();S().rec=false;noteHide();renderAll()});
+$('recovBtn').addEventListener('click',()=>{S().rec=true;renderAll()});
+$('copyNote').addEventListener('click',function(){const b=this,t=$('clientNote').textContent;try{navigator.clipboard.writeText(t).then(()=>b.textContent='Copied',()=>b.textContent='Select the text to copy')}catch(e){b.textContent='Select the text to copy'}});
+
+/* ---- stop 4: readiness, gate, risks ---- */
+function renderI4(){
+  const st=S(), cs=activeChecks(st), rd=readiness(st);
+  setT('readySub',`${rd.p}% complete (${rd.d} of ${rd.n})`);
+  const groups=[...new Set(cs.map(c=>c.ph))];
+  $('checks').innerHTML=groups.map(g=>`<div class="cgroup"><h4 class="lbl">${PHNAME[g]}</h4>${cs.filter(c=>c.ph===g).map(c=>{const dn=st.done.has(c.id);return `<button type="button" class="citem ${dn?'done':''}" data-id="${c.id}" aria-pressed="${dn}"><span class="box">${dn?'✓':''}</span><span class="tx">${c.label}${c.gate?'<span class="gtag">gate</span>':''}</span><span class="own">${c.owner}</span></button>`}).join('')}</div>`).join('');
+  document.querySelectorAll('.citem').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.id;st.done.has(id)?st.done.delete(id):st.done.add(id);st.live=null;renderAll()}));
+  const blockers=cs.filter(c=>c.gate&&!st.done.has(c.id));
+  setT('gateSub',blockers.length?`${blockers.length} blocker${blockers.length>1?'s':''} before go-live`:'Clear. Every go-live condition is met.');
+  $('gate').innerHTML=blockers.length?blockers.map(c=>`<div class="blk"><i></i><div><b>${c.label}</b><br><span class="sub">${PHNAME[c.ph]} · ${c.owner}</span></div></div>`).join(''):`<div class="gate-ok">✓ Gate clear. Every go-live condition is met.</div>`;
+  const lb=$('liveBtn'); lb.disabled=blockers.length>0||!!st.live;
+  lb.textContent=st.live?'Go-live recorded':blockers.length?`Record go-live (${blockers.length} blocker${blockers.length>1?'s':''})`:'Record go-live';
+  $('liveNote').textContent=st.live?`Live, recorded ${fmtD(st.live)} with ${st.lev.size} accelerator${st.lev.size===1?'':'s'} in play. HubSpot deal moved to Live.`:'';
+  const d=id=>!cs.some(c=>c.id===id)||st.done.has(id), R=[], sd=slipDays(st);
+  if(!d('c4'))R.push(['Escalation path not confirmed in writing','Governance','Impl. manager','Likely','High','Get the contacts and after-hours path on paper this week. Kickoff decisions belong in writing, not in memory.']);
+  if(!d('c9')||!d('c10'))R.push(['Training not yet delivered','Schedule','Impl. manager','Possible','Medium','Book a working session on the open decisions. Most of what is outstanding is a decision, not a task.']);
+  if(!d('c8'))R.push(['Care plans waiting on provider acceptance','Schedule','Account manager','Likely','High',st.lev.has('cp48')?'Hold the provider to the 48-hour turnaround that was committed, and follow up daily.':'Ask for a 48-hour acceptance turnaround, or have our care team draft the plans for review.']);
+  if(!d('c7'))R.push(['Automated data feed not live',st.lev.has('bridge')?'Quality':'Schedule','Client IT + EHR',st.lev.has('bridge')?'Possible':'Likely',st.lev.has('bridge')?'Medium':'High',st.lev.has('bridge')?'Launch runs on the patient list, but the feed still has to land before month two. This defers the work rather than removing it.':'Launch on a secure patient list while the feed is built, or move the date now while it is still a conversation rather than an apology.']);
+  if(sd>0)R.push([`Go-live ${sd} days behind the committed date`,'Schedule','Impl. manager','Occurred','High','Apply the recovery plan and tell the client today. If a date moves, they hear it the day it moves, not at go-live.']);
+  if(st.lev.size)R.push([`${st.lev.size} accelerator commitment${st.lev.size>1?'s':''} in the plan`,'Schedule','Joint','Possible','High','Track each commitment as a dependency. If one slips, tell the practice the date has moved on the day it slips, not at go-live.']);
+  if(st.start!=='new')R.push(['Carried-over settings from the prior setup','Quality','Impl. manager','Possible','Medium','Walk the carried-over sections with the practice and confirm each one. Inherited answers are assumptions until somebody says otherwise.']);
+  if(!d('c12'))R.push(['Devices not staged for the first cohort','Schedule','Logistics','Possible','Medium','Confirm shipment dates against the day-one cohort list, with a buffer for replacements.']);
+  setT('riskCount',R.length?`${R.length} open · ${R.filter(r=>r[4]==='High').length} high impact`:'None open');
+  $('risks').innerHTML=R.length?R.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td><span class="lvl ${r[3]}">${r[3]}</span></td><td><span class="lvl ${r[4]}">${r[4]}</span></td><td>${r[5]}</td></tr>`).join(''):'<tr><td colspan="6" class="sub">No open risks. The plan is clear to go live.</td></tr>';
+}
+$('liveBtn').addEventListener('click',()=>{S().live=addW(planEnd(S()));renderAll()});
+$('clearBtn').addEventListener('click',()=>{activeChecks().forEach(c=>S().done.add(c.id));S().live=null;renderAll()});
+
+/* ---- stop 5: play the implementation ---- */
+const PLAY_W=7.25, PLAY_MS=20000;
+function events(st){const p=st.promises;return [
+ [0,'sys','HubSpot deal closed won. Plan seeded with phases, owners and the go-live gate','Readout'],
+ [.3,'','MSA and BAA countersigned','Client'],
+ [.9,'','SOW signed by the named signer','Client'],
+ [1.2,'','Kickoff held, with the account executive handing over in the room','Joint'],
+ [1.3,'sys','Logged to HubSpot: kickoff notes, decisions and 14 tasks','Readout'],
+ [1.7,'','Escalation contacts and after-hours path received in writing','Client'],
+ [2.3,'','Eligibility criteria agreed for the first pull','Client'],
+ [2.6,'risk','EHR vendor quotes three weeks for the interface ticket','Client IT','Bridge: launching on a secure patient list',3.4],
+ [3.2,'','First patient list loaded: 1,240 eligible patients matched','Impl. manager'],
+ [3.9,'prom',`Promise kept: ${(p[1]||p[0])[0]}`,(p[1]||p[0])[1]],
+ [4.4,'','Provider accepted every care plan in 36 hours','Client provider'],
+ [4.9,'risk','Two providers cannot attend training','Impl. manager','Recorded session plus a make-up booked',5.4],
+ [5.3,'','Provider and staff training delivered','Impl. manager'],
+ [5.8,'prom',`Promise kept: ${(p[2]||p[0])[0]}`,(p[2]||p[0])[1]],
+ [6.3,'','Consent confirmed for 50 day-one patients','Joint'],
+ [6.9,'sys','Go-live gate clear. Every condition met','Readout'],
+ [7.2,'prom',`Promise kept: ${p[0][0]}`,p[0][1]],
+ [7.25,'sys','HubSpot deal moved to Live. Account owner assigned','Readout']]}
+const PLAY_ROWS=[['Contracts',0,1,'shared'],['Kickoff',1,2,'shared'],['Patient data',3,1.6,''],['Care plans',4.6,.8,''],['Training',5.4,.5,'shared'],['Enrollment',5.9,.6,''],['Go-live',6.5,.75,'live']];
+let playing=false, raf=0;
+function buildPtl(){const st=S(), pct=w=>(w/PLAY_W*100)+'%';
+  $('ptl').innerHTML=st.progs.map(pk=>`<div class="ptrack"><b>${IPROG[pk].abbr}</b><div class="pbar">${PLAY_ROWS.map(r=>`<span class="pseg ${r[3]}" data-s="${r[1]}" data-l="${r[2]}" style="left:${pct(r[1])};width:calc(${pct(r[2])} - 2px)"><i class="fill"></i><span>${r[0]}</span></span>`).join('')}</div></div>`).join('')+'<div class="pcursor" id="pCursor"></div>'}
+function setPlay(w){
+  const st=S(), EV=events(st); w=Math.min(PLAY_W,w);
+  document.querySelectorAll('.pseg').forEach(s=>{const a=+s.dataset.s,l=+s.dataset.l,f=Math.max(0,Math.min(1,(w-a)/l));s.querySelector('.fill').style.width=(f*100)+'%';s.classList.toggle('filled',f>.6)});
+  const bar=$('ptl').querySelector('.pbar'); if(bar)$('pCursor').style.left=(bar.offsetLeft+bar.offsetWidth*(w/PLAY_W))+'px';
+  setT('pWeek',`Week ${Math.floor(w)} · Day ${Math.round(w*7)}`); setT('pDate',fmtD(addW(w,st)));
+  const shown=EV.filter(e=>e[0]<=w), np=st.promises.length;
+  setT('pTasks',`${Math.min(14,shown.filter(e=>e[1]===''||e[1]==='sys').length)} of 14`);
+  setT('pRisks',shown.filter(e=>e[1]==='risk'&&w<e[5]).length);
+  setT('pProm',`${w>=PLAY_W?np:Math.min(np,shown.filter(e=>e[1]==='prom').length)} of ${np}`);
+  const feed=$('feed'), have=feed.querySelectorAll('.fe').length; if(have===0&&shown.length)feed.innerHTML='';
+  shown.slice(have).forEach(e=>{const d=document.createElement('div');d.className='fe '+(e[1]==='prom'?'sys':e[1]||'');d.dataset.res=e[5]||'';
+    d.innerHTML=`<small>${fmtD(addW(e[0],st))} · ${e[3]}</small><b>${e[2]}</b>${e[1]==='risk'?`<span class="fix" hidden>✓ ${e[4]}</span>`:''}`;feed.prepend(d)});
+  feed.querySelectorAll('.fe.risk').forEach(d=>{if(+d.dataset.res<=w&&!d.classList.contains('resolved')){d.classList.add('resolved');d.querySelector('.fix').hidden=false}});
+  if(w>=PLAY_W){$('liveStamp').hidden=false;setT('liveStampTxt',`${st.short} is live ${fmtD(addW(PLAY_W,st))}: on the committed date, both risks resolved, every sales promise delivered`)}
+}
+function resetPlay(){cancelAnimationFrame(raf);playing=false;$('playBtn').textContent='▶ Play the implementation';$('playBtn').classList.remove('done');$('feed').innerHTML='<p class="sub">The activity feed fills as the implementation plays.</p>';$('liveStamp').hidden=true;buildPtl();setPlay(0)}
+$('playBtn').addEventListener('click',()=>{ if(playing)return; resetPlay(); $('playBtn').classList.add('done'); if(reduce){setPlay(PLAY_W);return}
+  playing=true; $('playBtn').textContent='▶ Playing…'; const t0=performance.now();
+  const tick=now=>{const w=(now-t0)/PLAY_MS*PLAY_W; setPlay(w); if(w<PLAY_W)raf=requestAnimationFrame(tick); else {playing=false;$('playBtn').textContent='↻ Play again'}};
+  raf=requestAnimationFrame(tick)});
+addEventListener('resize',()=>{if(!playing)setPlay(0)});
+
+/* ---- hero copy follows the journey ---- */
+const HERO={
+ impl:['Implementation & customer success leadership','Disciplined, white-glove delivery. <em>See it run in four minutes.</em>',"A client's first 90 days decide how the next three years go. This is how I run a white-glove implementation: receive the handoff from sales with nothing dropped, curate every step of the launch, and deliver on everything the client was told to expect. Then account management keeps it healthy and growing. Everything runs on fictional data, so click anything."],
+ am:['Account management','Read the relationship, <em>and act on it.</em>','Once a client is live, the work is keeping the account healthy and growing: a portfolio I can read at a glance, a health score a team can explain, warnings that arrive early, and one click from concern to a client meeting. Everything runs on fictional data, so click anything.']
+};
+function heroFor(j){const h=HERO[j]||HERO.impl;setT('heroEyebrow',h[0]);$('heroH1').innerHTML=h[1];setT('heroLede',h[2])}
+
+function renderAll(){ renderCards(); renderPickers(); renderRings(); renderNeg(); renderLevers(); renderDag(); renderI4(); if(!playing){buildPtl();setPlay(0)} }
+renderAll();
+$('negot').classList.add('flash');
+
 /* Count-up on load */
 function countUp(el){const to=+el.dataset.to||+String(el.textContent).replace(/,/g,'');if(!to||reduce){return}
   const t0=performance.now(),dur=1100; const f=now=>{const p=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=fmt(Math.round(to*e));if(p<1)requestAnimationFrame(f)}; requestAnimationFrame(f);}
@@ -906,26 +1770,43 @@ function tick(){head=(head+1)%Math.max(1,pts.length);draw();requestAnimationFram
 size();draw();if(!reduce)requestAnimationFrame(tick);
 addEventListener('resize',()=>{size();draw()});
 
-/* Tour bar */
-const stops=[...document.querySelectorAll('[data-stop]')], secs=[15,40,40,35,45,40,30,25,20];
+/* Tour bar: two journeys, one shared welcome and close */
+let journey='impl', cur=0, list=[];
+const allStops=[...document.querySelectorAll('[data-stop]')];
 const ticks=$('ticks');
-ticks.innerHTML=stops.slice(1).map((s,i)=>`<button type="button" aria-label="Go to ${s.dataset.title}" data-i="${i+1}"></button>`).join('');
-let cur=0; const last=stops.length-1;
-function setCur(i){cur=i;
-  setT('curTitle',i===0?'Welcome':i===last?'Why I built it':`Stop ${i} of 7 · ${stops[i].dataset.title}`);
-  const left=secs.slice(i+1).reduce((a,b)=>a+b,0);
+function setJourney(j,scroll){
+  journey=j; if(typeof heroFor==='function')heroFor(j);
+  allStops.forEach(s=>{const jj=s.dataset.journey; s.hidden=!(jj==='both'||jj===j)});
+  list=allStops.filter(s=>!s.hidden);
+  document.querySelectorAll('.jtoggle button').forEach(b=>{b.classList.toggle('on',b.dataset.j===j);b.setAttribute('aria-pressed',b.dataset.j===j)});
+  ticks.style.setProperty('--n',list.length-1);
+  ticks.innerHTML=list.slice(1).map((s,i)=>`<button type="button" aria-label="Go to ${s.dataset.title}" data-i="${i+1}"></button>`).join('');
+  ticks.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>go(+b.dataset.i)));
+  setCur(0);
+  if(scroll)go(1);
+}
+function setCur(i){cur=i; const last=list.length-1, s=list[i];
+  const label=journey==='impl'?'Implementation':'Account management';
+  setT('curTitle',i===0?'Welcome':i===last?'Why I built it':`${label} · ${i} of ${last-1} · ${s.dataset.title}`);
+  const left=list.slice(i+1).reduce((a,x)=>a+(+x.dataset.secs||30),0);
   setT('timeLeft',left<=0?'tour complete':left<60?'under a minute left':`about ${Math.round(left/60)} min left`);
   ticks.querySelectorAll('button').forEach(b=>{const k=+b.dataset.i;b.className=k<i?'done':k===i?'cur':''});
   $('prevBtn').disabled=i===0;
-  $('nextBtn').textContent=i===0?'Start →':i>=last?'Back to top ↑':'Next →';
+  $('nextBtn').textContent=i===0?'Start →':i>=last?'Back to top ↑':(journey==='impl'&&i===last-1)?'Account management →':'Next →';
 }
-const go=i=>stops[clamp(i,0,last)].scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
-$('nextBtn').addEventListener('click',()=>go(cur>=last?0:cur+1));
+const go=i=>{const t=list[clamp(i,0,list.length-1)]; t&&t.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'})};
+$('nextBtn').addEventListener('click',()=>{const last=list.length-1;
+  if(cur>=last)return go(0);
+  if(journey==='impl'&&cur===last-1)return setJourney('am',true);
+  go(cur+1)});
 $('prevBtn').addEventListener('click',()=>go(cur-1));
-ticks.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>go(+b.dataset.i)));
-$('startBtn').addEventListener('click',e=>{e.preventDefault();go(1)});
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)setCur(+e.target.dataset.stop)}),{rootMargin:'-45% 0px -50% 0px'});
-stops.forEach(s=>io.observe(s)); setCur(0);
+document.querySelectorAll('.jtoggle button').forEach(b=>b.addEventListener('click',()=>setJourney(b.dataset.j,true)));
+$('startImpl').addEventListener('click',e=>{e.preventDefault();setJourney('impl',true)});
+$('startAm').addEventListener('click',e=>{e.preventDefault();setJourney('am',true)});
+$('handoffBtn').addEventListener('click',()=>setJourney('am',true));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const i=list.indexOf(e.target);if(i>=0)setCur(i)}}),{rootMargin:'-45% 0px -50% 0px'});
+allStops.forEach(s=>io.observe(s));
+setJourney('impl',false);
 
 $('copyBtn').addEventListener('click',function(){const b=this,t=$('email').textContent;
   const sel2=()=>{const r=document.createRange();r.selectNodeContents($('email'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Press Ctrl+C'};
